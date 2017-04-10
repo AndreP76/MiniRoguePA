@@ -24,5 +24,5 @@ public interface IState {
     public IState ToStart();
     public IState ToTradePhase();
 
-    public void Action(String ActionString);
+    public IState Action(String ActionString);
 }

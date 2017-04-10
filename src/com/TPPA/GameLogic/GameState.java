@@ -1,11 +1,12 @@
 package com.TPPA.GameLogic;
 
+import java.io.Serializable;
+
 /**
  * Created by andre on 4/5/17.
  */
-public abstract class GameState implements IState {
-    abstract public String GetActionsString();
-    abstract public String GetActionsDescription();
+public abstract class GameState implements IState, Serializable {
+    abstract public Action[] GetActions();
     @Override
     public Boolean CanDrawCard() {
         return null;
@@ -97,7 +98,9 @@ public abstract class GameState implements IState {
     }
 
     @Override
-    public void Action(String ActionString) {
-
+    public IState Action(String ActionString) {
+        //LOG THIS
+        //THIS SHOULD NOT HAPPEN
+        return this;
     }
 }
