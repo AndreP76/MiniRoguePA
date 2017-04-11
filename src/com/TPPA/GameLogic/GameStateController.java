@@ -8,7 +8,7 @@ import java.util.Observable;
 public class GameStateController extends Observable implements java.io.Serializable{
     //Acho que esta a ser misturada aqui um controlador de MVC e um "controlador" da logica...
     //A classe Observable nao tenho a certeza se e precisa, mas nao faz mal estar ali
-    //The View speaks only to this class
+    //The IView speaks only to this class
     private static GameStateController CurrentController; //Keeps the current controller. THERE CAN BE ONLY ONE!
 
     private GameState CurrentGameState; //The "Model"
