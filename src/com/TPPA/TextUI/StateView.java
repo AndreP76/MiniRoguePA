@@ -14,24 +14,41 @@ public abstract class StateView implements IView, Observer {
         GameStateController.getCurrentController().addObserver(this);
     }
 
+    public static StateView GenerateView() {
+        if (GameStateController.getCurrentController().getCurrentGameState().getClass() == StartState.class) {
+            CurrentView = new StartStateView();
+            return CurrentView;
+        } else return null;
+    }
+
     public abstract void Render();//Entry point for the views
 
     @Override
-    public void update(Observable observable, Object o){
-        if(GameStateController.getCurrentController().getCurrentGameState().getClass() == StartState.class){
-            System.out.print("Start state!");
-            CurrentView = new StartStateView();
-            CurrentView.Render();
-        }else if(GameStateController.getCurrentController().getCurrentGameState().getClass() == RestingState.class){
-            System.out.print("Resting state!");
+    public void update(Observable observable, Object o) {
+        if (GameStateController.getCurrentController().getCurrentGameState().getClass() == StartState.class) {
+            Main.ErrorStream.println("Start state!");
+            if (CurrentView.getClass() != StartStateView.class) {
+                GameStateController.getCurrentController().deleteObserver(CurrentView);
+                Main.ErrorStream.println("Creating new view!");
+                CurrentView = new StartStateView();
+            } else {
+                Main.ErrorStream.println("Keeping current view!");
+            }
+        } else if (GameStateController.getCurrentController().getCurrentGameState().getClass() == RestingState.class) {
+            Main.ErrorStream.println("Resting state!");
+            Main.ErrorStream.println("Unimplemented view!");
+        } else if (GameStateController.getCurrentController().getCurrentGameState().getClass() == AwaitCardSelectionState.class) {
+            Main.ErrorStream.println("DrawState!");
+            if (CurrentView.getClass() != DrawPhaseView.class) {
+                GameStateController.getCurrentController().deleteObserver(CurrentView);
+                Main.ErrorStream.println("Creating new view!");
+                CurrentView = new DrawPhaseView();
+            } else {
+                Main.ErrorStream.println("Keeping current view!");
+            }
         }else{
-            System.out.print("Unknown state!");
+            Main.ErrorStream.println("Unknown state!");
         }
-    }
-
-    public static StateView GenerateView(){
-        if(GameStateController.getCurrentController().getCurrentGameState().getClass() == StartState.class) {
-            return new StartStateView();
-        }else return null;
+        CurrentView.Render();
     }
 }

@@ -4,12 +4,15 @@ package com.TPPA.GameLogic;
 
 import com.TPPA.TextUI.StartStateView;
 import com.TPPA.TextUI.StateView;
+import com.TPPA.TextUI.TextDrawHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.file.Paths;
+import java.time.Instant;
+import java.util.Date;
 
 public class Main {
     public static PrintStream ErrorStream;
@@ -19,12 +22,19 @@ public class Main {
     public static String ErrorLogPath = Paths.get("./ErrorLog.txt").toString();
 
     public static void main(String[] args) throws Throwable{
-        if(!ErrorLogPath.equals(""))
+        if (!ErrorLogPath.equals("")) {
             ErrorStream = new PrintStream(new FileOutputStream(ErrorLogPath));
+            ErrorStream.println("Session started in " + Date.from(Instant.now()).toString());
+        }
         else
             ErrorStream = System.err;
 
+        OutputStream = System.out;
+        InputStream = System.in;
+
+        TextDrawHelper.Init();
         GameStateController GSC = new GameStateController();
         StateView SV = StateView.GenerateView();
+        SV.Render();
     }
 }

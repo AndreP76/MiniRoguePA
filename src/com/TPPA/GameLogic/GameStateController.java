@@ -11,7 +11,7 @@ public class GameStateController extends Observable implements java.io.Serializa
     //The IView speaks only to this class
     private static GameStateController CurrentController; //Keeps the current controller. THERE CAN BE ONLY ONE!
 
-    private GameState CurrentGameState; //The "Model"
+    private IState CurrentGameState; //The "Model"
 
     private DifficultyLevelEnum GameDificulty;
     private int MaxZones;
@@ -36,26 +36,36 @@ public class GameStateController extends Observable implements java.io.Serializa
     public int getCurrentZone() {
         return CurrentZone;
     }
-    public GameState getCurrentGameState() {
+
+    public void setCurrentZone(int currentZone) {
+        CurrentZone = currentZone;
+    }
+
+    public IState getCurrentGameState() {
         return CurrentGameState;
     }
+
+    public void setCurrentGameState(IState currentGameState) {
+        CurrentGameState = currentGameState;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
     public DifficultyLevelEnum getGameDificulty() {
         return GameDificulty;
-    }
-    public Player getCurrentPlayer() {
-        return CurrentPlayer;
     }
 
     //setters
     public void setGameDificulty(DifficultyLevelEnum gameDificulty) {
         GameDificulty = gameDificulty;
     }
-    public void setCurrentZone(int currentZone) {
-        CurrentZone = currentZone;
+
+    public Player getCurrentPlayer() {
+        return CurrentPlayer;
     }
-    public void setCurrentGameState(GameState currentGameState) {
-        CurrentGameState = currentGameState;
-        this.setChanged();
-        this.notifyObservers();
+
+    //C methods
+    public void RelayAction(String ActionString) {
+        setCurrentGameState(getCurrentGameState().Action(ActionString));
     }
 }

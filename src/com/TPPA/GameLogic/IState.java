@@ -25,4 +25,6 @@ public interface IState {
     public IState ToTradePhase();
 
     public IState Action(String ActionString);
+
+    public Action[] GetActions();
 }
