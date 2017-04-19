@@ -11,5 +11,4 @@ public class DrawPhaseView extends StateView {
         Main.OutputStream.println("Haro!");
     }
 
-
 }

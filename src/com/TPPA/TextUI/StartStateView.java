@@ -2,9 +2,7 @@ package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.*;
 
-import java.awt.geom.Area;
 import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by andre on 4/11/17.
@@ -19,7 +17,7 @@ public class StartStateView extends StateView {
         GameStateController GSC = GameStateController.getCurrentController();
         TextDrawHelper.ClearScreen();
         Action[] ActionsInState = GSC.getCurrentGameState().GetActions();
-        Main.OutputStream.println("Dificuldade : " + GSC.getGameDificulty().name() + "\n Area : " + GSC.getCurrentZone());
+        Main.OutputStream.println("Dificuldade : " + GSC.getGameDifficulty().name() + "\n Area : " + GSC.getCurrentZone());
         for (Action ac : ActionsInState) {
             Main.OutputStream.println(ac.getActionString() + " ==> " + ac.getDescriptionString());
         }

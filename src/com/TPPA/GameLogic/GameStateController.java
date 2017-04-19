@@ -1,5 +1,7 @@
 package com.TPPA.GameLogic;
 
+import com.TPPA.GameLogic.Cards.CardBase;
+
 import java.util.Observable;
 
 /**
@@ -7,29 +9,66 @@ import java.util.Observable;
  */
 public class GameStateController extends Observable implements java.io.Serializable{
     //Acho que esta a ser misturada aqui um controlador de MVC e um "controlador" da logica...
-    //A classe Observable nao tenho a certeza se e precisa, mas nao faz mal estar ali
     //The IView speaks only to this class
     private static GameStateController CurrentController; //Keeps the current controller. THERE CAN BE ONLY ONE!
 
     private IState CurrentGameState; //The "Model"
 
-    private DifficultyLevelEnum GameDificulty;
+    private DifficultyLevelEnum GameDifficulty;
     private int MaxZones;
     private int CurrentZone;
     private Player CurrentPlayer;
+    private Deck CurrentDeck;
+    private int MaxStagesInRoom = 5;
+    private int CurrentStageInRoom = 0;
+    private int RoomsPerZoneCoeficient = 1;
+    private int RoomsInZone;
+    private int CurrentRoom = 0;
+    private CardBase[][] RoomStages = null;
+    private int MaxCardsInStage = 2;
+    private int CardsInEvenStage = 1;
     GameStateController(){//default
         CurrentGameState = new StartState();
-        GameDificulty = DifficultyLevelEnum.Normal;//User can change it on StartState
+        GameDifficulty = DifficultyLevelEnum.Normal;//User can change it on StartState
         MaxZones = 5;
         CurrentZone = 1;
-        CurrentPlayer = new Player();
+        CurrentPlayer = new Player(0, 0, 0, 0, 0);
         CurrentController = this;
     }
 
-    //getter
     public static GameStateController getCurrentController() {
         return CurrentController;
     }
+
+    //getter
+    public int getCardsInEvenStage() {
+        return CardsInEvenStage;
+    }
+
+    public int getMaxCardsInStage() {
+        return MaxCardsInStage;
+    }
+
+    public Player getCurrentPlayer() {
+        return CurrentPlayer;
+    }
+
+    public CardBase[][] getRoomStages() {
+        return RoomStages;
+    }
+
+    public int getCurrentStageInRoom() {
+        return CurrentStageInRoom;
+    }
+
+    public Deck getCurrentDeck() {
+        return CurrentDeck;
+    }
+
+    public int getMaxStagesInRoom() {
+        return MaxStagesInRoom;
+    }
+
     public int getMaxZones() {
         return MaxZones;
     }
@@ -37,6 +76,7 @@ public class GameStateController extends Observable implements java.io.Serializa
         return CurrentZone;
     }
 
+    //setters
     public void setCurrentZone(int currentZone) {
         CurrentZone = currentZone;
     }
@@ -51,17 +91,24 @@ public class GameStateController extends Observable implements java.io.Serializa
         this.notifyObservers();
     }
 
-    public DifficultyLevelEnum getGameDificulty() {
-        return GameDificulty;
+    public int getCurrentRoom() {
+        return CurrentRoom;
     }
 
-    //setters
-    public void setGameDificulty(DifficultyLevelEnum gameDificulty) {
-        GameDificulty = gameDificulty;
+    public int getRoomsInZone() {
+        return RoomsInZone;
     }
 
-    public Player getCurrentPlayer() {
-        return CurrentPlayer;
+    public int getRoomsPerZoneCoeficient() {
+        return RoomsPerZoneCoeficient;
+    }
+
+    public DifficultyLevelEnum getGameDifficulty() {
+        return GameDifficulty;
+    }
+
+    public void setGameDifficulty(DifficultyLevelEnum gameDifficulty) {
+        GameDifficulty = gameDifficulty;
     }
 
     //C methods

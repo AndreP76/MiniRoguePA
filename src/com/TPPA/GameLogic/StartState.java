@@ -1,7 +1,5 @@
 package com.TPPA.GameLogic;
 
-import java.awt.geom.Area;
-
 /**
  * Created by andre on 4/5/17.
  */
@@ -41,7 +39,7 @@ public class StartState extends GameState {
             Integer DiffInt = Integer.parseInt(SSplit[SSplit.length - 1]);
             DifficultyLevelEnum Diff = DifficultyLevelEnum.values()[DiffInt];
             if(Diff != null)
-                GameStateController.getCurrentController().setGameDificulty(Diff);
+                GameStateController.getCurrentController().setGameDifficulty(Diff);
             //else idk, log it or something
         }else if(SSplit[0].equals(InternalCommandsDictionary.SetAreaCommand)){
             Integer AreaInt = Integer.parseInt(SSplit[SSplit.length - 1]);

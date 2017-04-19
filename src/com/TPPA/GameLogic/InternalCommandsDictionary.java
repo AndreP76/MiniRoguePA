@@ -7,6 +7,8 @@ public class InternalCommandsDictionary { //Isto so guarda os comandos e as stri
     public final static String SetDifficultyCommand = "SETDIFF";
     public final static String SetAreaCommand = "SETAREA";
     public final static String StartCommand = "GAMESTART";
+    public final static String DrawCommand = "DRAWCARD";
+    public final static String QuitCommand = "QUITGAME";
 
     /*public final static String TrapCardID = "TRAPCARD";
     public final static String MonsterCardID = "MONSTERCARD";

@@ -99,8 +99,8 @@ public abstract class GameState implements IState, Serializable {
 
     @Override
     public IState Action(String ActionString) {
-        //LOG THIS
-        //THIS SHOULD NOT HAPPEN
+        Main.ErrorStream.println("Unspecialized action called!");
+        Main.ErrorStream.println("\t" + this.getClass() + "\n\t" + ActionString);
         return this;
     }
 }
