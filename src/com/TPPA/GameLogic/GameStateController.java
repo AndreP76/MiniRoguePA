@@ -94,6 +94,32 @@ public class GameStateController extends Observable implements java.io.Serializa
     public void setCurrentZone(int currentZone) {
         CurrentZone = currentZone;
     }
+
+    public int getMaxRoomsInStage() {
+        int Level = getCurrentZone();
+        if (Level == 1 || Level == 2)
+            return 2;
+        else if (Level == 3 || Level == 4)
+            return 3;
+        else return 4;
+    }
+
+    public int getTrueRoom() {
+        int Level = getCurrentZone();
+
+        if (Level == 1) {
+            return getCurrentRoom();
+        } else if (Level == 2) {
+            return 2 + getCurrentRoom();
+        } else if (Level == 3) {
+            return 4 + getCurrentRoom();
+        } else if (Level == 4) {
+            return 7 + getCurrentRoom();
+        } else if (Level == 5) {
+            return 10 + getCurrentRoom();
+        } else return -1;
+    }
+
     public IState getCurrentGameState() {
         return CurrentGameState;
     }
