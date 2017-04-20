@@ -1,5 +1,5 @@
 package com.TPPA.GameLogic;
-// Olá MUndo
+
 import com.TPPA.GameLogic.Spells.FireSpell;
 import com.TPPA.GameLogic.Spells.HealSpell;
 import com.TPPA.GameLogic.Spells.IceSpell;
@@ -61,7 +61,6 @@ public class TradingState extends GameState {
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.SellSpell)) {
-            //TODO: escolher feitiço para vender
             if (SSplit.length >= 2) {
                 int index;
                 try {
