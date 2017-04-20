@@ -10,14 +10,26 @@ public class InternalCommandsDictionary { //Isto so guarda os comandos e as stri
     public final static String DrawCommand = "DRAWCARD";
     public final static String QuitCommand = "QUITGAME";
 
-    /*public final static String TrapCardID = "TRAPCARD";
-    public final static String MonsterCardID = "MONSTERCARD";
-    public final static String BossMonsterCardID = "BOSSCARD";
-    public final static String EventCardID = "EVENTCARD";
-    public final static String TreasureCardID = "TREASURECARD";
-    public final static String MerchantCardID = "MERCHANTCARD";
-    public final static String RestCardID = "RESTCARD";*/
-    //passou para a classe Deck
+    //Comandos para RestingState
+    public final static String ReinforceWeapon = "REINFORCE";
+    public final static String SearchRation = "SEARCHRATION";
+    public final static String Heal = "HEAL";
+
+    //ID dos Spells
+    public final static String FireSpellID = "FIRESPELL";
+    public final static String IceSpellID = "ICESPELL";
+    public final static String HealSpellID = "HEALSPELL";
+    public final static String PoisonSpellID = "POISONSPELL";
+
+    //Comandos para TradingState
+    public final static String BuyRation = "BUYRATION";
+    public final static String BuyHealthPotion = "BUYHEALTH";
+    public final static String BuyBigHealthPotion = "BUYBIGHEALTH";
+    public final static String BuyArmorPiece = "BUYARMOR";
+    public final static String BuySpell = "BUYSPELL";
+    public final static String SellArmorPiece = "SELLARMOR";
+    public final static String SellSpell = "SELLSPELL";
+    public final static String EndTradingState = "ENDTRADING";
 
     /*public final static int CakewalkIndex = 0;
     public final static int EzPzIndex = 1;

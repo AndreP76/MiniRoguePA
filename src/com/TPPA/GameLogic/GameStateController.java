@@ -27,12 +27,13 @@ public class GameStateController extends Observable implements java.io.Serializa
     private CardBase[][] RoomStages = null;
     private int MaxCardsInStage = 2;
     private int CardsInEvenStage = 1;
+    private Boolean BattledInThisRoom = false;
     GameStateController(){//default
         CurrentGameState = new StartState();
         GameDifficulty = DifficultyLevelEnum.Normal;//User can change it on StartState
         MaxZones = 5;
         CurrentZone = 1;
-        CurrentPlayer = new Player(0, 0, 0, 0, 0);
+        CurrentPlayer = new Player(0, 0, 0, 0, 0, 0);
         CurrentController = this;
     }
 
@@ -44,31 +45,24 @@ public class GameStateController extends Observable implements java.io.Serializa
     public int getCardsInEvenStage() {
         return CardsInEvenStage;
     }
-
     public int getMaxCardsInStage() {
         return MaxCardsInStage;
     }
-
     public Player getCurrentPlayer() {
         return CurrentPlayer;
     }
-
     public CardBase[][] getRoomStages() {
         return RoomStages;
     }
-
     public int getCurrentStageInRoom() {
         return CurrentStageInRoom;
     }
-
     public Deck getCurrentDeck() {
         return CurrentDeck;
     }
-
     public int getMaxStagesInRoom() {
         return MaxStagesInRoom;
     }
-
     public int getMaxZones() {
         return MaxZones;
     }
@@ -81,32 +75,30 @@ public class GameStateController extends Observable implements java.io.Serializa
         CurrentZone = currentZone;
     }
 
+    public Boolean getBattledInThisRoom() {
+        return BattledInThisRoom;
+    }
+
     public IState getCurrentGameState() {
         return CurrentGameState;
     }
-
     public void setCurrentGameState(IState currentGameState) {
         CurrentGameState = currentGameState;
         this.setChanged();
         this.notifyObservers();
     }
-
     public int getCurrentRoom() {
         return CurrentRoom;
     }
-
     public int getRoomsInZone() {
         return RoomsInZone;
     }
-
     public int getRoomsPerZoneCoeficient() {
         return RoomsPerZoneCoeficient;
     }
-
     public DifficultyLevelEnum getGameDifficulty() {
         return GameDifficulty;
     }
-
     public void setGameDifficulty(DifficultyLevelEnum gameDifficulty) {
         GameDifficulty = gameDifficulty;
     }
