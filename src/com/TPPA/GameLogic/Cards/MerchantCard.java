@@ -1,7 +1,7 @@
 package com.TPPA.GameLogic.Cards;
 
-import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.TradingState;
 
 /**
@@ -14,6 +14,7 @@ public class MerchantCard extends CardBase {
 
     @Override
     public IState Effect() {
+        Main.ErrorStream.println("TradingCard effect called");
         return new TradingState();
     }
 }

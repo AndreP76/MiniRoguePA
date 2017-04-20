@@ -5,6 +5,8 @@ import com.TPPA.GameLogic.Spells.HealSpell;
 import com.TPPA.GameLogic.Spells.IceSpell;
 import com.TPPA.GameLogic.Spells.PoisonSpell;
 
+import static com.TPPA.GameLogic.Main.ErrorStream;
+
 /**
  * Created by andre on 4/5/17.
  */
@@ -26,49 +28,59 @@ public class TradingState extends GameState {
 
     @Override
     public IState Action(String ActionString) {
+        String[] SSplit = ActionString.split(" ");
 
-        if (ActionString.equals(InternalCommandsDictionary.BuyRation)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.BuyRation)) {
             GameStateController.getCurrentController().getCurrentPlayer().incFood(1);
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-1);
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.BuyHealthPotion)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.BuyHealthPotion)) {
             GameStateController.getCurrentController().getCurrentPlayer().incHP(1);
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-1);
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.BuyBigHealthPotion)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.BuyBigHealthPotion)) {
             GameStateController.getCurrentController().getCurrentPlayer().incHP(4);
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-3);
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.BuyArmorPiece)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.BuyArmorPiece)) {
             GameStateController.getCurrentController().getCurrentPlayer().incArmor(1);
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-6);
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.BuySpell)) {
-            giveSpell();
+        if (SSplit[0].equals(InternalCommandsDictionary.BuySpell)) {
+            buyRandomSpell();
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-8);
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.SellArmorPiece)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.SellArmorPiece)) {
             GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1);
             GameStateController.getCurrentController().getCurrentPlayer().incGold(3);
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.SellSpell)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.SellSpell)) {
             //TODO: escolher feitiço para vender
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(4);
+            if (SSplit.length >= 2) {
+                int index;
+                try {
+                    index = Integer.parseInt(SSplit[1]);
+                    sellSpell(index);
+                } catch (NumberFormatException e) {
+                    ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid number");
+                }
+                GameStateController.getCurrentController().getCurrentPlayer().incGold(4);
+            }
             return this;
         }
-        if (ActionString.equals(InternalCommandsDictionary.EndTradingState)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.EndTradingState)) {
             return new AwaitCardSelectionState();
         }
         return this;
     }
 
-    public void giveSpell() {
+    public void buyRandomSpell() {
         int id = (int) (Math.random() % 4);
 
         switch (id) {
@@ -84,6 +96,14 @@ public class TradingState extends GameState {
             case 3:
                 GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new PoisonSpell(InternalCommandsDictionary.PoisonSpellID));
                 break;
+        }
+    }
+
+    public void sellSpell(int index) {
+        try {
+            GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid index");
         }
     }
 }

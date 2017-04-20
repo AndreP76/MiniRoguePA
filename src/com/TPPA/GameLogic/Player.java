@@ -14,6 +14,7 @@ public class Player {
     private int Gold = 0;
     private int Armor = 0;
     private int HP = 0;
+    private int Rank = 1;
 
     private ArrayList<SpellBase> SpellsInventory;
 
@@ -25,6 +26,7 @@ public class Player {
         Armor = StartArmor;
         SpellsInventory = new ArrayList<SpellBase>();
         HP = StartHP;
+        this.Rank = 1;
     }
 
     //getters
@@ -35,6 +37,14 @@ public class Player {
     //setters
     public void setAttack(int attack) {
         Attack = attack;
+    }
+
+    public int getRank() {
+        return Rank;
+    }
+
+    public void setRank(int rank) {
+        Rank = rank;
     }
 
     public int getFood() {
@@ -101,5 +111,13 @@ public class Player {
 
     public void incHP(int ammount) {
         this.HP += ammount;
+    }
+
+    public void incRank(int ammount) {
+        this.Rank += ammount;
+    }
+
+    public void incRank() {
+        this.Rank++;
     }
 }

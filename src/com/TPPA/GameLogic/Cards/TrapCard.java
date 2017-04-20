@@ -65,7 +65,9 @@ public class TrapCard extends CardBase {
                 if (GSC.getCurrentRoom() == GSC.getRoomsInZone() && GSC.getCurrentZone() == GSC.getMaxZones()) {
                     Main.ErrorStream.println("Player cannot fall anymore.");
                 } else {
+                    Main.ErrorStream.println("Fall not implemented");
                     //TODO : Some weird math happens here
+                    //TODO : Fall to the floor beneath
                 }
             }
             default:
