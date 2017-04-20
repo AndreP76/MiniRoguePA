@@ -28,6 +28,7 @@ public class GameStateController extends Observable implements java.io.Serializa
     private int MaxCardsInStage = 2;
     private int CardsInEvenStage = 1;
     private Boolean BattledInThisRoom = false;
+    private Monster CurrentMonster = null;
     GameStateController(){//default
         CurrentGameState = new StartState();
         GameDifficulty = DifficultyLevelEnum.Normal;//User can change it on StartState
@@ -35,6 +36,7 @@ public class GameStateController extends Observable implements java.io.Serializa
         CurrentZone = 1;
         CurrentPlayer = new Player(0, 0, 0, 0, 0, 0);
         CurrentController = this;
+        CurrentDeck = new Deck(7);
     }
 
     public static GameStateController getCurrentController() {
@@ -42,43 +44,56 @@ public class GameStateController extends Observable implements java.io.Serializa
     }
 
     //getter
+
+    public Monster getCurrentMonster() {
+        return CurrentMonster;
+    }
+
+    //setters
+    public void setCurrentMonster(Monster currentMonster) {
+        CurrentMonster = currentMonster;
+        setBattledInThisRoom(true);
+    }
+
     public int getCardsInEvenStage() {
         return CardsInEvenStage;
     }
+
     public int getMaxCardsInStage() {
         return MaxCardsInStage;
     }
+
     public Player getCurrentPlayer() {
         return CurrentPlayer;
     }
+
     public CardBase[][] getRoomStages() {
         return RoomStages;
     }
+
     public int getCurrentStageInRoom() {
         return CurrentStageInRoom;
     }
+
     public Deck getCurrentDeck() {
         return CurrentDeck;
     }
+
     public int getMaxStagesInRoom() {
         return MaxStagesInRoom;
     }
+
     public int getMaxZones() {
         return MaxZones;
     }
+
     public int getCurrentZone() {
         return CurrentZone;
     }
 
-    //setters
     public void setCurrentZone(int currentZone) {
         CurrentZone = currentZone;
     }
-
-    public Boolean getBattledInThisRoom() {
-        return BattledInThisRoom;
-    }
-
     public IState getCurrentGameState() {
         return CurrentGameState;
     }
@@ -101,6 +116,10 @@ public class GameStateController extends Observable implements java.io.Serializa
     }
     public void setGameDifficulty(DifficultyLevelEnum gameDifficulty) {
         GameDifficulty = gameDifficulty;
+    }
+
+    public void setBattledInThisRoom(Boolean battledInThisRoom) {
+        BattledInThisRoom = battledInThisRoom;
     }
 
     //C methods
