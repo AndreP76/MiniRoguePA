@@ -4,6 +4,7 @@ import com.TPPA.GameLogic.*;
 
 /**
  * Created by andre on 4/19/17.
+ * I have no idea what I''m doing
  */
 public class MonsterCard extends CardBase {
     public MonsterCard(String ID) {
