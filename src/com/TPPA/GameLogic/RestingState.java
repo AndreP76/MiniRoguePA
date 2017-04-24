@@ -19,6 +19,7 @@ public class RestingState extends GameState {
 
         if (ActionString.equals(InternalCommandsDictionary.ReinforceWeapon)) {
             GameStateController.getCurrentController().getCurrentPlayer().incXP(1);
+            GameStateController.getCurrentController().getCurrentPlayer().unlockNewDie();
             return new AwaitCardSelectionState();
         }
         if (ActionString.equals(InternalCommandsDictionary.SearchRation)) {

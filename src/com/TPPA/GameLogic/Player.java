@@ -3,6 +3,7 @@ package com.TPPA.GameLogic;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Lídia on 05/04/2017.
@@ -18,6 +19,8 @@ public class Player {
 
     private ArrayList<SpellBase> SpellsInventory;
 
+    private ArrayList<Dice> UnlockedDice;
+
     Player(int StartAttack, int StartArmor, int StartGold, int StartFood, int StartXP, int StartHP) {
         Food = StartFood;
         XP = StartXP;
@@ -27,6 +30,7 @@ public class Player {
         SpellsInventory = new ArrayList<SpellBase>();
         HP = StartHP;
         this.Rank = 1;
+        UnlockedDice = new ArrayList<>();
     }
 
     //getters
@@ -91,6 +95,10 @@ public class Player {
         return SpellsInventory;
     }
 
+    public ArrayList<Dice> getUnlockedDice() {
+        return UnlockedDice;
+    }
+
     //incrementers
     public void incAttack(int ammount) {
         this.Attack = this.Attack + ammount;
@@ -119,5 +127,45 @@ public class Player {
 
     public void incRank() {
         this.Rank++;
+    }
+
+
+    // Só é chamado quando XP aumenta
+    public void unlockNewDie() {
+        if (this.XP % 6 == 0) {
+            this.UnlockedDice.add(new Dice());
+        }
+    }
+
+    // Só é chamado se Player descer o Rank quando apanha uma TrapCard
+    public void removeUnlockedDice() {
+        try {
+            this.UnlockedDice.remove(this.UnlockedDice.size() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            Main.ErrorStream.println("Failed to remove Dice from UnlockedDice " + e);
+        }
+    }
+
+    // Métodos a ser usados na RollPhase
+    public void rollDice() {
+        for (Dice currentDie : this.UnlockedDice) {
+            int roll = currentDie.Roll();
+            currentDie.incRollSum(roll);
+        }
+    }
+
+    public void resetDice() {
+        for (Dice currentDie : this.UnlockedDice) {
+            currentDie.resetRollSum();
+        }
+    }
+
+
+    public Boolean skillCheck() {
+        int roll = new Dice().Roll();
+        if (roll <= this.Rank)
+            return true;
+
+        return false;
     }
 }
