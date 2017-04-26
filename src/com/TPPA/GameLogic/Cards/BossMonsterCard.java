@@ -7,7 +7,7 @@ import com.TPPA.GameLogic.*;
  */
 public class BossMonsterCard extends MonsterCard {
     public BossMonsterCard(String ID) {
-        super(ID);
+        super(ID, "Boss Monster");
     }
 
     @Override

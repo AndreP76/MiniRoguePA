@@ -7,7 +7,7 @@ import com.TPPA.GameLogic.*;
  */
 public class TrapCard extends CardBase {
     public TrapCard(String ID) {
-        super(ID);
+        super(ID, "Trap Card");
     }
 
     @Override

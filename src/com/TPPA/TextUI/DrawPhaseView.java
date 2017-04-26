@@ -1,7 +1,9 @@
 package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.Action;
+import com.TPPA.GameLogic.Cards.CardBase;
 import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 import java.util.EmptyStackException;
@@ -45,16 +47,27 @@ public class DrawPhaseView extends StateView {
         }
 
         Action[] AvailableActions = GSC.getCurrentGameState().GetActions();
-        for (Action a : AvailableActions) {
+        /*for (Action a : AvailableActions) {
             Text += "\n" + a.getActionString() + " ==> " + a.getDescriptionString();
+        }*/
+        CardBase[][] CardsInRoom = GSC.getRoomStages();
+        int max = -1;
+        String TAppend = "";
+        if (GSC.getCurrentStageInRoom() % 2 == 0) {//even stage
+            max = GSC.getCardsInEvenStage();
+            TAppend = "1";
+        } else {
+            max = GSC.getMaxCardsInStage();
+            TAppend = "1/2";
         }
-
-        Text += "\n\n\nEscolha : ";
+        for (int i = 0; i < max; ++i) {
+            Text += CardsInRoom[GSC.getCurrentStageInRoom()][i].toString();
+        }
+        Text += "\n\n\nEscolha (" + TAppend + "): ";
 
         Main.OutputStream.println(Text);
         String UserCommand = TextDrawHelper.InputScanner.nextLine();
-        GSC.RelayAction(UserCommand);
-
+        GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
     }
 
 }

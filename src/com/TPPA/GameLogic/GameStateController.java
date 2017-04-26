@@ -80,6 +80,10 @@ public class GameStateController extends Observable implements java.io.Serializa
         return RoomStages;
     }
 
+    public void setRoomStages(CardBase[][] roomStages) {
+        RoomStages = roomStages;
+    }
+
     public int getCurrentStageInRoom() {
         return CurrentStageInRoom;
     }

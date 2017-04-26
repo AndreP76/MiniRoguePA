@@ -7,8 +7,40 @@ import com.TPPA.GameLogic.*;
  * I have no idea what I''m doing
  */
 public class MonsterCard extends CardBase {
+    protected MonsterCard(String ID, String Name) {
+        super(ID, Name);
+    }
+
     public MonsterCard(String ID) {
-        super(ID);
+        super(ID, "Monster Card");
+    }
+
+    public IState Effect(int HP, int XPR, int GR, int Strength, Boolean Boss) {
+        String Name = "";
+        switch (GameStateController.getCurrentController().getCurrentZone()) {
+            case 1: {
+                Name = "Undead Soldier";
+                break;
+            }
+            case 2: {
+                Name = "Skeleton";
+                break;
+            }
+            case 3: {
+                Name = "Undead Knight";
+                break;
+            }
+            case 4: {
+                Name = "Serpent Knight";
+                break;
+            }
+            case 5: {
+                Name = "Og's Sanctum Guard";
+                break;
+            }
+        }
+        GameStateController.getCurrentController().setCurrentMonster(new Monster(HP, XPR, GR, Strength, Boss, Name));
+        return new RollPhase();
     }
 
     @Override
@@ -20,36 +52,30 @@ public class MonsterCard extends CardBase {
         int XPR = -1;
         int GR = 0;
         int S = 2 * GSC.getCurrentZone();
-        String name = "";
 
         switch (GSC.getCurrentZone()) {
             case 1: {
                 XPR = 1;
-                name = "Undead Soldier";
                 break;
             }
             case 2: {
                 XPR = 1;
-                name = "Skeleton";
                 break;
             }
             case 3: {
                 XPR = 2;
-                name = "Undead Knight";
                 break;
             }
             case 4: {
                 XPR = 2;
-                name = "Serpent Knight";
                 break;
             }
             case 5: {
                 XPR = 3;
-                name = "Og's Sanctum Guard";
                 break;
             }
         }
-        GSC.setCurrentMonster(new Monster(HP, XPR, GR, S, true, name));
-        return new RollPhase();
+
+        return this.Effect(HP, XPR, GR, S, false);
     }
 }

@@ -9,10 +9,12 @@ import java.io.Serializable;
  */
 public abstract class CardBase implements Serializable {
     protected String CardID;
+    protected String CardName;
 
     //constructors are package-private by default!
-    protected CardBase(String ID) {
+    protected CardBase(String ID, String Name) {
         this.CardID = ID;
+        this.CardName = Name;
     }
 
     public abstract IState Effect();
@@ -23,6 +25,6 @@ public abstract class CardBase implements Serializable {
 
     @Override
     public String toString() {
-        return CardID;
+        return CardName;
     }
 }

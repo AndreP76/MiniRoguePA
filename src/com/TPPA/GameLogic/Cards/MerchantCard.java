@@ -9,7 +9,7 @@ import com.TPPA.GameLogic.TradingState;
  */
 public class MerchantCard extends CardBase {
     public MerchantCard(String ID) {
-        super(ID);
+        super(ID, "Merchant Card");
     }
 
     @Override
