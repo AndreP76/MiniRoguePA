@@ -33,6 +33,8 @@ public class InternalCommandsDictionary { //Isto so guarda os comandos e as stri
 
     //Comandos para SpellPhase
     public final static String UseSpell = "USESPELL";
+    public final static String EndSpellPhase = "ENDSPELL";
+
 
     /*public final static int CakewalkIndex = 0;
     public final static int EzPzIndex = 1;

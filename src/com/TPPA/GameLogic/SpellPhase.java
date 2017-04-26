@@ -1,5 +1,5 @@
 package com.TPPA.GameLogic;
-//ola
+
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 import static com.TPPA.GameLogic.Main.ErrorStream;
@@ -11,8 +11,9 @@ public class SpellPhase extends GameState {
 
     @Override
     public Action[] GetActions() {
-        Action[] Act = new Action[1];
+        Action[] Act = new Action[2];
         Act[0] = new Action(InternalCommandsDictionary.UseSpell, "Usar um feitiço");
+        Act[1] = new Action(InternalCommandsDictionary.EndSpellPhase, "Passar à fase seguinte");
 
         return Act;
     }
@@ -29,7 +30,7 @@ public class SpellPhase extends GameState {
     public IState Action(String ActionString) {
         String[] SSplit = ActionString.split(" ");
 
-        if (CanUseSpell() == false)
+        if (CanUseSpell() == false || SSplit[0].equals(InternalCommandsDictionary.EndSpellPhase))
             return new DefensePhase();
 
         if (SSplit[0].equals(InternalCommandsDictionary.UseSpell)) {
