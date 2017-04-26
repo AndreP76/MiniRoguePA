@@ -35,6 +35,15 @@ public class InternalCommandsDictionary { //Isto so guarda os comandos e as stri
     public final static String UseSpell = "USESPELL";
     public final static String EndSpellPhase = "ENDSPELL";
 
+    //Comandos para RollPhase
+    public final static String RollDice = "ROLLDICE";
+    public final static String ReRollDice = "REROLLDICE";
+    public final static String EndRollPhase = "ENDROLLPHASE";
+
+    //Comandos para FeatPhase
+    public final static String UseFeatLosingHP = "USEFEATHP";
+    public final static String UseFeatLosingXP = "USEFEATXP";
+    public final static String EndFeatPhase = "ENDFEATPHASE";
 
     /*public final static int CakewalkIndex = 0;
     public final static int EzPzIndex = 1;

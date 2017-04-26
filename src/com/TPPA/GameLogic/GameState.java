@@ -53,6 +53,11 @@ public abstract class GameState implements IState, Serializable {
     }
 
     @Override
+    public Boolean CanReRollDice() {
+        return null;
+    }
+
+    @Override
     public IState ToDrawPhase() {
         return null;
     }

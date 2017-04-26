@@ -50,6 +50,7 @@ public class TradingState extends GameState {
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-6);
             return this;
         }
+        //TODO: tornar possível escolher o feitiço que se quer comprar???
         if (SSplit[0].equals(InternalCommandsDictionary.BuySpell)) {
             buyRandomSpell();
             GameStateController.getCurrentController().getCurrentPlayer().incGold(-8);

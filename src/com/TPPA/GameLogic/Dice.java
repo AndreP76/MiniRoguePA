@@ -9,6 +9,7 @@ import java.util.Random;
 public class Dice {
     private Random SR;
     private int RollSum;
+    private int LastRoll;
     private Boolean isLocked = false;
 
     public Dice() {
@@ -19,8 +20,17 @@ public class Dice {
 
     public int Roll() {
         int R = SR.nextInt(6) + 1;
+        this.LastRoll = R;
         Main.ErrorStream.println("Dice rolled " + R);
         return R;
+    }
+
+    public int getLastRoll() {
+        return LastRoll;
+    }
+
+    public void resetLastRoll() {
+        LastRoll = 0;
     }
 
     public int getRollSum() {
