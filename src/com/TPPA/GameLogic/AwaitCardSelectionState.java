@@ -13,6 +13,7 @@ public class AwaitCardSelectionState extends GameState {
 
     @Override
     public Action[] GetActions() {
+        Action DrawAction = new Action(InternalCommandsDictionary.DrawCommand, "Draw a stage card");
         return new Action[0];
     }
 
