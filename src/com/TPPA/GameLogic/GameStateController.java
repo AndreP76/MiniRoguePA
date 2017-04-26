@@ -36,7 +36,7 @@ public class GameStateController extends Observable implements java.io.Serializa
         CurrentZone = 1;
         CurrentPlayer = new Player(0, 0, 0, 0, 0, 0);
         CurrentController = this;
-        CurrentDeck = new Deck(7);
+        CurrentDeck = new Deck(6);
         MessageStack = new Stack<>();
     }
 

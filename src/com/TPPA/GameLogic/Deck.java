@@ -30,7 +30,7 @@ public class Deck {
         this.DeckLength = DeckSize;
         Cards = new ArrayList<>();
         SR.setSeed(System.nanoTime());
-        for(int i = 0; i < DeckSize;++i){
+        /*for(int i = 0; i < DeckSize;++i){
             int R = SR.nextInt(6);
             switch (R){
                 case 0:
@@ -52,7 +52,13 @@ public class Deck {
                     Cards.add(new RestCard(RestCardID));
                     break;
             }
-        }
+        }*/
+        Cards.add(new TrapCard(TrapCardID));
+        Cards.add(new MonsterCard(MonsterCardID));
+        Cards.add(new EventCard(EventCardID));
+        Cards.add(new TreasureCard(TreasureCardID));
+        Cards.add(new MerchantCard(MerchantCardID));
+        Cards.add(new RestCard(RestCardID));
         this.CollectionsShuffle();
     }
 
