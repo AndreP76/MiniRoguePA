@@ -10,7 +10,7 @@ import com.TPPA.GameLogic.RestingState;
  */
 public class RestCard extends CardBase {
     public RestCard(String ID) {
-        super(ID);
+        super(ID, "Resting Card");
     }
 
     @Override

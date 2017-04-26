@@ -7,7 +7,7 @@ import com.TPPA.GameLogic.*;
  */
 public class EventCard extends CardBase {
     public EventCard(String ID) {
-        super(ID);
+        super(ID, "Event Card");
     }
 
     @Override
@@ -42,8 +42,7 @@ public class EventCard extends CardBase {
             }
             case 6: {
                 Main.ErrorStream.println("Found Monster");
-                //Generate a battle
-                return new RollPhase();
+                return (new MonsterCard(Deck.MonsterCardID)).Effect(GameStateController.getCurrentController().getTrueRoom() + d.Roll(), 2, 0, GameStateController.getCurrentController().getCurrentZone(), false);
             }
 
         }

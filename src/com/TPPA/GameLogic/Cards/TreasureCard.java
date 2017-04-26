@@ -8,7 +8,7 @@ import com.TPPA.GameLogic.Spells.*;
  */
 public class TreasureCard extends CardBase {
     public TreasureCard(String ID) {
-        super(ID);
+        super(ID, "Treasure Card");
     }
 
     @Override

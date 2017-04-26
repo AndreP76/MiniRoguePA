@@ -1,5 +1,6 @@
 package com.TPPA.GameLogic;
 
+import com.TPPA.GameLogic.Cards.BossMonsterCard;
 import com.TPPA.GameLogic.Cards.CardBase;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ public class AwaitCardSelectionState extends GameState {
 
     @Override
     public Action[] GetActions() {
+        //git is stupid
+        Action DrawAction = new Action(InternalCommandsDictionary.DrawCommand, "Draw a stage card");
         return new Action[0];
     }
 
@@ -34,12 +37,21 @@ public class AwaitCardSelectionState extends GameState {
                         Main.ErrorStream.println("Added new card to stage " + i + " : " + Rooms[i][j]);
                     }
                     for (; j < GSC.getMaxCardsInStage(); ++j) {
+                        Main.ErrorStream.println("Added null card to stage " + i);
                         Rooms[i][j] = null;
                     }
                 } else {//odd rooms, max cards
-
+                    for (int j = 0; j < GSC.getMaxCardsInStage(); ++i) {
+                        Main.ErrorStream.println("Added new card to stage " + i + " : " + Rooms[i][j]);
+                        Rooms[i][j] = CurrentDeck.getCard(j);
+                    }
                 }
             }
+            Rooms[GSC.getMaxStagesInRoom() - 1][0] = new BossMonsterCard(Deck.BossMonsterCardID);
+            for (int i = 1; i < GSC.getMaxCardsInStage(); ++i)
+                Rooms[GSC.getMaxStagesInRoom()][i] = null;
+
+            GSC.setRoomStages(Rooms);
         }
 
         String[] SStr = ActionString.split(" ");

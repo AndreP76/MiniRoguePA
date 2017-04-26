@@ -25,9 +25,4 @@ public class StartStateView extends StateView {
         String userCommand = TextDrawHelper.InputScanner.nextLine();
         GSC.RelayAction(userCommand);
     }
-
-    @Override
-    public void update(Observable observable, Object o) {//chamado quando muda o estado
-        super.update(observable,o);
-    }
 }

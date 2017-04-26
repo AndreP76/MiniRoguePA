@@ -52,6 +52,7 @@ public abstract class StateView implements IView, Observer {
                 Main.ErrorStream.println(IlAcEx.fillInStackTrace().toString());
             }
         }
+        CurrentView.Render();
     }
 
     /*public void update(Observable observable, Object o) {
