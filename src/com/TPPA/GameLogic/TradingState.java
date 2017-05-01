@@ -56,8 +56,10 @@ public class TradingState extends GameState {
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.SellArmorPiece)) {
-            GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1);
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(3);
+            if (GameStateController.getCurrentController().getCurrentPlayer().getArmor() > 0) {
+                GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1);
+                GameStateController.getCurrentController().getCurrentPlayer().incGold(3);
+            }
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.SellSpell)) {
@@ -102,7 +104,7 @@ public class TradingState extends GameState {
         try {
             GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
         } catch (IndexOutOfBoundsException e) {
-            ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid index");
+            Main.ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid index");
         }
     }
 }

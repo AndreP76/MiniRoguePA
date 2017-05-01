@@ -42,7 +42,7 @@ public class AwaitCardSelectionState extends GameState {
             }
             Rooms[GSC.getMaxStagesInRoom() - 1][0] = new BossMonsterCard(Deck.BossMonsterCardID);
             for (int i = 1; i < GSC.getMaxCardsInStage(); ++i)
-                Rooms[GSC.getMaxStagesInRoom()][i] = null;
+                Rooms[GSC.getMaxStagesInRoom() - 1][i] = null;
 
             GSC.setRoomStages(Rooms);
         }
@@ -50,9 +50,10 @@ public class AwaitCardSelectionState extends GameState {
 
     @Override
     public Action[] GetActions() {
-        //git is stupid
         Action DrawAction = new Action(InternalCommandsDictionary.DrawCommand, "Draw a stage card");
-        return new Action[0];
+        Action[] AvAc = new Action[1];
+        AvAc[0] = DrawAction;
+        return AvAc;
     }
 
 
@@ -63,11 +64,11 @@ public class AwaitCardSelectionState extends GameState {
         String[] SStr = ActionString.split(" ");
         if (SStr[0].equals(InternalCommandsDictionary.DrawCommand)) {
             int CardIndex = Integer.parseInt(SStr[SStr.length - 1]);
-            if (GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex] == null) {
+            if (GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex - 1] == null) {
                 Main.ErrorStream.println("User selected empty card index. Ignoring.");
                 return this;
             } else {
-                CardBase RoomCard = GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex];
+                CardBase RoomCard = GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex - 1];
                 Main.ErrorStream.println("User drew " + RoomCard);
                 return RoomCard.Effect();
             }

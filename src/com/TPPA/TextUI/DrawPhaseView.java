@@ -3,7 +3,6 @@ package com.TPPA.TextUI;
 import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.Cards.CardBase;
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 import java.util.EmptyStackException;
@@ -45,6 +44,7 @@ public class DrawPhaseView extends StateView {
                 break;
             }
         }
+        Text += "\n\n\n";
 
         Action[] AvailableActions = GSC.getCurrentGameState().GetActions();
         /*for (Action a : AvailableActions) {

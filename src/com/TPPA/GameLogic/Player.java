@@ -9,12 +9,33 @@ import java.util.Iterator;
  * Created by Lídia on 05/04/2017.
  */
 public class Player {
+    private int MaxFood = 10;
     private int Food = 0;
+    private int MinFood = 0;
+    private int MinXP = 0;
     private int XP = 0;
-    private int Attack = 0;
+    private int MaxXP = 30;
+    private int Rank1XP = 7;
+    private int Rank2XP = 14;
+    private int Rank3XP = 21;
+    private int Rank4XP = 28;
+
+    private int MaxAttack = 10; //
+    private int Attack = 0;     // I think these are useless
+    private int MinAttack = 0;  //
+
+    private int MaxGold = 20;
     private int Gold = 0;
+    private int MinGold = 0;
+
+    private int MaxArmor = 7;
     private int Armor = 0;
+    private int MinArmor = 0;
+
+    private int MaxHP = 20;
     private int HP = 0;
+    private int MinHP = 0;
+
     private int Rank = 1;
 
     private ArrayList<SpellBase> SpellsInventory;
@@ -73,6 +94,18 @@ public class Player {
 
     public void setXP(int XP) {
         this.XP = XP;
+        if (this.XP >= Rank1XP) {
+            this.setRank(1);
+        }
+        if (this.XP >= Rank2XP) {
+            this.setRank(2);
+        }
+        if (this.XP >= Rank3XP) {
+            this.setRank(3);
+        }
+        if (this.XP >= Rank4XP) {
+            this.setRank(4);
+        }
     }
 
     public int getArmor() {
@@ -110,7 +143,11 @@ public class Player {
         this.Gold = this.Gold + ammount;
     }
     public void incXP(int ammount) {
-        this.XP = this.XP + ammount;
+        if (this.XP + ammount > MaxXP) {
+            this.setXP(MaxXP);
+        } else {
+            this.setXP(this.XP + ammount);
+        }
     }
 
     public void incArmor(int ammount) {

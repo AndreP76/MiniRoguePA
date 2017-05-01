@@ -1,7 +1,6 @@
 package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.*;
-
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -16,10 +15,12 @@ public abstract class StateView implements IView, Observer {
         GameStateController.getCurrentController().addObserver(this);
     }
 
-    public static HashMap<Class, Class> GenMTVMap() {
+    private static HashMap<Class, Class> GenMTVMap() {
         HashMap<Class, Class> MTVM = new HashMap<>();
         MTVM.put(StartState.class, StartStateView.class);
         MTVM.put(AwaitCardSelectionState.class, DrawPhaseView.class);
+        MTVM.put(RestingState.class, RestingStateView.class);
+        MTVM.put(TradingState.class, TradingStateView.class);
         return MTVM;
     }
 
@@ -41,6 +42,7 @@ public abstract class StateView implements IView, Observer {
             Main.ErrorStream.println("Creating new view!");
             GameStateController.getCurrentController().deleteObserver(CurrentView);
             try {
+                Main.ErrorStream.println("\t" + ViewClass.getCanonicalName());
                 CurrentView = (StateView) ViewClass.newInstance();
             } catch (InstantiationException InEx) {
                 Main.ErrorStream.println("Instantiation exception in view update!");
