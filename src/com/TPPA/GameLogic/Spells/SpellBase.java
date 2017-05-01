@@ -15,4 +15,8 @@ public abstract class SpellBase implements Serializable {
     }
 
     public abstract IState Effect();
+
+    public String getSpellID() {
+        return this.SpellID;
+    }
 }

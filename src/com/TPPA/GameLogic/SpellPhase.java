@@ -30,10 +30,12 @@ public class SpellPhase extends GameState {
     public IState Action(String ActionString) {
         String[] SSplit = ActionString.split(" ");
 
-        if (CanUseSpell() == false || SSplit[0].equals(InternalCommandsDictionary.EndSpellPhase))
-            return new DefensePhase();
+        if (CanUseSpell() == false || SSplit[0].equals(InternalCommandsDictionary.EndSpellPhase)) {
+            //calculateDefenseResult();
+            return new RollPhase();
+        }
 
-        if (SSplit[0].equals(InternalCommandsDictionary.UseSpell)) {
+        if (SSplit[0].equals(InternalCommandsDictionary.UseSpell) && SSplit.length >= 2) {
             try {
                 int index;
                 index = Integer.parseInt(SSplit[1]);
@@ -41,11 +43,11 @@ public class SpellPhase extends GameState {
                     SpellBase spellToUse = GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
                     return spellToUse.Effect();
                 } catch (IndexOutOfBoundsException e) {
-                    ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid index");
+                    ErrorStream.println("Second argument of " + InternalCommandsDictionary.UseSpell + " is not a valid index: " + e);
                     return this;
                 }
             } catch (NumberFormatException e) {
-                ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid number");
+                ErrorStream.println("Second argument of " + InternalCommandsDictionary.UseSpell + " is not a valid number: " + e);
                 return this;
             }
         }

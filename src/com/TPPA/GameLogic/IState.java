@@ -14,6 +14,8 @@ public interface IState {
     public Boolean CanGoToStart();
     public Boolean CanTrade();
 
+    public Boolean CanReRollDice();
+
     public IState ToDrawPhase();
     public IState ToDefensePhase();
     public IState ToFeatPhase();

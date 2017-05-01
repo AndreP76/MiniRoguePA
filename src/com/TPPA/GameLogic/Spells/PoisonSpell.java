@@ -16,4 +16,5 @@ public class PoisonSpell extends SpellBase {
         Main.ErrorStream.println("PoisonSpell effect called");
         return null;
     }
+
 }

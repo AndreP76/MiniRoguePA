@@ -18,4 +18,5 @@ public class FireSpell extends SpellBase {
         //GameStateController.getCurrentController().getCurrentBattle().getMonster.incHP(-8);
         return new DefensePhase();
     }
+
 }
