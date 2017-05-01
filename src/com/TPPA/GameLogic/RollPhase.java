@@ -51,14 +51,4 @@ public class RollPhase extends GameState {
         return this;
     }
 
-    @Override
-    public Boolean CanReRollDice() {
-        for (Dice currentDie : GameStateController.getCurrentController().getCurrentPlayer().getUnlockedDice()) {
-            if (currentDie.getLastRoll() == 6)
-                return true;
-        }
-
-        return false;
-    }
-
 }

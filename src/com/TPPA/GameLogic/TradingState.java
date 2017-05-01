@@ -31,34 +31,63 @@ public class TradingState extends GameState {
         String[] SSplit = ActionString.split(" ");
 
         if (SSplit[0].equals(InternalCommandsDictionary.BuyRation)) {
-            GameStateController.getCurrentController().getCurrentPlayer().incFood(1);
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(-1);
+            if (GameStateController.getCurrentController().getCurrentPlayer().incFood(1)) {
+                if (!(GameStateController.getCurrentController().getCurrentPlayer().incGold(-1))) {
+                    GameStateController.getCurrentController().getCurrentPlayer().incFood(-1);
+                    Main.ErrorStream.println("BuyRation failed: not enough money");
+                }
+            } else
+                Main.ErrorStream.println("BuyRation failed: cannot carry more food");
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.BuyHealthPotion)) {
-            GameStateController.getCurrentController().getCurrentPlayer().incHP(1);
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(-1);
+            if (GameStateController.getCurrentController().getCurrentPlayer().incHP(1)) {
+                if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(-1)) {
+                    GameStateController.getCurrentController().getCurrentPlayer().incHP(-1);
+                    Main.ErrorStream.println("BuyHealthPotion failed: not enough money");
+                }
+            } else
+                Main.ErrorStream.println("BuyHealthPotion failed: maximum health reached");
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.BuyBigHealthPotion)) {
-            GameStateController.getCurrentController().getCurrentPlayer().incHP(4);
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(-3);
+            if (GameStateController.getCurrentController().getCurrentPlayer().incHP(4)) {
+                if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(-3)) {
+                    GameStateController.getCurrentController().getCurrentPlayer().incHP(-4);
+                    Main.ErrorStream.println("BuyBigHealthPotion failed: not enough money");
+                }
+            } else
+                Main.ErrorStream.println("BuyBigHealthPotion failed: maximum health reached");
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.BuyArmorPiece)) {
-            GameStateController.getCurrentController().getCurrentPlayer().incArmor(1);
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(-6);
+            if (GameStateController.getCurrentController().getCurrentPlayer().incArmor(1)) {
+                if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(-6)) {
+                    GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1);
+                    Main.ErrorStream.println("BuyArmorPiece failed: not enough money");
+                }
+            } else
+                Main.ErrorStream.println("BuyArmorPiece failed: cannot carry more armor");
             return this;
         }
-        //TODO: tornar possível escolher o feitiço que se quer comprar???
+
         if (SSplit[0].equals(InternalCommandsDictionary.BuySpell)) {
-            buyRandomSpell();
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(-8);
+            if (SSplit.length >= 2) {
+                if (!buySpell(SSplit[1])) {
+                    Main.ErrorStream.println("BuySpell failed: cannot carry more spells / not enough money / unknown spell id");
+                }
+            } else
+                Main.ErrorStream.println("BuySpell failed: spell id was not indicated");
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.SellArmorPiece)) {
-            GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1);
-            GameStateController.getCurrentController().getCurrentPlayer().incGold(3);
+            if (GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1)) {
+                if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(3)) {
+                    GameStateController.getCurrentController().getCurrentPlayer().incArmor(1);
+                    Main.ErrorStream.println("SellArmorPiece failed: cannot carry more gold");
+                }
+            } else
+                Main.ErrorStream.println("SellArmorPiece failed: not enough armor");
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.SellSpell)) {
@@ -66,11 +95,12 @@ public class TradingState extends GameState {
                 int index;
                 try {
                     index = Integer.parseInt(SSplit[1]);
-                    sellSpell(index);
+                    if (!sellSpell(index))
+                        Main.ErrorStream.println("SellSpell failed: cannot carry more money / spell index out of bounds");
                 } catch (NumberFormatException e) {
                     ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid number");
                 }
-                GameStateController.getCurrentController().getCurrentPlayer().incGold(4);
+
             }
             return this;
         }
@@ -80,30 +110,45 @@ public class TradingState extends GameState {
         return this;
     }
 
-    public void buyRandomSpell() {
-        int id = (int) (Math.random() % 4);
+    public boolean buySpell(String SpellId) {
 
-        switch (id) {
-            case 0:
-                GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new FireSpell(InternalCommandsDictionary.FireSpellID));
-                break;
-            case 1:
-                GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new HealSpell(InternalCommandsDictionary.HealSpellID));
-                break;
-            case 2:
-                GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new IceSpell(InternalCommandsDictionary.IceSpellID));
-                break;
-            case 3:
-                GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new PoisonSpell(InternalCommandsDictionary.PoisonSpellID));
-                break;
-        }
+        if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().size() >= 2)
+            return false;
+
+        if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(-8))
+            return false;
+
+        if (SpellId.equals(InternalCommandsDictionary.FireSpellID))
+            if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new FireSpell(InternalCommandsDictionary.FireSpellID)))
+                return true;
+
+            else if (SpellId.equals(InternalCommandsDictionary.HealSpellID))
+                if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new HealSpell(InternalCommandsDictionary.HealSpellID)))
+                    return true;
+
+                else if (SpellId.equals(InternalCommandsDictionary.IceSpellID))
+                    if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new IceSpell(InternalCommandsDictionary.IceSpellID)))
+                        return true;
+
+                    else if (SpellId.equals(InternalCommandsDictionary.PoisonSpellID))
+                        if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new PoisonSpell(InternalCommandsDictionary.PoisonSpellID)))
+                            return true;
+
+        return false;
+
     }
 
-    public void sellSpell(int index) {
+    public boolean sellSpell(int index) {
         try {
             GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
         } catch (IndexOutOfBoundsException e) {
             ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid index");
+            return false;
         }
+
+        if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(4))
+            return false;
+
+        return true;
     }
 }

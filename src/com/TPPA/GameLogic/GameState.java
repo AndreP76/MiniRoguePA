@@ -54,8 +54,14 @@ public abstract class GameState implements IState, Serializable {
 
     @Override
     public Boolean CanReRollDice() {
-        return null;
+        for (Dice currentDie : GameStateController.getCurrentController().getCurrentPlayer().getUnlockedDice()) {
+            if (currentDie.getLastRoll() == 6)
+                return true;
+        }
+
+        return false;
     }
+
 
     @Override
     public IState ToDrawPhase() {

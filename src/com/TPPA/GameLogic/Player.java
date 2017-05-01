@@ -3,7 +3,6 @@ package com.TPPA.GameLogic;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Created by Lídia on 05/04/2017.
@@ -27,7 +26,7 @@ public class Player {
         Attack = StartAttack;
         Gold = StartGold;
         Armor = StartArmor;
-        SpellsInventory = new ArrayList<SpellBase>();
+        SpellsInventory = new ArrayList<>();
         HP = StartHP;
         this.Rank = 1;
         UnlockedDice = new ArrayList<>();
@@ -71,6 +70,8 @@ public class Player {
     }
 
     public void setFood(int food) {
+        if (food > 6)
+            food = 6;
         if (food < 0)
             food = 0;
         Food = food;
@@ -81,6 +82,8 @@ public class Player {
     }
 
     public void setGold(int gold) {
+        if (gold > 20)
+            gold = 20;
         if (gold < 0)
             gold = 0;
         Gold = gold;
@@ -93,7 +96,19 @@ public class Player {
     public void setXP(int XP) {
         if (XP < 0)
             XP = 0;
+        else if (XP > 36)
+            XP = 36;
         this.XP = XP;
+
+        if (this.XP < 6)
+            setRank(1);
+        if (this.XP >= 6 && this.XP < 12)
+            setRank(2);
+        if (this.XP >= 12 && this.XP < 36)
+            setRank(3);
+        if (this.XP >= 36)
+            setRank(4);
+
     }
 
     public int getArmor() {
@@ -103,6 +118,8 @@ public class Player {
     public void setArmor(int armor) {
         if (armor < 0)
             armor = 0;
+        if (armor > 5)
+            armor = 5;
         Armor = armor;
     }
 
@@ -126,47 +143,125 @@ public class Player {
     public void incAttack(int ammount) {
         this.Attack = this.Attack + ammount;
     }
-    public void incFood(int ammount) {
-        this.Food = this.Food + ammount;
-        if (this.Food < 0)
-            this.Food = 0;
+
+    public boolean incFood(int ammount) {
+        if (this.Food == 6 && ammount > 0)
+            return false;
+
+        if (this.Food + ammount < 0)
+            return false;
+
+        if (this.Food + ammount > 6)
+            this.Food = 6;
+        else
+            this.Food = this.Food + ammount;
+        return true;
     }
-    public void incGold(int ammount) {
-        this.Gold = this.Gold + ammount;
-        if (this.Gold < 0)
-            this.Gold = 0;
+
+    public boolean incGold(int ammount) {
+
+        if (this.Gold + ammount < 0)
+            return false;
+
+        if (this.Gold + ammount > 20)
+            this.Gold = 20;
+        else
+            this.Gold = this.Gold + ammount;
+        return true;
     }
     public void incXP(int ammount) {
-        this.XP = this.XP + ammount;
+        if (this.XP == 36 && ammount > 0) { // já chegou ao Rank 4
+            this.incHP(1);
+            return;
+        }
+
+        this.XP += ammount;
         if (this.XP < 0)
             this.XP = 0;
+        if (this.XP > 36)
+            this.XP = 36;
+
+        if (this.XP < 6)
+            setRank(1);
+        if (this.XP >= 6 && this.XP < 12)
+            setRank(2);
+        if (this.XP >= 12 && this.XP < 36)
+            setRank(3);
+        if (this.XP >= 36)
+            setRank(4);
     }
 
-    public void incArmor(int ammount) {
-        this.Armor += ammount;
-        if (this.Armor < 0)
-            this.Armor = 0;
+    public boolean incArmor(int ammount) {
+        if (this.Armor == 5 && ammount > 0)
+            return false;
+        if (this.Armor + ammount < 0)
+            return false;
+
+        if (this.Armor + ammount > 5)
+            this.Armor = 5;
+        else
+            this.Armor += ammount;
+        return true;
     }
 
-    public void incHP(int ammount) {
-        this.HP += ammount;
+    public boolean incHP(int ammount) {
+        if (this.HP == 20 && ammount > 0)
+            return false;
+
+        if (this.HP + ammount > 20)
+            this.HP = 20;
+        else
+            this.HP += ammount;
+
+        return true;
     }
 
     public void incRank(int ammount) {
-        this.Rank += ammount;
-        if (ammount < 0)
-            removeUnlockedDice();
-        if (ammount > 0)
-            unlockNewDie();
+        if (ammount == 0)
+            return;
+
+        if (this.Rank + ammount < 1) {
+            while (this.Rank > 1) {
+                this.Rank--;
+                removeUnlockedDice();
+            }
+            return;
+        }
+        if (this.Rank + ammount > 4) {
+            while (this.Rank < 4) {
+                this.Rank++;
+                unlockNewDie();
+            }
+            return;
+        }
+
+        if (ammount > 0) {
+            for (int i = 0; i < ammount; i++) {
+                this.Rank++;
+                unlockNewDie();
+            }
+            return;
+        }
+
+        if (ammount < 0) {
+            for (int i = 0; i < ammount; i++) {
+                this.Rank--;
+                removeUnlockedDice();
+            }
+            return;
+        }
+
     }
 
     public void incRank() {
-        this.Rank++;
-        unlockNewDie();
+        if (this.Rank + 1 <= 4) {
+            this.Rank++;
+            unlockNewDie();
+        }
     }
 
 
-    // Só é chamado quando XP aumenta
+    // Só é chamado quando Rank aumenta
     public void unlockNewDie() {
         this.UnlockedDice.add(new Dice());
     }
@@ -214,36 +309,43 @@ public class Player {
         }
     }
 
-    public void useFeat(int index, int mode) throws IndexOutOfBoundsException {
+    public boolean useFeatConsumingHP(int index) throws IndexOutOfBoundsException {
+        Dice currentDie;
+        currentDie = UnlockedDice.get(index);
+        if (currentDie == null) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (this.HP - 2 <= 0)
+            return false;
+        else
+            this.incHP(-2);
+
+        int roll = currentDie.Roll();
+        if (roll != 1)
+            currentDie.incRollSum(roll);
+        else
+            currentDie.resetRollSum();
+        return true;
+    }
+
+    public boolean useFeatConsumingXP(int index) throws IndexOutOfBoundsException {
         Dice currentDie;
         currentDie = UnlockedDice.get(index);
         if (currentDie == null)
             throw new IndexOutOfBoundsException();
 
-        if (mode < 1 || mode > 2) {
-            Main.ErrorStream.println("Unable to use Feat: invalid mode!");
-            return;
-        }
-
-        if (mode == 1) { //mode = 1 -> usa Feat e perde 2 HP
-            if (this.HP - 2 <= 0)
-                return;
-            else
-                this.incHP(-2);
-        }
-        if (mode == 2) { //mode = 2 -> usa Feat e perde 1 XP
-            if (this.XP - 1 < 0)
-                return;
-            else
-                this.incXP(-1);
-        }
+        if (this.XP - 1 < 0)
+            return false;
+        else
+            this.incXP(-1);
 
         int roll = currentDie.Roll();
         if (roll != 1)
             currentDie.incRollSum(roll);
-        if (roll == 1)
+        else
             currentDie.resetRollSum();
-
+        return true;
     }
 
 

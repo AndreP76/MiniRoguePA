@@ -17,4 +17,6 @@ public class IceSpell extends SpellBase {
         Main.ErrorStream.println("IceSpell effect called");
         return new RollPhase();
     }
+
+
 }

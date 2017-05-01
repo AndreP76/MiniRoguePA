@@ -17,4 +17,6 @@ public class HealSpell extends SpellBase {
         GameStateController.getCurrentController().getCurrentPlayer().incHP(8);
         return new DefensePhase();
     }
+
+
 }
