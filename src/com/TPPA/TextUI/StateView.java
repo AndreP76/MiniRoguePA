@@ -1,6 +1,8 @@
 package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.*;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,6 +26,7 @@ public abstract class StateView implements IView, Observer {
         return MTVM;
     }
 
+    @Nullable
     public static StateView GenerateView() {
         if (GameStateController.getCurrentController().getCurrentGameState().getClass() == StartState.class) {
             CurrentView = new StartStateView();
