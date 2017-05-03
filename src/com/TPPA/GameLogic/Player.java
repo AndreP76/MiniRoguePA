@@ -13,11 +13,11 @@ public class Player {
     private int MinFood = 0;
     private int MinXP = 0;
     private int XP = 0;
-    private int MaxXP = 30;
-    private int Rank1XP = 7;
-    private int Rank2XP = 14;
-    private int Rank3XP = 21;
-    private int Rank4XP = 28;
+    private int MaxXP = 36;
+    private int Rank1XP = 0;
+    private int Rank2XP = 6;
+    private int Rank3XP = 18;
+    private int Rank4XP = 36;
 
     private int MaxAttack = 10; //
     private int Attack = 0;     // I think these are useless
@@ -115,22 +115,28 @@ public class Player {
     }
 
     public void setXP(int XP) {
-        if (XP < 0)
-            XP = 0;
-        else if (XP > 36)
-            XP = 36;
-        this.XP = XP;
-        if (this.XP >= Rank1XP) {
-            this.setRank(1);
-        }
-        if (this.XP >= Rank2XP) {
-            this.setRank(2);
-        }
-        if (this.XP >= Rank3XP) {
-            this.setRank(3);
-        }
-        if (this.XP >= Rank4XP) {
-            this.setRank(4);
+        if (XP < MinXP)
+            this.XP = MinXP;
+        else if (XP > MaxXP) {
+            if (this.XP == MaxXP) {
+                this.incHP(1);
+            } else {
+                this.XP = MaxXP;
+            }
+        } else {
+            this.XP = XP;
+            if (this.XP >= Rank1XP) {
+                this.setRank(1);
+            }
+            if (this.XP >= Rank2XP) {
+                this.setRank(2);
+            }
+            if (this.XP >= Rank3XP) {
+                this.setRank(3);
+            }
+            if (this.XP >= Rank4XP) {
+                this.setRank(4);
+            }
         }
     }
 
@@ -198,22 +204,6 @@ public class Player {
         } else {
             this.setXP(this.XP + ammount);
         }
-    }
-
-        this.XP += ammount;
-        if (this.XP < 0)
-            this.XP = 0;
-        if (this.XP > 36)
-            this.XP = 36;
-
-        if (this.XP < 6)
-            setRank(1);
-        if (this.XP >= 6 && this.XP < 12)
-            setRank(2);
-        if (this.XP >= 12 && this.XP < 36)
-            setRank(3);
-        if (this.XP >= 36)
-            setRank(4);
     }
 
     public boolean incArmor(int ammount) {
@@ -376,9 +366,7 @@ public class Player {
 
     public Boolean skillCheck() {
         int roll = new Dice().Roll();
-        if (roll <= this.Rank)
-            return true;
+        return roll <= this.Rank;
 
-        return false;
     }
 }

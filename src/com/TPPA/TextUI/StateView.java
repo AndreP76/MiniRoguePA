@@ -23,6 +23,11 @@ public abstract class StateView implements IView, Observer {
         MTVM.put(AwaitCardSelectionState.class, DrawPhaseView.class);
         MTVM.put(RestingState.class, RestingStateView.class);
         MTVM.put(TradingState.class, TradingStateView.class);
+        MTVM.put(SpellPhase.class, SpellView.class);
+        MTVM.put(RollPhase.class, RollView.class);
+        MTVM.put(RestingState.class, RestingView.class);
+        MTVM.put(GameOverState.class, GameOverView.class);
+        MTVM.put(FeatPhase.class, FeatView.class);
         return MTVM;
     }
 
@@ -59,32 +64,4 @@ public abstract class StateView implements IView, Observer {
         }
         CurrentView.Render();
     }
-
-    /*public void update(Observable observable, Object o) {
-        if (GameStateController.getCurrentController().getCurrentGameState().getClass() == StartState.class) {
-            Main.ErrorStream.println("Start state!");
-            if (CurrentView.getClass() != StartStateView.class) {
-                GameStateController.getCurrentController().deleteObserver(CurrentView);
-                Main.ErrorStream.println("Creating new view!");
-                CurrentView = new StartStateView();
-            } else {
-                Main.ErrorStream.println("Keeping current view!");
-            }
-        } else if (GameStateController.getCurrentController().getCurrentGameState().getClass() == RestingState.class) {
-            Main.ErrorStream.println("Resting state!");
-            Main.ErrorStream.println("Unimplemented view!");
-        } else if (GameStateController.getCurrentController().getCurrentGameState().getClass() == AwaitCardSelectionState.class) {
-            Main.ErrorStream.println("DrawState!");
-            if (CurrentView.getClass() != DrawPhaseView.class) {
-                GameStateController.getCurrentController().deleteObserver(CurrentView);
-                Main.ErrorStream.println("Creating new view!");
-                CurrentView = new DrawPhaseView();
-            } else {
-                Main.ErrorStream.println("Keeping current view!");
-            }
-        }else{
-            Main.ErrorStream.println("Unknown state!");
-        }
-        CurrentView.Render();
-    }*/
 }

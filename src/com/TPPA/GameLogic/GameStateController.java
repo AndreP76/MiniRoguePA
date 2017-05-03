@@ -88,6 +88,14 @@ public class GameStateController extends Observable implements java.io.Serializa
         return CurrentStageInRoom;
     }
 
+    public void setCurrentStageInRoom(int currentStageInRoom) {
+        CurrentStageInRoom = currentStageInRoom;
+        if (CurrentStageInRoom == this.getMaxRoomsInStage()) {
+            CurrentStageInRoom = 0;
+            this.setCurrentRoom(this.getCurrentRoom() + 1);
+        }
+    }
+
     public Deck getCurrentDeck() {
         return CurrentDeck;
     }
@@ -145,6 +153,10 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public int getCurrentRoom() {
         return CurrentRoom;
+    }
+
+    public void setCurrentRoom(int currentRoom) {
+        CurrentRoom = currentRoom;
     }
 
     public int getRoomsInZone() {

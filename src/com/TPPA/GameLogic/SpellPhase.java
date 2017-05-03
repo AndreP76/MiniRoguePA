@@ -20,10 +20,7 @@ public class SpellPhase extends GameState {
 
     @Override
     public Boolean CanUseSpell() {
-        if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().isEmpty())
-            return false;
-        else
-            return true;
+        return !GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().isEmpty();
     }
 
     @Override

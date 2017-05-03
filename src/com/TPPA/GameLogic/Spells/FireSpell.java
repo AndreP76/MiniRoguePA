@@ -1,8 +1,8 @@
 package com.TPPA.GameLogic.Spells;
 
-import com.TPPA.GameLogic.DefensePhase;
 import com.TPPA.GameLogic.IState;
 import com.TPPA.GameLogic.Main;
+import com.TPPA.GameLogic.RollPhase;
 
 /**
  * Created by andre on 4/20/17.
@@ -16,7 +16,7 @@ public class FireSpell extends SpellBase {
     public IState Effect() {
         Main.ErrorStream.println("FireSpell effect called");
         //GameStateController.getCurrentController().getCurrentBattle().getMonster.incHP(-8);
-        return new DefensePhase();
+        return new RollPhase();
     }
 
 }

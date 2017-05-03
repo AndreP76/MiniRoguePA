@@ -5,8 +5,6 @@ import com.TPPA.GameLogic.Cards.CardBase;
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Main;
 
-import java.util.EmptyStackException;
-
 /**
  * Created by andre on 4/12/17.
  */
@@ -61,7 +59,7 @@ public class DrawPhaseView extends StateView {
             TAppend = "1/2";
         }
         for (int i = 0; i < max; ++i) {
-            Text += CardsInRoom[GSC.getCurrentStageInRoom()][i].toString();
+            Text += CardsInRoom[GSC.getCurrentStageInRoom()][i].toString() + "\n";
         }
         Text += "\n\n\nEscolha (" + TAppend + "): ";
 

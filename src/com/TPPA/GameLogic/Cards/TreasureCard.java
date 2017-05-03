@@ -1,7 +1,10 @@
 package com.TPPA.GameLogic.Cards;
 
 import com.TPPA.GameLogic.*;
-import com.TPPA.GameLogic.Spells.*;
+import com.TPPA.GameLogic.Spells.FireSpell;
+import com.TPPA.GameLogic.Spells.HealSpell;
+import com.TPPA.GameLogic.Spells.IceSpell;
+import com.TPPA.GameLogic.Spells.PoisonSpell;
 
 /**
  * Created by andre on 4/19/17.
@@ -27,26 +30,32 @@ public class TreasureCard extends CardBase {
         switch (d.Roll()) {
             case 1: /*Communicate with view, Somehow...*/
                 GSC.getCurrentPlayer().incArmor(1);
+                GSC.MessageStack.push("Got an Armor Piece");
                 Main.ErrorStream.println("Got 1 Armor");
                 break;
             case 2:
                 GSC.getCurrentPlayer().incXP(2);
+                GSC.MessageStack.push("Got an 2 XP");
                 Main.ErrorStream.println("Got 2 XP");
                 break;
             case 3:
                 GSC.getCurrentPlayer().getSpellsInventory().add(new FireSpell(InternalCommandsDictionary.FireSpellID));
+                GSC.MessageStack.push("Got a Fire Spell!");
                 Main.ErrorStream.println("Got FireSpell");
                 break;
             case 4:
                 GSC.getCurrentPlayer().getSpellsInventory().add(new IceSpell(InternalCommandsDictionary.IceSpellID));
+                GSC.MessageStack.push("Got an Ice Spell!");
                 Main.ErrorStream.println("Got IceSpell");
                 break;
             case 5:
                 GSC.getCurrentPlayer().getSpellsInventory().add(new PoisonSpell(InternalCommandsDictionary.PoisonSpellID));
+                GSC.MessageStack.push("Got a Poisoning Spell!");
                 Main.ErrorStream.println("Got PoisonSpell");
                 break;
             case 6:
                 GSC.getCurrentPlayer().getSpellsInventory().add(new HealSpell(InternalCommandsDictionary.HealSpellID));
+                GSC.MessageStack.push("Got an Healing Spell!");
                 Main.ErrorStream.println("Got HealSpell");
                 break;
             default:

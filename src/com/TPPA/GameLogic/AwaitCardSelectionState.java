@@ -3,10 +3,6 @@ package com.TPPA.GameLogic;
 import com.TPPA.GameLogic.Cards.BossMonsterCard;
 import com.TPPA.GameLogic.Cards.CardBase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-
 /**
  * Created by andre on 4/5/17.
  */
@@ -64,12 +60,13 @@ public class AwaitCardSelectionState extends GameState {
         String[] SStr = ActionString.split(" ");
         if (SStr[0].equals(InternalCommandsDictionary.DrawCommand)) {
             int CardIndex = Integer.parseInt(SStr[SStr.length - 1]);
-            if (GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex - 1] == null) {
+            if (GSC.getRoomStages()[GSC.getCurrentStageInRoom()][CardIndex - 1] == null) {
                 Main.ErrorStream.println("User selected empty card index. Ignoring.");
                 return this;
             } else {
                 CardBase RoomCard = GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex - 1];
                 Main.ErrorStream.println("User drew " + RoomCard);
+                GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
                 return RoomCard.Effect();
             }
         } else {
