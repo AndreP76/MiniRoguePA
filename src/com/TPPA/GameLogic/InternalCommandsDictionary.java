@@ -2,6 +2,7 @@ package com.TPPA.GameLogic;
 
 /**
  * Created by andre on 4/10/17.
+ * this saves commands for easy comparison
  */
 public class InternalCommandsDictionary { //Isto so guarda os comandos e as strings correspondentes. Nao deve ser instranciado
     public final static String SetDifficultyCommand = "SETDIFF";
@@ -44,6 +45,9 @@ public class InternalCommandsDictionary { //Isto so guarda os comandos e as stri
     public final static String UseFeatLosingHP = "USEFEATHP";
     public final static String UseFeatLosingXP = "USEFEATXP";
     public final static String EndFeatPhase = "ENDFEATPHASE";
+
+    //Comandos para GameOverPhase
+    public final static String Skip = "GAMEOVERSKIP";
 
     /*public final static int CakewalkIndex = 0;
     public final static int EzPzIndex = 1;

@@ -2,6 +2,7 @@ package com.TPPA.GameLogic;
 
 /**
  * Created by andre on 4/5/17.
+ * Change the course of battle through sheer despair
  */
 public class FeatPhase extends GameState {
     @Override
@@ -16,7 +17,7 @@ public class FeatPhase extends GameState {
 
     @Override
     public IState Action(String ActionString) {
-
+        //TODO:  End this phase
         String[] SSplit = ActionString.split(" ");
 
         if (SSplit[0].equals(InternalCommandsDictionary.EndFeatPhase)) {

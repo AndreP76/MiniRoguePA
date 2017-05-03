@@ -5,9 +5,11 @@ import com.TPPA.GameLogic.Cards.CardBase;
 
 /**
  * Created by andre on 4/5/17.
+ * Time to d-d-d-duel
  */
 public class AwaitCardSelectionState extends GameState {
     public AwaitCardSelectionState() {
+        //TODO : SAVE GAME OPTION
         super();
         GameStateController GSC = GameStateController.getCurrentController();
         if (GSC.getRoomStages() == null) {
