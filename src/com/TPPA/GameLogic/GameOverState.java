@@ -5,7 +5,6 @@ package com.TPPA.GameLogic;
  */
 
 public class GameOverState extends GameState {
-
     @Override
     public Action[] GetActions() {
         return new Action[0];

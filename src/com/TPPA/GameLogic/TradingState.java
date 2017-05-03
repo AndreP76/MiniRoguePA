@@ -80,10 +80,6 @@ public class TradingState extends GameState {
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.SellArmorPiece)) {
-            if (GameStateController.getCurrentController().getCurrentPlayer().getArmor() > 0) {
-                GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1);
-                GameStateController.getCurrentController().getCurrentPlayer().incGold(3);
-            }
             if (GameStateController.getCurrentController().getCurrentPlayer().incArmor(-1)) {
                 if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(3)) {
                     GameStateController.getCurrentController().getCurrentPlayer().incArmor(1);
@@ -149,9 +145,7 @@ public class TradingState extends GameState {
             return false;
         }
 
-        if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(4))
-            return false;
+        return GameStateController.getCurrentController().getCurrentPlayer().incGold(4);
 
-        return true;
     }
 }

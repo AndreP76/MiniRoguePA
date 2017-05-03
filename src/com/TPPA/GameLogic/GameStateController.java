@@ -178,5 +178,40 @@ public class GameStateController extends Observable implements java.io.Serializa
     //C methods
     public void RelayAction(String ActionString) {
         setCurrentGameState(getCurrentGameState().Action(ActionString));
+        //setCurrentGameState(new GameOverState());
+    }
+
+    public int CalculateScore() {
+        int CurrentScore = 0;
+        switch (this.getGameDifficulty()) {
+            case Casual: {
+                CurrentScore += 0;
+                break;
+            }
+            case Normal: {
+                CurrentScore += 2;
+                break;
+            }
+            case Hard: {
+                CurrentScore += 4;
+                break;
+            }
+            case Nightmare: {
+                CurrentScore += 6;
+                break;
+            }
+        }
+
+        Player P = getCurrentPlayer();
+        CurrentScore += (getCurrentZone() * 3);                  //Area Reached *3
+        CurrentScore += ((getTrueRoom() - 1) * 2);               //Bosses defeated *2
+        CurrentScore += (P.getRank() * 2);                      //Rank *2
+        CurrentScore += (P.getHP() * 2);                        //HP *2
+        CurrentScore += (P.getGold() * 2);                       //Gold *2
+        CurrentScore += P.getSpellsInventory().size();          //Spells *1
+        CurrentScore += P.getArmor();                           //Armor *1
+        CurrentScore += P.getFood();                            //Food *1
+
+        return CurrentScore;
     }
 }

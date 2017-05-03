@@ -25,7 +25,6 @@ public abstract class StateView implements IView, Observer {
         MTVM.put(TradingState.class, TradingStateView.class);
         MTVM.put(SpellPhase.class, SpellView.class);
         MTVM.put(RollPhase.class, RollView.class);
-        MTVM.put(RestingState.class, RestingView.class);
         MTVM.put(GameOverState.class, GameOverView.class);
         MTVM.put(FeatPhase.class, FeatView.class);
         return MTVM;

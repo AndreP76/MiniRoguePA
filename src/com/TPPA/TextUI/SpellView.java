@@ -8,6 +8,6 @@ import com.TPPA.GameLogic.Main;
 public class SpellView extends StateView {
     @Override
     public void Render() {
-        Main.OutputStream.println("Haro!");
+        Main.OutputStream.println("IMPLEMENT THIS YA LAZY BASTARDS");
     }
 }
