@@ -2,13 +2,10 @@ package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Main;
-
-/*
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.Ansi.*;
-import org.fusesource.jansi.Ansi.Color.*;
+import org.fusesource.jansi.Ansi.Color;
 import org.fusesource.jansi.AnsiConsole;
-*/
+
+import static org.fusesource.jansi.Ansi.ansi;
 /*Maybe Later...*/
 
 /**
@@ -17,7 +14,7 @@ import org.fusesource.jansi.AnsiConsole;
 public class GameOverView extends StateView {
     @Override
     public void Render() {
-        //AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall();
         GameStateController GSC = GameStateController.getCurrentController();
         String Text = "";
         while (!GSC.MessageStack.empty())
@@ -48,9 +45,9 @@ public class GameOverView extends StateView {
         Text += "\n\t\t\t\tYou died... \n\t\t\t\tScore : " + GSC.CalculateScore();
 
 
-        //Main.OutputStream.println(ansi().eraseScreen().fg(Color.RED).a(Text));
-        //AnsiConsole.systemUninstall();
-        Main.OutputStream.println(Text);
+        Main.OutputStream.println(ansi().eraseScreen().fg(Color.RED).a(Text));
+        AnsiConsole.systemUninstall();
+        //Main.OutputStream.println(Text);
 
         TextDrawHelper.InputScanner.nextLine();
     }

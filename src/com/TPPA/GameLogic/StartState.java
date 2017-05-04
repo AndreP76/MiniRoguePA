@@ -1,5 +1,11 @@
 package com.TPPA.GameLogic;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Paths;
+
 /**
  * Created by andre on 4/5/17.
  */
@@ -14,6 +20,7 @@ public class StartState extends GameState {
         Act[0] = new Action(InternalCommandsDictionary.SetDifficultyCommand, "Alterar dificuldade (1 ~ 7)");
         Act[1] = new Action(InternalCommandsDictionary.SetAreaCommand, "Definir area de inicio (1 ~ " + GameStateController.getCurrentController().getMaxZones() + ")");
         Act[2] = new Action(InternalCommandsDictionary.StartCommand,"Começa o jogo");
+        Act[3] = new Action(InternalCommandsDictionary.LoadCommand, "Carregar um jogo");
         return Act;
     }
 
@@ -50,6 +57,20 @@ public class StartState extends GameState {
             //else idk, log it or something
         }else if(SSplit[0].equals(InternalCommandsDictionary.StartCommand)){
             return new AwaitCardSelectionState();
+        } else if (SSplit[0].equals(InternalCommandsDictionary.LoadCommand)) {
+            String Pth = Paths.get(SSplit[SSplit.length]).toString();
+            File x = new File(Pth);
+            if (x.exists()) {
+                try {
+                    GameStateController.setCurrentController((GameStateController) (new ObjectInputStream(new FileInputStream(x)).readObject()));
+                } catch (IOException e) {
+                    Main.ErrorStream.println("Error deserealizing object\n\t" + e.fillInStackTrace());
+                } catch (ClassNotFoundException e) {
+                    Main.ErrorStream.println("Error deserealizing object\n\t" + e.fillInStackTrace());
+                }
+            } else {
+                return this;
+            }
         }
         return this;
     }

@@ -4,12 +4,14 @@ package com.TPPA.GameLogic;
  * Created by andre on 4/10/17.
  * this saves commands for easy comparison
  */
-public class InternalCommandsDictionary { //Isto so guarda os comandos e as strings correspondentes. Nao deve ser instranciado
+public class InternalCommandsDictionary { //Isto so guarda os comandos e as strings correspondentes. Nao deve ser instanciado
     public final static String SetDifficultyCommand = "SETDIFF";
     public final static String SetAreaCommand = "SETAREA";
     public final static String StartCommand = "GAMESTART";
     public final static String DrawCommand = "DRAWCARD";
     public final static String QuitCommand = "QUITGAME";
+    public final static String LoadCommand = "LOADGAME";
+    public final static String SaveCommand = "SAVEGAME";
 
     //Comandos para RestingState
     public final static String ReinforceWeapon = "REINFORCE";

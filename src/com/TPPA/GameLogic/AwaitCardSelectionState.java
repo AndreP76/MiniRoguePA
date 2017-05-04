@@ -3,6 +3,10 @@ package com.TPPA.GameLogic;
 import com.TPPA.GameLogic.Cards.BossMonsterCard;
 import com.TPPA.GameLogic.Cards.CardBase;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 /**
  * Created by andre on 4/5/17.
  * Time to d-d-d-duel
@@ -48,9 +52,10 @@ public class AwaitCardSelectionState extends GameState {
 
     @Override
     public Action[] GetActions() {
-        Action DrawAction = new Action(InternalCommandsDictionary.DrawCommand, "Draw a stage card");
-        Action[] AvAc = new Action[1];
-        AvAc[0] = DrawAction;
+        Action[] AvAc = new Action[3];
+        AvAc[0] = new Action(InternalCommandsDictionary.DrawCommand, "Draw a stage card");
+        AvAc[1] = new Action(InternalCommandsDictionary.SaveCommand, "Load a save game ");
+        AvAc[2] = new Action(InternalCommandsDictionary.QuitCommand, "Exit to main menu");
         return AvAc;
     }
 
@@ -71,6 +76,18 @@ public class AwaitCardSelectionState extends GameState {
                 GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
                 return RoomCard.Effect();
             }
+        } else if (SStr[0].equals(InternalCommandsDictionary.QuitCommand)) {
+            return new StartState();
+        } else if (SStr[0].equals(InternalCommandsDictionary.SaveCommand)) {
+            try {
+                FileOutputStream FSO = new FileOutputStream(SStr[SStr.length - 1]);
+                ObjectOutputStream OOS = new ObjectOutputStream(FSO);
+                OOS.writeObject(GameStateController.getCurrentController());
+                return this;
+            } catch (IOException IOEX) {
+                Main.ErrorStream.println("Error serializing object\n\tMessage : " + IOEX.fillInStackTrace());
+            }
+            return this;
         } else {
             Main.ErrorStream.println("Unexpected command on AwaitCardSelectionStation : " + ActionString);
             return this;

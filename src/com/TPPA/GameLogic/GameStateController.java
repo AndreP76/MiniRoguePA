@@ -46,6 +46,11 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     //getter
 
+    public static void setCurrentController(GameStateController currentController) {
+        CurrentController = currentController;
+        CurrentController.setCurrentGameState(CurrentController.getCurrentGameState());
+    }
+
     public Monster getCurrentMonster() {
         return CurrentMonster;
     }
@@ -171,11 +176,12 @@ public class GameStateController extends Observable implements java.io.Serializa
         return GameDifficulty;
     }
 
+    //C methods
+
     public void setGameDifficulty(DifficultyLevelEnum gameDifficulty) {
         GameDifficulty = gameDifficulty;
     }
 
-    //C methods
     public void RelayAction(String ActionString) {
         setCurrentGameState(getCurrentGameState().Action(ActionString));
         //setCurrentGameState(new GameOverState());
