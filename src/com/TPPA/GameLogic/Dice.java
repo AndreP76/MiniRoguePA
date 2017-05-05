@@ -1,6 +1,5 @@
 package com.TPPA.GameLogic;
 
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -55,5 +54,14 @@ public class Dice {
 
     public Boolean isLocked() {
         return isLocked;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+
+        s += "Último valor obtido: " + LastRoll + "; Soma: " + RollSum;
+
+        return s;
     }
 }

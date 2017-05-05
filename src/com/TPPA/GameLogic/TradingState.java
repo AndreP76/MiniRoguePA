@@ -133,19 +133,24 @@ public class TradingState extends GameState {
                         if (GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().add(new PoisonSpell(InternalCommandsDictionary.PoisonSpellID)))
                             return true;
 
+        GameStateController.getCurrentController().getCurrentPlayer().incGold(8);
+
         return false;
 
     }
 
     public boolean sellSpell(int index) {
+        if (!GameStateController.getCurrentController().getCurrentPlayer().incGold(4))
+            return false;
         try {
             GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
         } catch (IndexOutOfBoundsException e) {
             ErrorStream.println("Second argument of " + InternalCommandsDictionary.SellSpell + " is not a valid index");
+            GameStateController.getCurrentController().getCurrentPlayer().incGold(-4);
             return false;
         }
 
-        return GameStateController.getCurrentController().getCurrentPlayer().incGold(4);
+        return true;
 
     }
 }

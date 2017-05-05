@@ -16,7 +16,7 @@ public class StartState extends GameState {
 
     @Override
     public Action[] GetActions() {
-        Action[] Act = new Action[3];
+        Action[] Act = new Action[4];
         Act[0] = new Action(InternalCommandsDictionary.SetDifficultyCommand, "Alterar dificuldade (1 ~ 7)");
         Act[1] = new Action(InternalCommandsDictionary.SetAreaCommand, "Definir area de inicio (1 ~ " + GameStateController.getCurrentController().getMaxZones() + ")");
         Act[2] = new Action(InternalCommandsDictionary.StartCommand,"Começa o jogo");

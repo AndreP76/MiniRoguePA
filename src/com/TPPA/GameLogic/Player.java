@@ -369,4 +369,31 @@ public class Player {
         return roll <= this.Rank;
 
     }
+
+    public boolean hasRolledDice() {
+        for (Dice currentDie : UnlockedDice)
+            if (currentDie.getLastRoll() != 0)
+                return true;
+        return false;
+    }
+
+
+    public String getUnlockedDiceDescription() {
+        String s = "";
+
+        for (int i = 0; i < UnlockedDice.size(); i++) {
+            s += (i + 1) + ") " + UnlockedDice.get(i).toString() + "\n";
+        }
+        return s;
+    }
+
+    public String getCriticalDiceDescription() {
+        String s = "";
+
+        for (int i = 0; i < UnlockedDice.size(); i++) {
+            if (UnlockedDice.get(i).getLastRoll() == 6)
+                s += (i + 1) + ") " + UnlockedDice.get(i).toString() + "\n";
+        }
+        return s;
+    }
 }

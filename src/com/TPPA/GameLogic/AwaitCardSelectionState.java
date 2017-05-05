@@ -71,7 +71,7 @@ public class AwaitCardSelectionState extends GameState {
                 Main.ErrorStream.println("User selected empty card index. Ignoring.");
                 return this;
             } else {
-                CardBase RoomCard = GSC.getRoomStages()[GSC.getCurrentRoom()][CardIndex - 1];
+                CardBase RoomCard = GSC.getRoomStages()[GSC.getCurrentStageInRoom()][CardIndex - 1];
                 Main.ErrorStream.println("User drew " + RoomCard);
                 GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
                 return RoomCard.Effect();

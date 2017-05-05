@@ -108,6 +108,7 @@ public class Monster {
         if (GameStateController.getCurrentController().getCurrentPlayer().getHP() <= 0) {
             return new GameOverState();
         } else {
+            GameStateController.getCurrentController().getCurrentPlayer().resetDice();
             return new RollPhase();
         }
     }
