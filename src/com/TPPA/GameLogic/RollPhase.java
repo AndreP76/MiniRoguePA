@@ -46,7 +46,7 @@ public class RollPhase extends GameState {
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.EndRollPhase)) {
-            return new FeatPhase(); // resetDice só é feito quando concluída a FeatPhase
+            return new FeatPhase();
         }
         return this;
     }

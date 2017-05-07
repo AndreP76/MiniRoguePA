@@ -1,7 +1,7 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 import java.util.Arrays;
@@ -13,21 +13,26 @@ import java.util.Arrays;
 public class RollView extends StateView {
     @Override
     public void Render() {
-        //TODO : IMPLEMENT THIS
-        Main.OutputStream.println("IMPLEMENT THIS YA LAZY BASTARDS");
+        //TODO : I believe this is finished
 
         String Text = "";
         GameStateController GSC = GameStateController.getCurrentController();
         while (!GSC.MessageStack.empty())
             Text += GSC.MessageStack.pop() + "\n";
 
-        Action[] ActionsAvailable = GSC.getCurrentGameState().GetActions();
+
+        Text += "==== " + GSC.getCurrentMonster().getName() + (GSC.getCurrentMonster().getBoss() ? " (BOSS)" : "") + " encountered! ====\n";
+        Main.OutputStream.println(Text);
+        Main.OutputStream.println(GSC.getCurrentMonster().toString());
+        Main.OutputStream.println(GSC.getCurrentPlayer().toString());
+
+        Text = "";
 
         String ActionString = "";
 
         if (!GSC.getCurrentPlayer().hasRolledDice()) {
             //Tem obrigatoriamente de rodar os dados para passar à fase seguinte
-            Text += "\n1) Rodar dados\n\n\nEscolha: ";
+            Text += "\n1) Roll dice\n\n\nChoose: ";
 
             Main.OutputStream.print(Text);
             int Selected = -1;
@@ -35,9 +40,15 @@ public class RollView extends StateView {
                 while (!TextDrawHelper.InputScanner.hasNextInt()) ;
                 Selected = TextDrawHelper.InputScanner.nextInt();
             }
-            ActionString += ActionsAvailable[Selected - 1].getActionString();
+            ActionString += InternalCommandsDictionary.RollDice;
+            GSC.RelayAction(ActionString);
+
+
+
         } else if (GSC.getCurrentGameState().CanReRollDice()) {
-            Text += "\nRodar novamente um dado com dano crítico?\n\t1) Sim\n\t2) Não\n\n\nEscolha: ";
+            Main.OutputStream.println(GSC.getCurrentPlayer().getUnlockedDiceDescription());
+
+            Text += "\nRe-roll a die with critical damage?\n\t1) Yes\n\t2) No\n\n\nChoose: ";
             //Utilizador tem de selecionar sim ou não
             //Se selecionar sim perguntar qual o dado que quer rodar
             //Se não, ENDROLLPHASE
@@ -50,11 +61,12 @@ public class RollView extends StateView {
             }
 
             if (Selected == 2) {
-                ActionString += ActionsAvailable[2].getActionString();
+                ActionString += InternalCommandsDictionary.EndRollPhase;
+                GSC.RelayAction(ActionString);
             } else {
-                ActionString += ActionsAvailable[1].getActionString();
+                ActionString += InternalCommandsDictionary.ReRollDice;
 
-                Text = "Qual dado?\n" + GSC.getCurrentPlayer().getCriticalDiceDescription() + "\n\nEscolha: ";
+                Text = "Which die?\n" + GSC.getCurrentPlayer().getCriticalDiceDescription() + "\n\nChoose: ";
 
                 Main.OutputStream.print(Text);
                 Selected = -1;
@@ -70,12 +82,14 @@ public class RollView extends StateView {
                 }
 
                 ActionString += " " + (Selected - 1);
+                GSC.RelayAction(ActionString);
+
             }
+        } else {
+            ActionString += InternalCommandsDictionary.EndRollPhase;
+            //Main.OutputStream.println(GSC.getCurrentPlayer().getUnlockedDiceDescription());
+            GSC.RelayAction(ActionString);
         }
-
-        //Main.OutputStream.println(GSC.getCurrentPlayer().getUnlockedDiceDescription());
-        GSC.RelayAction(ActionString);
-
 
     }
 }

@@ -41,6 +41,9 @@ public class Player {
 
     private ArrayList<Dice> UnlockedDice;
 
+    private boolean hasDefeatedMonster;
+    private boolean hasUsedFeat;
+
     Player(int StartAttack, int StartArmor, int StartGold, int StartFood, int StartXP, int StartHP) {
         Food = StartFood;
         XP = StartXP;
@@ -52,6 +55,10 @@ public class Player {
         this.Rank = 1;
         UnlockedDice = new ArrayList<>();
         unlockNewDie(); // começa já com um dado desbloqueado
+
+        hasDefeatedMonster = false;
+
+        hasUsedFeat = false;
     }
 
     //getters
@@ -290,6 +297,22 @@ public class Player {
         }
     }
 
+    public boolean getHasDefeatedMonster() {
+        return this.hasDefeatedMonster;
+    }
+
+    public void setHasDefeatedMonster(boolean hasDefeatedMonster) {
+        this.hasDefeatedMonster = hasDefeatedMonster;
+    }
+
+    public boolean getHasUsedFeat() {
+        return hasUsedFeat;
+    }
+
+    public void setHasUsedFeat(boolean hasUsedFeat) {
+        this.hasUsedFeat = hasUsedFeat;
+    }
+
     // Métodos a ser usados na RollPhase
     public void rollDice() {
         for (Dice currentDie : this.UnlockedDice) {
@@ -394,6 +417,22 @@ public class Player {
             if (UnlockedDice.get(i).getLastRoll() == 6)
                 s += (i + 1) + ") " + UnlockedDice.get(i).toString() + "\n";
         }
+        return s;
+    }
+
+    public int getUnlockedDiceSum() {
+        int sum = 0;
+        for (Dice currentDie : UnlockedDice)
+            sum += currentDie.getRollSum();
+        return sum;
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Player stats:\n";
+        s += "Rank: " + Rank + "\tXP: " + XP + "\tGold: " + Gold + "\tFood: " + Food + "\n";
+        s += "Armor: " + Armor + "\tHP: " + HP + "\n";
         return s;
     }
 }

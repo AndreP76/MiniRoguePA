@@ -29,4 +29,6 @@ public interface IState {
     public IState Action(String ActionString);
 
     public Action[] GetActions();
+
+    public IState AttackMonster();
 }

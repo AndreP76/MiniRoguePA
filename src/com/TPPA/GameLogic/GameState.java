@@ -114,4 +114,9 @@ public abstract class GameState implements IState, Serializable {
         Main.ErrorStream.println("\t" + this.getClass() + "\n\t" + ActionString);
         return this;
     }
+
+    @Override
+    public IState AttackMonster() {
+        return this;
+    }
 }

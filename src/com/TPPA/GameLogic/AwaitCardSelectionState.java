@@ -11,6 +11,8 @@ import java.io.ObjectOutputStream;
  * Created by andre on 4/5/17.
  * Time to d-d-d-duel
  */
+
+//TODO: Resolver este erro: Exception in thread "main" java.lang.NumberFormatException: For input string: "DRAWCARD"
 public class AwaitCardSelectionState extends GameState {
     public AwaitCardSelectionState() {
         //TODO : SAVE GAME OPTION

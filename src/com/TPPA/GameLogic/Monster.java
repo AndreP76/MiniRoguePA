@@ -20,6 +20,8 @@ public class Monster {
 
     private Boolean CanAttack = true;
 
+    private boolean poisoned = false;
+
     public Monster(int HPMax, int XPReward, int GoldReward, int MonsterAttack, Boolean isBoss, String Name) {
         this.HPMax = this.HPCurr = HPMax;
         this.XPReward = XPReward;
@@ -79,6 +81,14 @@ public class Monster {
         this.HPCurr = HPCurr;
     }
 
+    public void incHPCurr(int HPCurr) {
+        if (this.HPCurr + HPCurr > HPMax) {
+            this.HPCurr = HPMax;
+            return;
+        }
+        this.HPCurr += HPCurr;
+    }
+
     public int getHPMax() {
         return HPMax;
     }
@@ -103,13 +113,33 @@ public class Monster {
         this.XPReward = XPReward;
     }
 
+    public boolean getPoisoned() {
+        return poisoned;
+    }
+
+    public void setPoisoned(boolean poisoned) {
+        this.poisoned = poisoned;
+    }
+
     public IState onAttack() {
         GameStateController.getCurrentController().getCurrentPlayer().incHP(this.Strength - GameStateController.getCurrentController().getCurrentPlayer().getArmor());
         if (GameStateController.getCurrentController().getCurrentPlayer().getHP() <= 0) {
             return new GameOverState();
         } else {
-            GameStateController.getCurrentController().getCurrentPlayer().resetDice();
+            //GameStateController.getCurrentController().getCurrentPlayer().resetDice();
             return new RollPhase();
         }
+    }
+
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Monster stats:\n";
+        s += "HP: " + HPCurr + "\tAttack: " + Strength + "\n";
+        s += "XP reward: " + XPReward;
+        if (this.isBoss)
+            s += "\tGold reward: " + GoldReward;
+        s += "\n";
+        return s;
     }
 }

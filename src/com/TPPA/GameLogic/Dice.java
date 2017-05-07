@@ -60,7 +60,7 @@ public class Dice {
     public String toString() {
         String s = "";
 
-        s += "Último valor obtido: " + LastRoll + "; Soma: " + RollSum;
+        s += "Last roll: " + LastRoll + "; Sum: " + RollSum;
 
         return s;
     }
