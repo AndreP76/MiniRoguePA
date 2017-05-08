@@ -1,9 +1,7 @@
 package com.TPPA.GameLogic.Spells;
 
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.IState;
 import com.TPPA.GameLogic.Main;
-import com.TPPA.GameLogic.RollPhase;
 
 /**
  * Created by andre on 4/20/17.
@@ -14,12 +12,22 @@ public class HealSpell extends SpellBase {
         super(ID);
     }
 
+//    @Override
+//    public IState Effect() {
+//        Main.ErrorStream.println("HealSpell effect called");
+//        GameStateController.getCurrentController().getCurrentPlayer().incHP(8);
+//        return new RollPhase();
+//    }
+
+
     @Override
-    public IState Effect() {
+    public void Effect() {
         Main.ErrorStream.println("HealSpell effect called");
-        GameStateController.getCurrentController().getCurrentPlayer().incHP(8);
-        return new RollPhase();
+
+        GameStateController GSC = GameStateController.getCurrentController();
+        if (GSC.getCurrentPlayer().incHP(8))
+            GSC.MessageStack.push("HealSpell effect called - Player gained HP");
+        else
+            GSC.MessageStack.push("HealSpell effect called, but Player HP can't go any higher");
     }
-
-
 }

@@ -8,9 +8,9 @@ public class RollPhase extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[3];
-        Act[0] = new Action(InternalCommandsDictionary.RollDice, "Rodar os dados");
-        Act[1] = new Action(InternalCommandsDictionary.ReRollDice, "Rodar novamente um dado com dano crítico");
-        Act[2] = new Action(InternalCommandsDictionary.EndRollPhase, "Passar à fase seguinte");
+        Act[0] = new Action(InternalCommandsDictionary.RollDice, "Roll dice");
+        Act[1] = new Action(InternalCommandsDictionary.ReRollDice, "Re-roll a die with critical damage");
+        Act[2] = new Action(InternalCommandsDictionary.EndRollPhase, "Skip to next phase");
         return Act;
     }
 

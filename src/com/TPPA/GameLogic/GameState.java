@@ -1,5 +1,8 @@
 package com.TPPA.GameLogic;
 
+import com.TPPA.GameLogic.Cards.TreasureCard;
+import com.TPPA.GameLogic.Spells.SpellBase;
+
 import java.io.Serializable;
 
 /**
@@ -117,6 +120,51 @@ public abstract class GameState implements IState, Serializable {
 
     @Override
     public IState AttackMonster() {
+        return this;
+    }
+
+    @Override
+    public IState UseSpell(SpellBase spellToUse) {
+        return this;
+    }
+
+    @Override
+    public IState OnDefeatingMonster() {
+        GameStateController GSC = GameStateController.getCurrentController();
+
+        if (GSC.getCurrentMonster().getBoss()) {
+            int currentZone = GSC.getCurrentZone();
+            if (currentZone == 12) { // Qual é a zona final???
+                GSC.MessageStack.push("==== Final Boss defeated! ====\nYou've won Og's Blood!\n");
+
+                GSC.getCurrentPlayer().resetDice();
+                return new StartState();
+            }
+
+            GSC.getCurrentPlayer().incGold(GSC.getCurrentMonster().getGoldReward());
+            GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
+            GSC.setBattledInThisRoom(true); // ???
+            GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
+            GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP and " + GSC.getCurrentMonster().getGoldReward() + " Gold\n");
+            GSC.setCurrentZone(currentZone + 1);
+            GSC.setCurrentRoom(1); // Qual é a sala inicial???
+
+            GSC.getCurrentPlayer().resetDice();
+            return (new TreasureCard(Deck.TreasureCardID)).Effect();
+        }
+
+        GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
+        GSC.setBattledInThisRoom(true); // ???
+        GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
+        GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP\n");
+        GSC.setCurrentRoom(GSC.getCurrentRoom() + 1);
+
+        GSC.getCurrentPlayer().resetDice();
+        return new AwaitCardSelectionState();
+    }
+
+    @Override
+    public IState DefendFromMonster() {
         return this;
     }
 }

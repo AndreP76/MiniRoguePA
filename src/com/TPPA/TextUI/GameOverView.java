@@ -18,7 +18,7 @@ public class GameOverView extends StateView {
         GameStateController GSC = GameStateController.getCurrentController();
         String Text = "";
         while (!GSC.MessageStack.empty())
-            Text += GSC.MessageStack.pop();
+            Text += GSC.MessageStack.pop() + "\n";
 
         Text += ("               ...") + "\n";
         Text += ("             ;::::;") + "\n";

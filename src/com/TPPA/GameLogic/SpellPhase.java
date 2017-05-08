@@ -12,8 +12,8 @@ public class SpellPhase extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[2];
-        Act[0] = new Action(InternalCommandsDictionary.UseSpell, "Usar um feitiço");
-        Act[1] = new Action(InternalCommandsDictionary.EndSpellPhase, "Passar à fase seguinte");
+        Act[0] = new Action(InternalCommandsDictionary.UseSpell, "Use a spell");
+        Act[1] = new Action(InternalCommandsDictionary.EndSpellPhase, "Skip to next phase");
 
         return Act;
     }
@@ -27,9 +27,9 @@ public class SpellPhase extends GameState {
     public IState Action(String ActionString) {
         String[] SSplit = ActionString.split(" ");
 
-        if (CanUseSpell() == false || SSplit[0].equals(InternalCommandsDictionary.EndSpellPhase)) {
-            //calculateDefenseResult();
-            return new RollPhase();
+        if (!CanUseSpell() || SSplit[0].equals(InternalCommandsDictionary.EndSpellPhase)) {
+
+            return DefendFromMonster();
         }
 
         if (SSplit[0].equals(InternalCommandsDictionary.UseSpell) && SSplit.length >= 2) {
@@ -38,7 +38,7 @@ public class SpellPhase extends GameState {
                 index = Integer.parseInt(SSplit[1]);
                 try {
                     SpellBase spellToUse = GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
-                    return spellToUse.Effect();
+                    return UseSpell(spellToUse);
                 } catch (IndexOutOfBoundsException e) {
                     ErrorStream.println("Second argument of " + InternalCommandsDictionary.UseSpell + " is not a valid index: " + e);
                     return this;
@@ -49,6 +49,51 @@ public class SpellPhase extends GameState {
             }
         }
         return this;
+    }
+
+    @Override
+    public IState UseSpell(SpellBase spellToUse) {
+        GameStateController GSC = GameStateController.getCurrentController();
+
+        spellToUse.Effect();
+        if (GSC.getCurrentMonster().getHPCurr() <= 0)
+            return OnDefeatingMonster();
+
+        return DefendFromMonster();
+    }
+
+    @Override
+    public IState DefendFromMonster() {
+        GameStateController GSC = GameStateController.getCurrentController();
+
+        String s = "";
+        if (!GSC.getCurrentMonster().getCanAttack()) {
+            GSC.getCurrentMonster().setCanAttack(true);
+            s += GSC.getCurrentMonster().getName() + " can't attack this turn";
+            GSC.MessageStack.push(s);
+
+            return new RollPhase();
+        }
+
+        int damage;
+
+        if (GSC.getCurrentMonster().getStrength() > GSC.getCurrentPlayer().getArmor()) {
+            damage = GSC.getCurrentMonster().getStrength() - GSC.getCurrentPlayer().getArmor();
+            GSC.getCurrentPlayer().incHP(-damage);
+            s += GSC.getCurrentMonster().getName() + " inflicted +" + (0 - damage) + " to Player!";
+        } else {
+            s += GSC.getCurrentMonster().getName() + " doesn't have enough power to damage through Player's armor";
+        }
+
+        GSC.MessageStack.push(s);
+
+        if (GSC.getCurrentPlayer().getHP() <= 0) {
+            s = GSC.getCurrentMonster().getName() + " has defeated you!";
+            GSC.MessageStack.push(s);
+            return new GameOverState();
+        }
+
+        return new RollPhase();
     }
 
 }

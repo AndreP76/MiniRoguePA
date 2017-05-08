@@ -15,9 +15,11 @@ public class RestingStateView extends StateView {
         while (!GSC.MessageStack.empty())
             Text += GSC.MessageStack.pop() + "\n";
 
+        Text += "\n==== Finally, some time to rest... ===\n\n";
+
         Text += "You have 3 choices : ";
         Action[] ActionsAvailable = GSC.getCurrentGameState().GetActions();
-        Text += "\n\t1) Reinforce your weapon (+2 XP)\n\t2) Search for Ration (+1 Food)\n\t3) Rest and heal (+2 HP)\n\n\nEscolha : ";
+        Text += "\n\t1) Reinforce your weapon (+2 XP)\n\t2) Search for Ration (+1 Food)\n\t3) Rest and heal (+2 HP)\n\n\nChoose : ";
 
         Main.OutputStream.print(Text);
         int Selected = -1;

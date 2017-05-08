@@ -1,7 +1,5 @@
 package com.TPPA.GameLogic.Spells;
 
-import com.TPPA.GameLogic.IState;
-
 import java.io.Serializable;
 
 /**
@@ -14,7 +12,8 @@ public abstract class SpellBase implements Serializable {
         SpellID = ID;
     }
 
-    public abstract IState Effect();
+    //public abstract IState Effect();
+    public abstract void Effect();
 
     public String getSpellID() {
         return this.SpellID;

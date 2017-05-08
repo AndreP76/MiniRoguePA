@@ -19,7 +19,7 @@ public class TreasureCard extends CardBase {
         Main.ErrorStream.println("Treasure card effect was called!");
         GameStateController GSC = GameStateController.getCurrentController();
 
-        if (!(GSC.getCurrentGameState() instanceof FeatPhase)) {
+        if (!(GSC.getCurrentGameState() instanceof FeatPhase) && !(GSC.getCurrentGameState() instanceof SpellPhase)) {
             if (GSC.getBattledInThisRoom()) {
                 Main.ErrorStream.println("Got 2 gold");
                 GSC.getCurrentPlayer().incGold(2);
@@ -31,7 +31,7 @@ public class TreasureCard extends CardBase {
 
         Dice d = new Dice();
 
-        if (d.Roll() < 5 && !(GSC.getCurrentGameState() instanceof FeatPhase))
+        if (d.Roll() < 5 && !(GSC.getCurrentGameState() instanceof FeatPhase) && !(GSC.getCurrentGameState() instanceof SpellPhase))
             return new AwaitCardSelectionState();
 
         // só é dada outra recompensa ao jogador se o primeiro dado rodado der 5 ou mais

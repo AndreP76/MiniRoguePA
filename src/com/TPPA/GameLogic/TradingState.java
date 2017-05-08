@@ -15,14 +15,14 @@ public class TradingState extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[8];
-        Act[0] = new Action(InternalCommandsDictionary.BuyRation, "Comprar comida: +1 Food / -1 Gold");
-        Act[1] = new Action(InternalCommandsDictionary.BuyHealthPotion, "Comprar poção de vida: +1 HP / -1 Gold");
-        Act[2] = new Action(InternalCommandsDictionary.BuyBigHealthPotion, "Comprar poção de vida grande: +4 HP / -3 Gold");
-        Act[3] = new Action(InternalCommandsDictionary.BuyArmorPiece, "Comprar peça de armadura: +1 Armor / -6 Gold");
-        Act[4] = new Action(InternalCommandsDictionary.BuySpell, "Comprar feitiço: +1 Spell aleatório / -8 Gold");
-        Act[5] = new Action(InternalCommandsDictionary.SellArmorPiece, "Vender peça de armadura: -1 Armor / +3 Gold");
-        Act[6] = new Action(InternalCommandsDictionary.SellSpell, "Vender feitiço: -1 Spell / +4 Gold");
-        Act[7] = new Action(InternalCommandsDictionary.EndTradingState, "Passar à fase seguinte");
+        Act[0] = new Action(InternalCommandsDictionary.BuyRation, "Buy Ration: +1 Food / -1 Gold");
+        Act[1] = new Action(InternalCommandsDictionary.BuyHealthPotion, "Buy Health Potion: +1 HP / -1 Gold");
+        Act[2] = new Action(InternalCommandsDictionary.BuyBigHealthPotion, "Buy Big Health Potion: +4 HP / -3 Gold");
+        Act[3] = new Action(InternalCommandsDictionary.BuyArmorPiece, "Buy Armor Piece: +1 Armor / -6 Gold");
+        Act[4] = new Action(InternalCommandsDictionary.BuySpell, "Buy Spell: +1 Spell of your choice / -8 Gold");
+        Act[5] = new Action(InternalCommandsDictionary.SellArmorPiece, "Sell Armor Piece: -1 Armor / +3 Gold");
+        Act[6] = new Action(InternalCommandsDictionary.SellSpell, "Sell Spell: -1 Spell of your choice / +4 Gold");
+        Act[7] = new Action(InternalCommandsDictionary.EndTradingState, "Skip to next phase");
         return Act;
     }
 

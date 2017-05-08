@@ -427,6 +427,19 @@ public class Player {
         return sum;
     }
 
+    public String getSpellsDescription() {
+        String s = "";
+
+        if (!SpellsInventory.isEmpty()) {
+            for (int i = 0; i < SpellsInventory.size(); i++) {
+                s += (i + 1) + ") " + SpellsInventory.get(i).getSpellID() + "\n";
+            }
+        } else
+            s += "Player has no spells to use";
+
+        return s;
+    }
+
     @Override
     public String toString() {
         String s = "";

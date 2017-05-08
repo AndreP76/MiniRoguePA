@@ -1,5 +1,7 @@
 package com.TPPA.GameLogic;
 
+import com.TPPA.GameLogic.Spells.SpellBase;
+
 /**
  * Created by andre on 4/5/17.
  */
@@ -30,5 +32,11 @@ public interface IState {
 
     public Action[] GetActions();
 
+    public IState UseSpell(SpellBase spellToUse);
+
     public IState AttackMonster();
+
+    public IState OnDefeatingMonster();
+
+    public IState DefendFromMonster();
 }

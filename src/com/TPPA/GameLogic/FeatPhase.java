@@ -1,7 +1,5 @@
 package com.TPPA.GameLogic;
 
-import com.TPPA.GameLogic.Cards.TreasureCard;
-
 /**
  * Created by andre on 4/5/17.
  * Change the course of battle through sheer despair
@@ -10,10 +8,10 @@ public class FeatPhase extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[4];
-        Act[0] = new Action(InternalCommandsDictionary.UseFeatLosingHP, "Usar Feat sacrificando HP (- 2HP)");
-        Act[1] = new Action(InternalCommandsDictionary.UseFeatLosingXP, "Usar Feat sacrificando XP (- 1XP)");
-        Act[2] = new Action(InternalCommandsDictionary.EndFeatPhase, "Passar à fase seguinte");
-        Act[3] = new Action(InternalCommandsDictionary.ReRollDice, "Rodar novamente um dado com dano crítico");
+        Act[0] = new Action(InternalCommandsDictionary.UseFeatLosingHP, "Use Feat sacrificing HP (- 2HP)");
+        Act[1] = new Action(InternalCommandsDictionary.UseFeatLosingXP, "Use Feat sacrificing XP (- 1XP)");
+        Act[2] = new Action(InternalCommandsDictionary.EndFeatPhase, "Skip to next phase");
+        Act[3] = new Action(InternalCommandsDictionary.ReRollDice, "Re-roll a die with critical damage");
         return Act;
     }
 
@@ -99,39 +97,13 @@ public class FeatPhase extends GameState {
 
         int playerAttack = GSC.getCurrentPlayer().getUnlockedDiceSum();
 
-        GSC.getCurrentMonster().incHPCurr(0 - playerAttack);
+        GSC.getCurrentMonster().incHPCurr(-playerAttack);
 
-        if (GSC.getCurrentMonster().getHPCurr() <= 0) {
-            if (GSC.getCurrentMonster().getBoss()) {
-                int currentZone = GSC.getCurrentZone();
-                if (currentZone == 12) { // Qual é a zona final???
-                    GSC.MessageStack.push("==== Final Boss defeated! ====\nYou've won Og's Blood!\n");
+        if (GSC.getCurrentMonster().getPoisoned())
+            GSC.getCurrentMonster().incHPCurr(-5);
 
-                    GSC.getCurrentPlayer().resetDice();
-                    return new StartState();
-                }
-
-                GSC.getCurrentPlayer().incGold(GSC.getCurrentMonster().getGoldReward());
-                GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
-                GSC.setBattledInThisRoom(true); // ???
-                GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
-                GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP and " + GSC.getCurrentMonster().getGoldReward() + " Gold\n");
-                GSC.setCurrentZone(currentZone + 1);
-                GSC.setCurrentRoom(1); // Qual é a sala inicial???
-
-                GSC.getCurrentPlayer().resetDice();
-                return (new TreasureCard(Deck.TreasureCardID)).Effect();
-            }
-
-            GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
-            GSC.setBattledInThisRoom(true); // ???
-            GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
-            GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP\n");
-            GSC.setCurrentRoom(GSC.getCurrentRoom() + 1);
-
-            GSC.getCurrentPlayer().resetDice();
-            return new AwaitCardSelectionState();
-        }
+        if (GSC.getCurrentMonster().getHPCurr() <= 0)
+            return OnDefeatingMonster();
 
         GSC.getCurrentPlayer().resetDice();
         return new SpellPhase();

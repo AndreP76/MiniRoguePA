@@ -8,9 +8,9 @@ public class RestingState extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[3];
-        Act[0] = new Action(InternalCommandsDictionary.ReinforceWeapon, "Reforça arma: +1XP");
-        Act[1] = new Action(InternalCommandsDictionary.SearchRation, "Procura comida: +1Food");
-        Act[2] = new Action(InternalCommandsDictionary.Heal, "Curar: +2HP");
+        Act[0] = new Action(InternalCommandsDictionary.ReinforceWeapon, "Reinforce your weapon: +1XP");
+        Act[1] = new Action(InternalCommandsDictionary.SearchRation, "Search for ration: +1Food");
+        Act[2] = new Action(InternalCommandsDictionary.Heal, "Heal: +2HP");
         return Act;
     }
 
@@ -19,7 +19,7 @@ public class RestingState extends GameState {
 
         if (ActionString.equals(InternalCommandsDictionary.ReinforceWeapon)) {
             GameStateController.getCurrentController().getCurrentPlayer().incXP(1);
-            GameStateController.getCurrentController().getCurrentPlayer().unlockNewDie(); //Lidia, explain plz
+            //GameStateController.getCurrentController().getCurrentPlayer().unlockNewDie(); //Lidia, explain plz // Sorry, my mistake ( by Lídia)
             return new AwaitCardSelectionState();
         }
         if (ActionString.equals(InternalCommandsDictionary.SearchRation)) {
