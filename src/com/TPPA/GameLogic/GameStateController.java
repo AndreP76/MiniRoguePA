@@ -21,7 +21,6 @@ public class GameStateController extends Observable implements java.io.Serializa
     private Deck CurrentDeck;
     private int MaxStagesInRoom = 5;
     private int CurrentStageInRoom = 0;
-    private int RoomsPerZoneCoeficient = 1;
     private int RoomsInZone;
     private int CurrentRoom = 0;
     private CardBase[][] RoomStages = null;
@@ -119,6 +118,15 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public void setCurrentZone(int currentZone) {
         CurrentZone = currentZone;
+        if (CurrentZone == 1 || CurrentZone == 2) {
+            RoomsInZone = 2;
+        } else if (CurrentZone == 3 || CurrentZone == 4) {
+            RoomsInZone = 3;
+        } else if (CurrentZone == 5) {
+            RoomsInZone = 4;
+        } else {
+            RoomsInZone = 0;
+        }
     }
 
     public int getMaxRoomsInStage() {
@@ -166,10 +174,6 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public int getRoomsInZone() {
         return RoomsInZone;
-    }
-
-    public int getRoomsPerZoneCoeficient() {
-        return RoomsPerZoneCoeficient;
     }
 
     public DifficultyLevelEnum getGameDifficulty() {

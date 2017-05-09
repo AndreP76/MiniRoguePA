@@ -64,6 +64,7 @@ public class DrawPhaseView extends StateView {
         Text += "\n\n\nEscolha (" + TAppend + "): ";
 
         Main.OutputStream.println(Text);
+        //Something wrong in here boyyyy
         String UserCommand = TextDrawHelper.InputScanner.nextLine();
         GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
     }
