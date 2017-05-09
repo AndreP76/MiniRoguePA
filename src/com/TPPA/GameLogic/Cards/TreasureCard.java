@@ -36,7 +36,7 @@ public class TreasureCard extends CardBase {
 
         // só é dada outra recompensa ao jogador se o primeiro dado rodado der 5 ou mais
         switch (d.Roll()) {
-            case 1: /*Communicate with view, Somehow...*/
+            case 1:
                 GSC.getCurrentPlayer().incArmor(1);
                 GSC.MessageStack.push("Got an Armor Piece");
                 Main.ErrorStream.println("Got 1 Armor");

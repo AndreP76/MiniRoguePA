@@ -12,18 +12,15 @@ import java.util.Arrays;
  * GODDAMN WARNINGS!
  */
 public class FeatView extends StateView {
+    //TODO : Needs to be reworked
     @Override
     public void Render() {
-        //TODO : I believe this is finished
-
         String Text = "";
         GameStateController GSC = GameStateController.getCurrentController();
 
         String ActionString = "";
 
-        Main.OutputStream.println(GSC.getCurrentMonster().toString());
-        Main.OutputStream.println(GSC.getCurrentPlayer().toString());
-        Main.OutputStream.println(GSC.getCurrentPlayer().getUnlockedDiceDescription());
+        Text += GSC.getCurrentMonster().toString() + "\n" + GSC.getCurrentPlayer().toString() + "\n" + GSC.getCurrentPlayer().getUnlockedDiceDescription();
 
         while (!GSC.MessageStack.empty())
             Text += GSC.MessageStack.pop() + "\n";
@@ -40,12 +37,13 @@ public class FeatView extends StateView {
             }
 
             if (Selected == 1) {
-                ActionString += InternalCommandsDictionary.ReRollDice;
+                ActionString = InternalCommandsDictionary.ReRollDice;
 
                 Text = "Which die?\n" + GSC.getCurrentPlayer().getCriticalDiceDescription() + "\n\nChoose: ";
 
                 Main.OutputStream.print(Text);
                 Selected = -1;
+                //what is this ?
                 String[] SSplit = GSC.getCurrentPlayer().getCriticalDiceDescription().split("\n");
                 Integer[] validIndexes = new Integer[SSplit.length];
                 for (int i = 0; i < validIndexes.length; i++) {
@@ -76,14 +74,15 @@ public class FeatView extends StateView {
 
         ActionString = ActionsAvailable[Selected - 1].getActionString();
 
+
         if (Selected < 3) {
+            Selected = -1;
             Text = "Which die do you want to roll again?\n" + GSC.getCurrentPlayer().getUnlockedDiceDescription();
             Main.OutputStream.println(Text);
-            while (Selected < 1 && Selected > GSC.getCurrentPlayer().getUnlockedDice().size()) {
+            while (Selected < 1 || Selected > GSC.getCurrentPlayer().getUnlockedDice().size()) {
                 while (!TextDrawHelper.InputScanner.hasNextInt()) ;
                 Selected = TextDrawHelper.InputScanner.nextInt();
             }
-
             ActionString += " " + (Selected - 1);
         }
 

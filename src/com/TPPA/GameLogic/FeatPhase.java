@@ -17,7 +17,6 @@ public class FeatPhase extends GameState {
 
     @Override
     public IState Action(String ActionString) {
-        //TODO:  End this phase
         String[] SSplit = ActionString.split(" ");
 
         GameStateController GSC = GameStateController.getCurrentController();
@@ -26,14 +25,9 @@ public class FeatPhase extends GameState {
             //calcular dano infligido ao monstro
             return AttackMonster();
         } else if (SSplit[0].equals(InternalCommandsDictionary.UseFeatLosingHP)) {
-//            if (GSC.getCurrentPlayer().useFeatConsumingHP(Integer.parseInt(SSplit[SSplit.length - 1]) - 1)) {
-//                GSC.MessageStack.push("Re-rolled dice number " + SSplit[SSplit.length - 1] + ", got " + GSC.getCurrentPlayer().getUnlockedDice().get(Integer.parseInt(SSplit[SSplit.length - 1]) - 1).getLastRoll());
-//            } else {
-//                GSC.MessageStack.push("Re-rolling would kill you...");
-//            }
             if (SSplit.length >= 2) {
                 try {
-                    int index = Integer.parseInt(SSplit[1]);
+                    int index = Integer.parseInt(SSplit[SSplit.length - 1]);
                     try {
                         if (GSC.getCurrentPlayer().useFeatConsumingHP(index)) {
                             GSC.MessageStack.push("Re-rolled dice number " + index + ", got " + GSC.getCurrentPlayer().getUnlockedDice().get(index).getLastRoll());
@@ -48,14 +42,9 @@ public class FeatPhase extends GameState {
                 }
             }
         } else if (SSplit[0].equals(InternalCommandsDictionary.UseFeatLosingXP)) {
-//            if (GSC.getCurrentPlayer().useFeatConsumingXP(Integer.parseInt(SSplit[SSplit.length - 1]) - 1)) {
-//                GSC.MessageStack.push("Re-rolled dice number " + SSplit[SSplit.length - 1] + ", got " + GSC.getCurrentPlayer().getUnlockedDice().get(Integer.parseInt(SSplit[SSplit.length - 1]) - 1).getLastRoll());
-//            } else {
-//                GSC.MessageStack.push("Re-rolling would break your sword...");
-//            }
             if (SSplit.length >= 2) {
                 try {
-                    int index = Integer.parseInt(SSplit[1]);
+                    int index = Integer.parseInt(SSplit[SSplit.length - 1]);
                     try {
                         if (GSC.getCurrentPlayer().useFeatConsumingXP(index)) {
                             GSC.MessageStack.push("Re-rolled dice number " + index + ", got " + GSC.getCurrentPlayer().getUnlockedDice().get(index).getLastRoll());
@@ -87,7 +76,6 @@ public class FeatPhase extends GameState {
                 }
             }
         }
-
         return this;
     }
 

@@ -4,7 +4,6 @@ import com.TPPA.GameLogic.Cards.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Random;
 
 /**
@@ -30,29 +29,6 @@ public class Deck {
         this.DeckLength = DeckSize;
         Cards = new ArrayList<>();
         SR.setSeed(System.nanoTime());
-        /*for(int i = 0; i < DeckSize;++i){
-            int R = SR.nextInt(6);
-            switch (R){
-                case 0:
-                    Cards.add(new TrapCard(TrapCardID));
-                    break;
-                case 1:
-                    Cards.add(new MonsterCard(MonsterCardID));
-                    break;
-                case 2:
-                    Cards.add(new EventCard(EventCardID));
-                    break;
-                case 3:
-                    Cards.add(new TreasureCard(TreasureCardID));
-                    break;
-                case 4:
-                    Cards.add(new MerchantCard(MerchantCardID));
-                    break;
-                case 5:
-                    Cards.add(new RestCard(RestCardID));
-                    break;
-            }
-        }*/
         Cards.add(new TrapCard(TrapCardID));
         Cards.add(new MonsterCard(MonsterCardID));
         Cards.add(new EventCard(EventCardID));
@@ -60,6 +36,7 @@ public class Deck {
         Cards.add(new MerchantCard(MerchantCardID));
         Cards.add(new RestCard(RestCardID));
         this.CollectionsShuffle();
+        this.DebugPrintDeck();
     }
 
     public CardBase getCard(int index) throws IndexOutOfBoundsException {
@@ -71,12 +48,13 @@ public class Deck {
     }
 
     public void CollectionsShuffle(){
-        Collections.shuffle(Cards,SR);
+        Collections.shuffle(Cards);
     }
 
     public void DebugPrintDeck(){
+        Main.ErrorStream.println("Deck : ");
         for (CardBase s : Cards)
-            System.out.println(s);
+            Main.ErrorStream.println("\t" + s);
     }
 
     public ArrayList<CardBase> getCards() {

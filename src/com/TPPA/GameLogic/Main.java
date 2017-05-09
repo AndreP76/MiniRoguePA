@@ -2,11 +2,11 @@ package com.TPPA.GameLogic;
 //Sorry Lidia, eu programo tudo em ingles xD
 //Se for problema diz que eu mudo xD
 
-import com.TPPA.TextUI.StartStateView;
+//TODO : Implementar a queda na TrapCard
+
 import com.TPPA.TextUI.StateView;
 import com.TPPA.TextUI.TextDrawHelper;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;

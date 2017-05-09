@@ -6,16 +6,15 @@ import com.TPPA.GameLogic.Cards.CardBase;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.InputMismatchException;
 
 /**
  * Created by andre on 4/5/17.
  * Time to d-d-d-duel
  */
 
-//TODO: Resolver este erro: Exception in thread "main" java.lang.NumberFormatException: For input string: "DRAWCARD"
 public class AwaitCardSelectionState extends GameState {
     public AwaitCardSelectionState() {
-        //TODO : SAVE GAME OPTION
         super();
         GameStateController GSC = GameStateController.getCurrentController();
         if (GSC.getRoomStages() == null) {
@@ -45,6 +44,7 @@ public class AwaitCardSelectionState extends GameState {
                 }
             }
             Rooms[GSC.getMaxStagesInRoom() - 1][0] = new BossMonsterCard(Deck.BossMonsterCardID);
+            Main.ErrorStream.println("Added new card to stage " + (GSC.getMaxStagesInRoom() - 1) + " : " + Rooms[GSC.getMaxStagesInRoom() - 1][0]);
             for (int i = 1; i < GSC.getMaxCardsInStage(); ++i)
                 Rooms[GSC.getMaxStagesInRoom() - 1][i] = null;
 
@@ -68,7 +68,12 @@ public class AwaitCardSelectionState extends GameState {
 
         String[] SStr = ActionString.split(" ");
         if (SStr[0].equals(InternalCommandsDictionary.DrawCommand)) {
-            int CardIndex = Integer.parseInt(SStr[SStr.length - 1]);
+            int CardIndex = -1;
+            try {
+                CardIndex = Integer.parseInt(SStr[SStr.length - 1]);
+            } catch (InputMismatchException Ime) {
+                Main.ErrorStream.println("Error parsing int from string\n\tString : " + ActionString + "\n\t" + Ime.fillInStackTrace());
+            }
             if (GSC.getRoomStages()[GSC.getCurrentStageInRoom()][CardIndex - 1] == null) {
                 Main.ErrorStream.println("User selected empty card index. Ignoring.");
                 return this;

@@ -12,8 +12,6 @@ import com.TPPA.GameLogic.Main;
 public class TradingStateView extends StateView {
     @Override
     public void Render() {
-        //TODO: Finished, I think
-
         String Text = "";
         String ActionString = "";
         GameStateController GSC = GameStateController.getCurrentController();

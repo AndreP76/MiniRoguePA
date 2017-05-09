@@ -61,7 +61,6 @@ public abstract class GameState implements IState, Serializable {
             if (currentDie.getLastRoll() == 6)
                 return true;
         }
-
         return false;
     }
 
@@ -117,7 +116,6 @@ public abstract class GameState implements IState, Serializable {
         Main.ErrorStream.println("\t" + this.getClass() + "\n\t" + ActionString);
         return this;
     }
-
     @Override
     public IState AttackMonster() {
         return this;
@@ -134,33 +132,35 @@ public abstract class GameState implements IState, Serializable {
 
         if (GSC.getCurrentMonster().getBoss()) {
             int currentZone = GSC.getCurrentZone();
-            if (currentZone == 12) { // Qual é a zona final???
+            if (currentZone == GSC.getMaxZones()) {
                 GSC.MessageStack.push("==== Final Boss defeated! ====\nYou've won Og's Blood!\n");
 
                 GSC.getCurrentPlayer().resetDice();
                 return new StartState();
-            }
+            } else {
+                GSC.getCurrentPlayer().incGold(GSC.getCurrentMonster().getGoldReward());
+                GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
+                GSC.setBattledInThisRoom(false);
+                GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
+                GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP and " + GSC.getCurrentMonster().getGoldReward() + " Gold\n");
 
-            GSC.getCurrentPlayer().incGold(GSC.getCurrentMonster().getGoldReward());
+                GSC.setCurrentRoom(GSC.getCurrentRoom() + 1);
+                GSC.setCurrentStageInRoom(1); // Qual é a sala inicial???
+                GSC.setRoomStages(null);//para depois ser recriada pelo AwaitCardSelectionState
+                GSC.getCurrentPlayer().resetDice();
+                return (new TreasureCard(Deck.TreasureCardID)).Effect();
+            }
+        } else {
+
             GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
-            GSC.setBattledInThisRoom(true); // ???
+            GSC.setBattledInThisRoom(true); // para calcular o tesouro depois
             GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
-            GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP and " + GSC.getCurrentMonster().getGoldReward() + " Gold\n");
-            GSC.setCurrentZone(currentZone + 1);
-            GSC.setCurrentRoom(1); // Qual é a sala inicial???
+            GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP\n");
+            GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
 
             GSC.getCurrentPlayer().resetDice();
-            return (new TreasureCard(Deck.TreasureCardID)).Effect();
+            return new AwaitCardSelectionState();
         }
-
-        GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
-        GSC.setBattledInThisRoom(true); // ???
-        GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
-        GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP\n");
-        GSC.setCurrentRoom(GSC.getCurrentRoom() + 1);
-
-        GSC.getCurrentPlayer().resetDice();
-        return new AwaitCardSelectionState();
     }
 
     @Override

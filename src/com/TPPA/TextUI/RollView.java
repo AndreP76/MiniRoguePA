@@ -13,8 +13,6 @@ import java.util.Arrays;
 public class RollView extends StateView {
     @Override
     public void Render() {
-        //TODO : I believe this is finished
-
         String Text = "";
         GameStateController GSC = GameStateController.getCurrentController();
         while (!GSC.MessageStack.empty())

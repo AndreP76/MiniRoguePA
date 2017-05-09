@@ -64,9 +64,13 @@ public class DrawPhaseView extends StateView {
         Text += "\n\n\nEscolha (" + TAppend + "): ";
 
         Main.OutputStream.println(Text);
-        //Something wrong in here boyyyy
+        TextDrawHelper.InputScanner.reset();
         String UserCommand = TextDrawHelper.InputScanner.nextLine();
-        GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
+        if (UserCommand.isEmpty()) {
+            this.Render();//Voltar ao inicio
+        } else {
+            GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
+        }
     }
 
 }

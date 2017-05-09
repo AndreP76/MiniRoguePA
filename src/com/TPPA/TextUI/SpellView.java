@@ -11,8 +11,6 @@ import com.TPPA.GameLogic.Main;
 public class SpellView extends StateView {
     @Override
     public void Render() {
-        //TODO : It's finished, I think
-
         String Text = "";
         String ActionString = "";
         GameStateController GSC = GameStateController.getCurrentController();

@@ -83,9 +83,7 @@ public class TrapCard extends CardBase {
                     Main.ErrorStream.println("Player cannot fall anymore.");
                 } else {
                     Main.ErrorStream.println("Fall not implemented");
-
-                    //TODO : Some weird math happens here
-                    //TODO : Fall to the floor beneath
+                    //TODO : HERE
                 }
             }
             default:

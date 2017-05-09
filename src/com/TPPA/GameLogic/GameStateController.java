@@ -94,7 +94,7 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public void setCurrentStageInRoom(int currentStageInRoom) {
         CurrentStageInRoom = currentStageInRoom;
-        if (CurrentStageInRoom == this.getMaxRoomsInStage()) {
+        if (CurrentStageInRoom == this.getMaxStagesInRoom()) {
             CurrentStageInRoom = 0;
             this.setCurrentRoom(this.getCurrentRoom() + 1);
         }
@@ -169,6 +169,7 @@ public class GameStateController extends Observable implements java.io.Serializa
     }
 
     public void setCurrentRoom(int currentRoom) {
+        Main.ErrorStream.println("Room was set to " + currentRoom);
         CurrentRoom = currentRoom;
     }
 
@@ -188,7 +189,6 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public void RelayAction(String ActionString) {
         setCurrentGameState(getCurrentGameState().Action(ActionString));
-        //setCurrentGameState(new GameOverState());
     }
 
     public int CalculateScore() {

@@ -11,6 +11,7 @@ public enum DifficultyLevelEnum {
     Normal,
     Hard,
     Nightmare,
+    Debug,
     //VeryHard,     (1)
     //Insane        (1)
 }

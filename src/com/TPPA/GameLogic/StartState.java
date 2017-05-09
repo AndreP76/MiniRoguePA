@@ -17,7 +17,7 @@ public class StartState extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[4];
-        Act[0] = new Action(InternalCommandsDictionary.SetDifficultyCommand, "Change difficulty (1 ~ 7)");
+        Act[0] = new Action(InternalCommandsDictionary.SetDifficultyCommand, "Change difficulty (1 ~ 5)");
         Act[1] = new Action(InternalCommandsDictionary.SetAreaCommand, "Define starting area (1 ~ " + GameStateController.getCurrentController().getMaxZones() + ")");
         Act[2] = new Action(InternalCommandsDictionary.StartCommand, "Start the game!");
         Act[3] = new Action(InternalCommandsDictionary.LoadCommand, "Load a previously saved game");
@@ -56,6 +56,53 @@ public class StartState extends GameState {
             }
             //else idk, log it or something
         }else if(SSplit[0].equals(InternalCommandsDictionary.StartCommand)){
+            GameStateController GSC = GameStateController.getCurrentController();
+            Player P = GSC.getCurrentPlayer();
+            int armor = 0;
+            int hp = 0;
+            int gold = 0;
+            int food = 0;
+            int xp = 0;
+            switch (GSC.getGameDifficulty()) {
+                case Casual: {
+                    armor = 1;
+                    hp = 5;
+                    gold = 5;
+                    food = 6;
+                    break;
+                }
+                case Normal: {
+                    hp = 5;
+                    gold = 3;
+                    food = 6;
+                    break;
+                }
+                case Hard: {
+                    hp = 4;
+                    gold = 2;
+                    food = 5;
+                    break;
+                }
+                case Nightmare: {
+                    hp = 3;
+                    gold = 1;
+                    food = 3;
+                    break;
+                }
+                case Debug: {
+                    armor = 7;
+                    hp = 30;
+                    gold = 30;
+                    food = 10;
+                    xp = 36;
+                    break;
+                }
+            }
+            P.setArmor(armor);
+            P.setFood(food);
+            P.setGold(gold);
+            P.setHP(hp);
+            P.setXP(xp);
             return new AwaitCardSelectionState();
         } else if (SSplit[0].equals(InternalCommandsDictionary.LoadCommand)) {
             String Pth = Paths.get(SSplit[SSplit.length]).toString();
@@ -64,9 +111,9 @@ public class StartState extends GameState {
                 try {
                     GameStateController.setCurrentController((GameStateController) (new ObjectInputStream(new FileInputStream(x)).readObject()));
                 } catch (IOException e) {
-                    Main.ErrorStream.println("Error deserealizing object\n\t" + e.fillInStackTrace());
+                    Main.ErrorStream.println("Error deserealizing object : IOException\n\t" + e.fillInStackTrace());
                 } catch (ClassNotFoundException e) {
-                    Main.ErrorStream.println("Error deserealizing object\n\t" + e.fillInStackTrace());
+                    Main.ErrorStream.println("Error deserealizing object : ClassNotFound\n\t" + e.fillInStackTrace());
                 }
             } else {
                 return this;
