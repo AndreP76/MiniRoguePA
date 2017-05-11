@@ -56,7 +56,7 @@ public class AwaitCardSelectionState extends GameState {
     public Action[] GetActions() {
         Action[] AvAc = new Action[3];
         AvAc[0] = new Action(InternalCommandsDictionary.DrawCommand, "Draw a stage card");
-        AvAc[1] = new Action(InternalCommandsDictionary.SaveCommand, "Load a save game ");
+        AvAc[1] = new Action(InternalCommandsDictionary.SaveCommand, "Save a game ");
         AvAc[2] = new Action(InternalCommandsDictionary.QuitCommand, "Exit to main menu");
         return AvAc;
     }
@@ -87,7 +87,16 @@ public class AwaitCardSelectionState extends GameState {
             return new StartState();
         } else if (SStr[0].equals(InternalCommandsDictionary.SaveCommand)) {
             try {
-                FileOutputStream FSO = new FileOutputStream(SStr[SStr.length - 1]);
+                String PathStr = "";
+                if (SStr[SStr.length - 1].equals(SStr[0])) {
+                    PathStr = Utils.GenerateDateTimeStringNow("./Savegame") + ".savegamedat";
+                } else {
+                    if (PathStr.contains(".savegamedat"))
+                        PathStr = SStr[SStr.length - 1];
+                    else
+                        PathStr = SStr[SStr.length - 1] + ".savegamedat";
+                }
+                FileOutputStream FSO = new FileOutputStream(PathStr);
                 ObjectOutputStream OOS = new ObjectOutputStream(FSO);
                 OOS.writeObject(GameStateController.getCurrentController());
                 return this;

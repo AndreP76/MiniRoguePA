@@ -3,6 +3,7 @@ package com.TPPA.TextUI;
 import com.TPPA.GameLogic.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -10,7 +11,7 @@ import java.util.Observer;
 /**
  * Created by andre on 4/11/17.
  */
-public abstract class StateView implements IView, Observer {
+public abstract class StateView implements IView, Observer, Serializable {
     public static HashMap<Class, Class> ModelToViewMap = GenMTVMap();
     public static StateView CurrentView;
     StateView(){

@@ -2,12 +2,13 @@ package com.TPPA.GameLogic;
 
 import com.TPPA.GameLogic.Spells.SpellBase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Lídia on 05/04/2017.
  */
-public class Player {
+public class Player implements Serializable {
     private int MaxFood = 10;
     private int Food = 0;
     private int MinFood = 0;

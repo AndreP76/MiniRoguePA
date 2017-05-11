@@ -2,10 +2,12 @@ package com.TPPA.GameLogic;
 
 import com.TPPA.GameLogic.Cards.TreasureCard;
 
+import java.io.Serializable;
+
 /**
  * Created by andre on 4/20/17.
  */
-public class Monster {
+public class Monster implements Serializable {
     private int HPMax;
     private int HPCurr;
 

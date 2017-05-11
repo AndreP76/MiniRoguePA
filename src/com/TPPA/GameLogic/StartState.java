@@ -44,7 +44,7 @@ public class StartState extends GameState {
         String[] SSplit = ActionString.split(" ");
         if(SSplit[0].equals(InternalCommandsDictionary.SetDifficultyCommand)){
             Integer DiffInt = Integer.parseInt(SSplit[SSplit.length - 1]);
-            DifficultyLevelEnum Diff = DifficultyLevelEnum.values()[DiffInt];
+            DifficultyLevelEnum Diff = DifficultyLevelEnum.values()[DiffInt - 1];
             if(Diff != null)
                 GameStateController.getCurrentController().setGameDifficulty(Diff);
             //else idk, log it or something
@@ -105,10 +105,11 @@ public class StartState extends GameState {
             P.setXP(xp);
             return new AwaitCardSelectionState();
         } else if (SSplit[0].equals(InternalCommandsDictionary.LoadCommand)) {
-            String Pth = Paths.get(SSplit[SSplit.length]).toString();
+            String Pth = Paths.get(SSplit[SSplit.length - 1]).toString();
             File x = new File(Pth);
             if (x.exists()) {
                 try {
+                    Main.ErrorStream.println("Loading savegame in location : " + SSplit[SSplit.length - 1]);
                     GameStateController.setCurrentController((GameStateController) (new ObjectInputStream(new FileInputStream(x)).readObject()));
                 } catch (IOException e) {
                     Main.ErrorStream.println("Error deserealizing object : IOException\n\t" + e.fillInStackTrace());

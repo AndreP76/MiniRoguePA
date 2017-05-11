@@ -2,6 +2,7 @@ package com.TPPA.GameLogic;
 
 import com.TPPA.GameLogic.Cards.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -9,7 +10,7 @@ import java.util.Random;
 /**
  * Created by andre on 4/10/17.
  */
-public class Deck {
+public class Deck implements Serializable {
     public final static String TrapCardID = "TRAPCARD";
     public final static String MonsterCardID = "MONSTERCARD";
     public final static String EventCardID = "EVENTCARD";

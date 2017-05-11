@@ -61,6 +61,7 @@ public class DrawPhaseView extends StateView {
         for (int i = 0; i < max; ++i) {
             Text += CardsInRoom[GSC.getCurrentStageInRoom()][i].toString() + "\n";
         }
+        TAppend += "/S(ave)/Q(uit)";
         Text += "\n\n\nEscolha (" + TAppend + "): ";
 
         Main.OutputStream.println(Text);
@@ -69,7 +70,12 @@ public class DrawPhaseView extends StateView {
         if (UserCommand.isEmpty()) {
             this.Render();//Voltar ao inicio
         } else {
-            GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
+            if (UserCommand.toLowerCase().equals("s") || UserCommand.toLowerCase().equals("save"))//Save
+                GSC.RelayAction(AvailableActions[1].getActionString());
+            else if (UserCommand.toLowerCase().equals("q") || UserCommand.toLowerCase().equals("quit"))//Quit
+                GSC.RelayAction(AvailableActions[2].getActionString());
+            else
+                GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
         }
     }
 

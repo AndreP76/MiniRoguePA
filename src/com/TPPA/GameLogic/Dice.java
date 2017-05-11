@@ -1,11 +1,12 @@
 package com.TPPA.GameLogic;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * Created by andre on 4/20/17.
  */
-public class Dice {
+public class Dice implements Serializable {
     private Random SR;
     private int RollSum;
     private int LastRoll;
