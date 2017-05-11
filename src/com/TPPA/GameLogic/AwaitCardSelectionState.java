@@ -78,10 +78,17 @@ public class AwaitCardSelectionState extends GameState {
                 Main.ErrorStream.println("User selected empty card index. Ignoring.");
                 return this;
             } else {
-                CardBase RoomCard = GSC.getRoomStages()[GSC.getCurrentStageInRoom()][CardIndex - 1];
-                Main.ErrorStream.println("User drew " + RoomCard);
-                GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
-                return RoomCard.Effect();
+                CardIndex--;
+                CardBase RoomCard = null;
+                if (CardIndex < 0 || CardIndex > GSC.getRoomStages()[GSC.getCurrentStageInRoom()].length || (RoomCard = GSC.getRoomStages()[GSC.getCurrentStageInRoom()][CardIndex]) == null) {
+                    Main.ErrorStream.println("User drew an invalid card, ignoring...");
+                    GameStateController.getCurrentController().MessageStack.push("Sorry, what ?");
+                    return this;
+                } else {
+                    Main.ErrorStream.println("User drew " + RoomCard);
+                    GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
+                    return RoomCard.Effect();
+                }
             }
         } else if (SStr[0].equals(InternalCommandsDictionary.QuitCommand)) {
             return new StartState();

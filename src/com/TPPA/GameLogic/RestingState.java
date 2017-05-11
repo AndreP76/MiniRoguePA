@@ -19,6 +19,7 @@ public class RestingState extends GameState {
 
         if (ActionString.equals(InternalCommandsDictionary.ReinforceWeapon)) {
             Main.ErrorStream.println("User got 1 XP");
+            GameStateController.getCurrentController().MessageStack.push("");
             GameStateController.getCurrentController().getCurrentPlayer().incXP(1);
             return new AwaitCardSelectionState();
         }
