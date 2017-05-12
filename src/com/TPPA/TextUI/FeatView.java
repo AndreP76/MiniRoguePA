@@ -16,6 +16,7 @@ public class FeatView extends StateView {
     @Override
     public void Render() {
         String Text = "";
+        TextDrawHelper.ClearScreen();
         GameStateController GSC = GameStateController.getCurrentController();
 
         String ActionString = "";
@@ -53,6 +54,7 @@ public class FeatView extends StateView {
                 while (!Arrays.asList(validIndexes).contains(Selected)) {
                     while (!TextDrawHelper.InputScanner.hasNextInt()) ;
                     Selected = TextDrawHelper.InputScanner.nextInt();
+                    TextDrawHelper.InputScanner.nextLine();//stuff
                 }
 
                 ActionString += " " + (Selected - 1);
@@ -68,6 +70,7 @@ public class FeatView extends StateView {
         while (Selected <= 0 || Selected > 3) {
             while (!TextDrawHelper.InputScanner.hasNextInt()) ;
             Selected = TextDrawHelper.InputScanner.nextInt();
+            TextDrawHelper.InputScanner.nextLine();//stuff
         }
 
         Action[] ActionsAvailable = GSC.getCurrentGameState().GetActions();
@@ -82,6 +85,7 @@ public class FeatView extends StateView {
             while (Selected < 1 || Selected > GSC.getCurrentPlayer().getUnlockedDice().size()) {
                 while (!TextDrawHelper.InputScanner.hasNextInt()) ;
                 Selected = TextDrawHelper.InputScanner.nextInt();
+                TextDrawHelper.InputScanner.nextLine();//stuff
             }
             ActionString += " " + (Selected - 1);
         }

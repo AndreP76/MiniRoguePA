@@ -1,12 +1,16 @@
 package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.*;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
+
+import static org.fusesource.jansi.Ansi.ansi;
 
 /**
  * Created by andre on 4/11/17.
@@ -42,17 +46,22 @@ public abstract class StateView implements IView, Observer, Serializable {
 
     public void Render() {//Entry point for the views
         String Text = "";
+        AnsiConsole.systemInstall();
         TextDrawHelper.ClearScreen();
         GameStateController GSC = GameStateController.getCurrentController();
-        Text += "HP : " + GSC.getCurrentPlayer().getHP();
-        Text += "\tXP : " + GSC.getCurrentPlayer().getXP();
-        Text += "\nGold : " + GSC.getCurrentPlayer().getGold();
-        Text += "\tArmor : " + GSC.getCurrentPlayer().getArmor() + "\n";
+        Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "HP : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getHP() + ansi().fg(Ansi.Color.DEFAULT);
+        Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\tXP : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getXP() + ansi().fg(Ansi.Color.DEFAULT);
+        Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\nGold : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getGold() + ansi().fg(Ansi.Color.DEFAULT);
+        ;
+        Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\tArmor : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getArmor() + ansi().fg(Ansi.Color.DEFAULT);
+        ;
+        Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\tFood : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getFood() + ansi().fg(Ansi.Color.DEFAULT) + "\n";
 
         while (!GSC.MessageStack.empty())
-            Text += GSC.MessageStack.pop() + "\n";
+            Text += ansi().fg(Ansi.Color.GREEN) + GSC.MessageStack.pop() + ansi().fg(Ansi.Color.DEFAULT) + "\n";
 
         Main.OutputStream.println(Text);
+        AnsiConsole.systemUninstall();
     }
 
     @Override

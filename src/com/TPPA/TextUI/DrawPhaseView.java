@@ -13,6 +13,7 @@ public class DrawPhaseView extends StateView {
     public void Render() {
         super.Render();
         String Text = "";
+
         GameStateController GSC = GameStateController.getCurrentController();
 
         Text += "Nivel : " + GSC.getTrueRoom();
@@ -64,16 +65,15 @@ public class DrawPhaseView extends StateView {
         Main.OutputStream.println(Text);
         TextDrawHelper.InputScanner.reset();
         String UserCommand = TextDrawHelper.InputScanner.nextLine();
-        if (UserCommand.isEmpty()) {
-            this.Render();//Voltar ao inicio
-        } else {
+        while (UserCommand.isEmpty()) {
+            UserCommand = TextDrawHelper.InputScanner.nextLine();
+        }
             if (UserCommand.toLowerCase().equals("s") || UserCommand.toLowerCase().equals("save"))//Save
                 GSC.RelayAction(AvailableActions[1].getActionString());
             else if (UserCommand.toLowerCase().equals("q") || UserCommand.toLowerCase().equals("quit"))//Quit
                 GSC.RelayAction(AvailableActions[2].getActionString());
             else
                 GSC.RelayAction(AvailableActions[0].getActionString() + " " + UserCommand);
-        }
     }
 
 }
