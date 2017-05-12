@@ -22,9 +22,11 @@ public class TreasureCard extends CardBase {
         if (!(GSC.getCurrentGameState() instanceof FeatPhase) && !(GSC.getCurrentGameState() instanceof SpellPhase)) {
             if (GSC.getBattledInThisRoom()) {
                 Main.ErrorStream.println("Got 2 gold");
+                GSC.MessageStack.push("You got 2 gold");
                 GSC.getCurrentPlayer().incGold(2);
             } else {
                 Main.ErrorStream.println("Got 1 gold");
+                GSC.MessageStack.push("You got 1 gold");
                 GSC.getCurrentPlayer().incGold(1);
             }
         }
