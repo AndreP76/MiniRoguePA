@@ -80,7 +80,7 @@ public class SpellPhase extends GameState {
         if (GSC.getCurrentMonster().getStrength() > GSC.getCurrentPlayer().getArmor()) {
             damage = GSC.getCurrentMonster().getStrength() - GSC.getCurrentPlayer().getArmor();
             GSC.getCurrentPlayer().incHP(-damage);
-            s += GSC.getCurrentMonster().getName() + " inflicted +" + (0 - damage) + " to Player!";
+            s += GSC.getCurrentMonster().getName() + " inflicted +" + (damage) + " to Player!";
         } else {
             s += GSC.getCurrentMonster().getName() + " doesn't have enough power to damage through Player's armor";
         }

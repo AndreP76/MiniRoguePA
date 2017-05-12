@@ -17,7 +17,7 @@ public class StartState extends GameState {
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[4];
-        Act[0] = new Action(InternalCommandsDictionary.SetDifficultyCommand, "Change difficulty (1 ~ 5)");
+        Act[0] = new Action(InternalCommandsDictionary.SetDifficultyCommand, "Change difficulty (1 ~ 4)");
         Act[1] = new Action(InternalCommandsDictionary.SetAreaCommand, "Define starting area (1 ~ " + GameStateController.getCurrentController().getMaxZones() + ")");
         Act[2] = new Action(InternalCommandsDictionary.StartCommand, "Start the game!");
         Act[3] = new Action(InternalCommandsDictionary.LoadCommand, "Load a previously saved game");
@@ -44,17 +44,19 @@ public class StartState extends GameState {
         String[] SSplit = ActionString.split(" ");
         if(SSplit[0].equals(InternalCommandsDictionary.SetDifficultyCommand)){
             Integer DiffInt = Integer.parseInt(SSplit[SSplit.length - 1]);
-            DifficultyLevelEnum Diff = DifficultyLevelEnum.values()[DiffInt - 1];
-            if(Diff != null)
-                GameStateController.getCurrentController().setGameDifficulty(Diff);
-            //else idk, log it or something
+            if (DiffInt > 0 && DiffInt < 4) {//valid difficulty
+                DifficultyLevelEnum Diff = DifficultyLevelEnum.values()[DiffInt - 1];
+                if (Diff != null)
+                    GameStateController.getCurrentController().setGameDifficulty(Diff);
+            } else {
+                GameStateController.getCurrentController().MessageStack.push("Unknown difficulty");
+            }
         }else if(SSplit[0].equals(InternalCommandsDictionary.SetAreaCommand)){
             Integer AreaInt = Integer.parseInt(SSplit[SSplit.length - 1]);
             GameStateController GSC = GameStateController.getCurrentController();
             if(AreaInt > 0 && AreaInt < GSC.getMaxZones()) {//valid area
                 GSC.setCurrentZone(AreaInt);
             }
-            //else idk, log it or something
         }else if(SSplit[0].equals(InternalCommandsDictionary.StartCommand)){
             GameStateController GSC = GameStateController.getCurrentController();
             Player P = GSC.getCurrentPlayer();

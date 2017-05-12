@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="cce43112-76d8-48ef-89ab-199ca89d57d2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/Cards/TreasureCard.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/Cards/TreasureCard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/Main.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java" afterPath="$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java" afterPath="$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java" />
     </list>
     <ignored path="MiniRoguePA.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -17,6 +19,9 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/MiniRoguePA$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1494600741428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -26,21 +31,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FeatPhase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/FeatPhase.java">
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="345">
+              <caret line="369" column="0" selection-start-line="369" selection-start-column="0" selection-end-line="369" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Player.java">
+      <file leaf-file-name="SpellPhase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="361" column="0" selection-start-line="361" selection-start-column="0" selection-end-line="361" selection-end-column="0" />
+            <state relative-caret-position="1476">
+              <caret line="84" column="74" selection-start-line="84" selection-start-column="74" selection-end-line="84" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="611">
+              <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RestingStateView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StartStateView.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -49,22 +86,12 @@
       <file leaf-file-name="StateView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StateView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="-288">
               <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
               <folding>
                 <element signature="e#574#575#0" expanded="true" />
                 <element signature="e#650#651#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AwaitCardSelectionState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/AwaitCardSelectionState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="857">
-              <caret line="111" column="28" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -93,8 +120,10 @@
         <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
-              <caret line="27" column="78" selection-start-line="27" selection-start-column="78" selection-end-line="27" selection-end-column="78" />
-              <folding />
+              <caret line="26" column="78" selection-start-line="26" selection-start-column="78" selection-end-line="26" selection-end-column="78" />
+              <folding>
+                <marker date="1494600305952" expanded="false" signature="164:396" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,28 +133,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
               <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextDrawHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/TextDrawHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="60" column="38" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DrawPhaseView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/DrawPhaseView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="75" column="91" selection-start-line="75" selection-start-column="91" selection-end-line="75" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -160,7 +167,6 @@
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Spells/FireSpell.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Spells/HealSpell.java" />
-        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/RestingView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/TradingState.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -178,11 +184,8 @@
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Dice.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Monster.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Player.java" />
-        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java" />
-        <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/RestingState.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/AwaitCardSelectionState.java" />
-        <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/RollView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/SpellView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/TradingStateView.java" />
@@ -193,6 +196,10 @@
         <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/StateView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Main.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/Cards/TreasureCard.java" />
+        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java" />
+        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java" />
+        <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java" />
+        <option value="$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java" />
       </list>
     </option>
   </component>
@@ -853,7 +860,7 @@
       <workItem from="1494272219152" duration="2137000" />
       <workItem from="1494339719755" duration="11250000" />
       <workItem from="1494353161911" duration="6543000" />
-      <workItem from="1494510406569" duration="15605000" />
+      <workItem from="1494510406569" duration="16530000" />
     </task>
     <task id="LOCAL-00003" summary="Merged changes, created views">
       <created>1493803116321</created>
@@ -939,11 +946,18 @@
       <option name="project" value="LOCAL" />
       <updated>1494599803462</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Forgot the Treasure message">
+      <created>1494600309976</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1494600309976</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57631000" />
+    <option name="totallyTimeSpent" value="58556000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -967,6 +981,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32866043" sideWeight="0.49705014" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.65732086" sideWeight="0.4859259" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32964602" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32866043" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1004,7 +1019,8 @@
     <MESSAGE value="Some stuff was changed&#10;Fixed some loops&#10;Exposed the save and load functions" />
     <MESSAGE value="Started actually treating exceptions&#10;" />
     <MESSAGE value="Fixed some views" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some views" />
+    <MESSAGE value="Forgot the Treasure message" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forgot the Treasure message" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1014,13 +1030,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java</url>
-          <line>111</line>
+          <line>113</line>
           <properties />
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java</url>
-          <line>28</line>
+          <line>36</line>
           <properties />
           <option name="timeStamp" value="57" />
         </line-breakpoint>
@@ -1143,14 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="113" column="90" selection-start-line="113" selection-start-column="88" selection-end-line="113" selection-end-column="90" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="82" column="69" selection-start-line="82" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1286,14 +1294,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="92" column="25" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/GameOverView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
@@ -1302,28 +1302,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/SpellView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1416,22 +1398,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StateView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-          <folding>
-            <element signature="e#574#575#0" expanded="true" />
-            <element signature="e#650#651#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
-          <caret line="27" column="78" selection-start-line="27" selection-start-column="78" selection-end-line="27" selection-end-column="78" />
-          <folding />
+          <caret line="26" column="78" selection-start-line="26" selection-start-column="78" selection-end-line="26" selection-end-column="78" />
+          <folding>
+            <marker date="1494600305952" expanded="false" signature="164:396" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1445,8 +1418,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="361" column="0" selection-start-line="361" selection-start-column="0" selection-end-line="361" selection-end-column="0" />
+        <state relative-caret-position="345">
+          <caret line="369" column="0" selection-start-line="369" selection-start-column="0" selection-end-line="369" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/SpellPhase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1476">
+          <caret line="84" column="74" selection-start-line="84" selection-start-column="74" selection-end-line="84" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/StartState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="611">
+          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/RestingStateView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StateView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-288">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+          <folding>
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
