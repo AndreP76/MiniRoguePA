@@ -79,11 +79,79 @@ public class TrapCard extends CardBase {
                 Main.ErrorStream.println("Player lost 2 HP");
                 GSC.MessageStack.push("Pit - you've lost 2 HP and fell down to the next Level");
                 //GameStateController GSC = GameStateController.getCurrentController();
-                if (GSC.getCurrentRoom() == GSC.getRoomsInZone() && GSC.getCurrentZone() == GSC.getMaxZones()) {
+                if (GSC.getCurrentZone() == GSC.getMaxZones()) {
                     Main.ErrorStream.println("Player cannot fall anymore.");
+                    GSC.MessageStack.push("Pit - you've lost 2 HP when you fell down an hole");
                 } else {
                     Main.ErrorStream.println("Fall not implemented");
-                    //TODO : HERE
+                    GSC.MessageStack.push("Pit - you've lost 2 HP and fell down to the next Level");
+                    if (GSC.getCurrentZone() < GSC.getMaxZones()) {//player can still fall down
+                        GSC.setCurrentZone(GSC.getCurrentZone() + 1);
+                        int CurrentRoom = GSC.getTrueRoom();
+                        switch (CurrentRoom) {
+                            case 1: {
+                                GSC.setCurrentZone(1);
+                                GSC.setCurrentRoom(0);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 2: {
+                                GSC.setCurrentZone(1);
+                                GSC.setCurrentRoom(1);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 3: {
+                                GSC.setCurrentZone(2);
+                                GSC.setCurrentRoom(0);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 4: {
+                                GSC.setCurrentZone(2);
+                                GSC.setCurrentRoom(1);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 5: {
+                                GSC.setCurrentZone(3);
+                                GSC.setCurrentRoom(0);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 6: {
+                                GSC.setCurrentZone(3);
+                                GSC.setCurrentRoom(1);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 7: {
+                                GSC.setCurrentZone(3);
+                                GSC.setCurrentRoom(2);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 8: {
+                                GSC.setCurrentZone(4);
+                                GSC.setCurrentRoom(0);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 9: {
+                                GSC.setCurrentZone(4);
+                                GSC.setCurrentRoom(1);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                            case 10: {
+                                GSC.setCurrentZone(4);
+                                GSC.setCurrentRoom(2);
+                                GSC.setCurrentStageInRoom(0);
+                                break;
+                            }
+                        }
+                        Main.ErrorStream.println("Player fell to Zone " + GSC.getCurrentZone() + ", Room : " + GSC.getCurrentRoom());
+                    }
                 }
             }
             default:

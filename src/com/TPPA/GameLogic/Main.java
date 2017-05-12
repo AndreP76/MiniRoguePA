@@ -1,8 +1,9 @@
 package com.TPPA.GameLogic;
 //Sorry Lidia, eu programo tudo em ingles xD
 //Se for problema diz que eu mudo xD
-
-//TODO : Implementar a queda na TrapCard
+//Zone : Nivel
+//Room : Area
+//Stage : Coluna
 
 import com.TPPA.TextUI.StateView;
 import com.TPPA.TextUI.TextDrawHelper;
@@ -35,6 +36,11 @@ public class Main {
         TextDrawHelper.Init();
         GameStateController GSC = new GameStateController();
         StateView SV = StateView.GenerateView();
-        SV.Render();
+        if (SV != null) {
+            Main.ErrorStream.println("Starting render cycle");
+            SV.Render();
+        } else {
+            Main.ErrorStream.println("Could not start rendering, Generated view was null");
+        }
     }
 }
