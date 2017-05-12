@@ -91,7 +91,8 @@ public class AwaitCardSelectionState extends GameState {
                 }
             }
         } else if (SStr[0].equals(InternalCommandsDictionary.QuitCommand)) {
-            return new StartState();
+            //return new StartState();
+            System.exit(0);
         } else if (SStr[0].equals(InternalCommandsDictionary.SaveCommand)) {
             try {
                 String PathStr = "";
@@ -119,5 +120,6 @@ public class AwaitCardSelectionState extends GameState {
             GSC.MessageStack.push("Sorry, what ?");
             return this;
         }
+        return this;
     }
 }
