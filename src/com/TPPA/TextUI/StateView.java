@@ -40,7 +40,20 @@ public abstract class StateView implements IView, Observer, Serializable {
         } else return null;
     }
 
-    public abstract void Render();//Entry point for the views
+    public void Render() {//Entry point for the views
+        String Text = "";
+        TextDrawHelper.ClearScreen();
+        GameStateController GSC = GameStateController.getCurrentController();
+        Text += "HP : " + GSC.getCurrentPlayer().getHP();
+        Text += "\tXP : " + GSC.getCurrentPlayer().getXP();
+        Text += "\nGold : " + GSC.getCurrentPlayer().getGold();
+        Text += "\tArmor : " + GSC.getCurrentPlayer().getArmor() + "\n";
+
+        while (!GSC.MessageStack.empty())
+            Text += GSC.MessageStack.pop() + "\n";
+
+        Main.OutputStream.println(Text);
+    }
 
     @Override
     public void update(Observable observable, Object o) {

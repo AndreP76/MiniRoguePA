@@ -14,9 +14,7 @@ public class SpellView extends StateView {
         String Text = "";
         String ActionString = "";
         GameStateController GSC = GameStateController.getCurrentController();
-
-        while (!GSC.MessageStack.empty())
-            Text += GSC.MessageStack.pop() + "\n";
+        super.Render();
 
 
         if (!GSC.getCurrentGameState().CanUseSpell()) {

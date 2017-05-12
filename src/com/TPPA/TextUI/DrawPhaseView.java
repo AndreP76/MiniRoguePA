@@ -11,12 +11,9 @@ import com.TPPA.GameLogic.Main;
 public class DrawPhaseView extends StateView {
     @Override
     public void Render() {
-        TextDrawHelper.ClearScreen();
-        GameStateController GSC = GameStateController.getCurrentController();
+        super.Render();
         String Text = "";
-
-        while (!GSC.MessageStack.empty())
-            Text += GSC.MessageStack.pop();
+        GameStateController GSC = GameStateController.getCurrentController();
 
         Text += "Nivel : " + GSC.getTrueRoom();
         int Zone = GSC.getCurrentZone();

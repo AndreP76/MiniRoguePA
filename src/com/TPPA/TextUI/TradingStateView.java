@@ -15,8 +15,7 @@ public class TradingStateView extends StateView {
         String Text = "";
         String ActionString = "";
         GameStateController GSC = GameStateController.getCurrentController();
-        while (!GSC.MessageStack.empty())
-            Text += GSC.MessageStack.pop() + "\n";
+        super.Render();
 
         Text += "\n==== Found a Merchant ====\n\n";
         Text += GSC.getCurrentPlayer().toString() + "\n\n";

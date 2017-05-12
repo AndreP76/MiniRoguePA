@@ -12,8 +12,7 @@ public class RestingStateView extends StateView {
     public void Render() {
         String Text = "";
         GameStateController GSC = GameStateController.getCurrentController();
-        while (!GSC.MessageStack.empty())
-            Text += GSC.MessageStack.pop() + "\n";
+        super.Render();
 
         Text += "\n==== Finally, some time to rest... ===\n\n";
 

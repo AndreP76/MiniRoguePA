@@ -106,13 +106,17 @@ public class AwaitCardSelectionState extends GameState {
                 FileOutputStream FSO = new FileOutputStream(PathStr);
                 ObjectOutputStream OOS = new ObjectOutputStream(FSO);
                 OOS.writeObject(GameStateController.getCurrentController());
+                GSC.MessageStack.push("Game saved in " + PathStr);
+                Main.ErrorStream.println("User saved the game in file : " + PathStr);
                 return this;
             } catch (IOException IOEX) {
                 Main.ErrorStream.println("Error serializing object\n\tMessage : " + IOEX.fillInStackTrace());
+                GSC.MessageStack.push("Something wrong happened when loading the game");
             }
             return this;
         } else {
             Main.ErrorStream.println("Unexpected command on AwaitCardSelectionStation : " + ActionString);
+            GSC.MessageStack.push("Sorry, what ?");
             return this;
         }
     }
