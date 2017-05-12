@@ -8,16 +8,19 @@ package com.TPPA.GameLogic;
 public class GameOverState extends GameState {
     @Override
     public Action[] GetActions() {
-        return new Action[0];
+        Action[] Act = new Action[1];
+        Act[0] = new Action(InternalCommandsDictionary.QuitCommand, "Exit game");
+        return Act;
     }
 
     @Override
     public IState Action(String ActionString) {
-        if (ActionString.equals(InternalCommandsDictionary.Skip)) {
-            return new StartState();
+        if (ActionString.equals(InternalCommandsDictionary.QuitCommand)) {
+            System.exit(0);
         } else {
             Main.ErrorStream.println("Got unknown command " + ActionString + " on GameOverPhase");
             return this;
         }
+        return this;
     }
 }
