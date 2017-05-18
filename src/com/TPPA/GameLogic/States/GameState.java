@@ -1,6 +1,12 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
 
 import com.TPPA.GameLogic.Cards.TreasureCard;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.Deck;
+import com.TPPA.GameLogic.Internals.Dice;
+import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 import java.io.Serializable;
@@ -9,7 +15,14 @@ import java.io.Serializable;
  * Created by andre on 4/5/17.
  */
 public abstract class GameState implements IState, Serializable {
+    GameStateController currentController;
+
+    public GameState(GameStateController GSC) {
+        currentController = GSC;
+    }
+
     abstract public Action[] GetActions();
+
     @Override
     public Boolean CanDrawCard() {
         return null;
@@ -55,9 +68,17 @@ public abstract class GameState implements IState, Serializable {
         return null;
     }
 
+    protected GameStateController getCurrentController() {
+        return currentController;
+    }
+
+    public void setCurrentController(GameStateController currentController) {
+        this.currentController = currentController;
+    }
+
     @Override
     public Boolean CanReRollDice() {
-        for (Dice currentDie : GameStateController.getCurrentController().getCurrentPlayer().getUnlockedDice()) {
+        for (Dice currentDie : getCurrentController().getCurrentPlayer().getUnlockedDice()) {
             if (currentDie.getLastRoll() == 6)
                 return true;
         }
@@ -128,15 +149,15 @@ public abstract class GameState implements IState, Serializable {
 
     @Override
     public IState OnDefeatingMonster() {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = getCurrentController();
 
         if (GSC.getCurrentMonster().getBoss()) {
-            int currentZone = GSC.getCurrentZone();
-            if (currentZone == GSC.getMaxZones()) {
+
+            if (GSC.getTrueRoom() >= 14) {//Final room
                 GSC.MessageStack.push("==== Final Boss defeated! ====\nYou've won Og's Blood!\n");
 
                 GSC.getCurrentPlayer().resetDice();
-                return new StartState();
+                return new StartState(getCurrentController());
             } else {
                 GSC.getCurrentPlayer().incGold(GSC.getCurrentMonster().getGoldReward());
                 GSC.getCurrentPlayer().incXP(GSC.getCurrentMonster().getXPReward());
@@ -144,11 +165,17 @@ public abstract class GameState implements IState, Serializable {
                 GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
                 GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP and " + GSC.getCurrentMonster().getGoldReward() + " Gold\n");
 
-                GSC.setCurrentRoom(GSC.getCurrentRoom() + 1);
-                GSC.setCurrentStageInRoom(1); // Qual é a sala inicial???
+                int CurrentRoom = GSC.getCurrentRoom();
+                GSC.setCurrentStageInRoom(0);
+                if ((CurrentRoom == 2 && GSC.getCurrentZone() == 1) || (CurrentRoom == 2 && GSC.getCurrentZone() == 2) || (CurrentRoom == 3 && GSC.getCurrentZone() == 3) || (CurrentRoom == 3 && GSC.getCurrentZone() == 4) || (CurrentRoom == 4 && GSC.getCurrentZone() == 5)) {
+                    GSC.setCurrentRoom(1);
+                    GSC.setCurrentZone(GSC.getCurrentZone() + 1);
+                } else {
+                    GSC.setCurrentRoom(GSC.getCurrentRoom() + 1);
+                }
                 GSC.setRoomStages(null);//para depois ser recriada pelo AwaitCardSelectionState
                 GSC.getCurrentPlayer().resetDice();
-                return (new TreasureCard(Deck.TreasureCardID)).Effect();
+                return (new TreasureCard(GSC, Deck.TreasureCardID)).Effect();
             }
         } else {
 
@@ -156,10 +183,10 @@ public abstract class GameState implements IState, Serializable {
             GSC.setBattledInThisRoom(true); // para calcular o tesouro depois
             GSC.MessageStack.push("Congratulations! You have defeated " + GSC.getCurrentMonster().getName() + "\n");
             GSC.MessageStack.push("Your rewards: " + GSC.getCurrentMonster().getXPReward() + "XP\n");
-            GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1);
+            //GSC.setCurrentStageInRoom(GSC.getCurrentStageInRoom() + 1); Feito pela vista automaticamente
 
             GSC.getCurrentPlayer().resetDice();
-            return new AwaitCardSelectionState();
+            return new AwaitCardSelectionState(getCurrentController());
         }
     }
 

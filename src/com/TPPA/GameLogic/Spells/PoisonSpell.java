@@ -7,8 +7,8 @@ import com.TPPA.GameLogic.Main;
  * Created by andre on 4/20/17.
  */
 public class PoisonSpell extends SpellBase {
-    public PoisonSpell(String ID) {
-        super(ID);
+    public PoisonSpell(GameStateController GSC, String ID) {
+        super(GSC, ID);
     }
 
 //    @Override
@@ -21,7 +21,7 @@ public class PoisonSpell extends SpellBase {
     public void Effect() {
         Main.ErrorStream.println("PoisonSpell effect called");
 
-        GameStateController GSC = GameStateController.getCurrentController();
+        //GameStateController GSC = GameStateController.getCurrentController();
 
         String s = "";
         GSC.getCurrentMonster().setPoisoned(true);

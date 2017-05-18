@@ -8,8 +8,8 @@ import com.TPPA.GameLogic.Main;
  */
 public class HealSpell extends SpellBase {
 
-    public HealSpell(String ID) {
-        super(ID);
+    public HealSpell(GameStateController GSC, String ID) {
+        super(GSC, ID);
     }
 
 //    @Override
@@ -24,7 +24,7 @@ public class HealSpell extends SpellBase {
     public void Effect() {
         Main.ErrorStream.println("HealSpell effect called");
 
-        GameStateController GSC = GameStateController.getCurrentController();
+        //GameStateController GSC = GameStateController.getCurrentController();
         if (GSC.getCurrentPlayer().incHP(8))
             GSC.MessageStack.push("HealSpell effect called - Player gained HP");
         else

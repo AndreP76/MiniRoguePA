@@ -1,19 +1,23 @@
 package com.TPPA.GameLogic.Cards;
 
-import com.TPPA.GameLogic.*;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Monster;
+import com.TPPA.GameLogic.Main;
+import com.TPPA.GameLogic.States.RollPhase;
 
 /**
  * Created by andre on 4/19/17.
  */
 public class BossMonsterCard extends MonsterCard {
-    public BossMonsterCard(String ID) {
-        super(ID, "Boss Monster");
+    public BossMonsterCard(GameStateController GSC, String ID) {
+        super(GSC, ID, "Boss Monster");
     }
 
     @Override
     public IState Effect() {
         Main.ErrorStream.println("BossMonsterCard effect called!");
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = this.GSC;
 
         int HP = -1;
         int XPR = -1;
@@ -63,7 +67,7 @@ public class BossMonsterCard extends MonsterCard {
                 break;
             }
         }
-        GSC.setCurrentMonster(new Monster(HP, XPR, GR, S, true, name));
-        return new RollPhase();
+        GSC.setCurrentMonster(new Monster(GSC, HP, XPR, GR, S, true, name));
+        return new RollPhase(GSC);
     }
 }

@@ -7,8 +7,8 @@ import com.TPPA.GameLogic.Main;
  * Created by andre on 4/20/17.
  */
 public class IceSpell extends SpellBase {
-    public IceSpell(String ID) {
-        super(ID);
+    public IceSpell(GameStateController GSC, String ID) {
+        super(GSC, ID);
     }
 
 //    @Override
@@ -21,7 +21,7 @@ public class IceSpell extends SpellBase {
     public void Effect() {
         Main.ErrorStream.println("IceSpell effect called");
 
-        GameStateController GSC = GameStateController.getCurrentController();
+        //GameStateController GSC = GameStateController.getCurrentController();
 
         GSC.getCurrentMonster().setCanAttack(false);
 

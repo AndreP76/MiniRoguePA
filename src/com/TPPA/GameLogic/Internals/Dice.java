@@ -1,4 +1,6 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
+
+import com.TPPA.GameLogic.Main;
 
 import java.io.Serializable;
 import java.util.Random;

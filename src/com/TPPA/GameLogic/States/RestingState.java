@@ -1,10 +1,18 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
+
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Main;
 
 /**
  * Created by andre on 4/5/17.
  */
 public class RestingState extends GameState {
-
+    public RestingState(GameStateController GS) {
+        super(GS);
+    }
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[3];
@@ -19,19 +27,19 @@ public class RestingState extends GameState {
 
         if (ActionString.equals(InternalCommandsDictionary.ReinforceWeapon)) {
             Main.ErrorStream.println("User got 1 XP");
-            GameStateController.getCurrentController().MessageStack.push("");
-            GameStateController.getCurrentController().getCurrentPlayer().incXP(1);
-            return new AwaitCardSelectionState();
+            getCurrentController().MessageStack.push("");
+            getCurrentController().getCurrentPlayer().incXP(1);
+            return new AwaitCardSelectionState(getCurrentController());
         }
         if (ActionString.equals(InternalCommandsDictionary.SearchRation)) {
             Main.ErrorStream.println("User got 1 Food");
-            GameStateController.getCurrentController().getCurrentPlayer().incFood(1);
-            return new AwaitCardSelectionState();
+            getCurrentController().getCurrentPlayer().incFood(1);
+            return new AwaitCardSelectionState(getCurrentController());
         }
         if (ActionString.equals(InternalCommandsDictionary.Heal)) {
             Main.ErrorStream.println("User got 2 HP");
-            GameStateController.getCurrentController().getCurrentPlayer().incHP(2);
-            return new AwaitCardSelectionState();
+            getCurrentController().getCurrentPlayer().incHP(2);
+            return new AwaitCardSelectionState(getCurrentController());
         }
         return this;
     }

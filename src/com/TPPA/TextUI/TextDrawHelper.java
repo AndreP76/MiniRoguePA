@@ -14,7 +14,7 @@ enum AvailableOS{
     Windows,
     Linux,
     Mac,
-    Other;
+    Other
 }
 
 public class TextDrawHelper {//To console

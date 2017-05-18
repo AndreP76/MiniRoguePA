@@ -1,4 +1,10 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
+
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Main;
 
 /**
  * Created by andre on 4/5/17.
@@ -6,6 +12,10 @@ package com.TPPA.GameLogic;
  */
 
 public class GameOverState extends GameState {
+    public GameOverState(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[1];

@@ -1,17 +1,21 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Main;
 
 /**
  * Created by andre on 5/1/17.
  */
 public class RestingStateView extends StateView {
+    RestingStateView(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public void Render() {
         String Text = "";
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
         super.Render();
 
         Text += "\n==== Finally, some time to rest... ===\n\n";

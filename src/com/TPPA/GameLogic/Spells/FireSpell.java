@@ -7,8 +7,8 @@ import com.TPPA.GameLogic.Main;
  * Created by andre on 4/20/17.
  */
 public class FireSpell extends SpellBase {
-    public FireSpell(String ID) {
-        super(ID);
+    public FireSpell(GameStateController GSC, String ID) {
+        super(GSC, ID);
     }
 
 //    @Override
@@ -20,7 +20,7 @@ public class FireSpell extends SpellBase {
 
     @Override
     public void Effect() {
-        GameStateController GSC = GameStateController.getCurrentController();
+        //GameStateController GSC = GameStateController.getCurrentController();
         Main.ErrorStream.println("FireSpell effect called");
         GSC.MessageStack.push("FireSpell effect called - inflicted +8 damage to " + GSC.getCurrentMonster().getName());
 

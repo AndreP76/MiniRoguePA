@@ -1,8 +1,8 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 import java.util.Arrays;
@@ -12,12 +12,14 @@ import java.util.Arrays;
  * GODDAMN WARNINGS!
  */
 public class FeatView extends StateView {
-    //TODO : Needs to be reworked
+    FeatView(GameStateController GS) {
+        super(GS);
+    }
     @Override
     public void Render() {
         String Text = "";
         TextDrawHelper.ClearScreen();
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
 
         String ActionString = "";
 

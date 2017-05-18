@@ -1,8 +1,8 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 /**
@@ -10,11 +10,15 @@ import com.TPPA.GameLogic.Main;
  * The law of equivalent exchange
  */
 public class TradingStateView extends StateView {
+    TradingStateView(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public void Render() {
         String Text = "";
         String ActionString = "";
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
         super.Render();
 
         Text += "\n==== Found a Merchant ====\n\n";
@@ -79,6 +83,5 @@ public class TradingStateView extends StateView {
         }
 
         GSC.RelayAction(ActionString);
-
     }
 }

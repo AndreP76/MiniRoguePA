@@ -1,7 +1,7 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Main;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -13,13 +13,13 @@ import static org.fusesource.jansi.Ansi.ansi;
  * Created by andre on 4/11/17.
  */
 public class StartStateView extends StateView {
-    StartStateView(){
-        super();//regista este observador no GameStateController
+    public StartStateView(GameStateController GS) {
+        super(GS);
     }
 
     @Override
     public void Render() {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
         TextDrawHelper.ClearScreen();
         AnsiConsole.systemInstall();
         while (!GSC.MessageStack.empty()) {

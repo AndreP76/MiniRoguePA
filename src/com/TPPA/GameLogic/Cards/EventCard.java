@@ -1,13 +1,18 @@
 package com.TPPA.GameLogic.Cards;
 
-import com.TPPA.GameLogic.*;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Deck;
+import com.TPPA.GameLogic.Internals.Dice;
+import com.TPPA.GameLogic.Main;
+import com.TPPA.GameLogic.States.AwaitCardSelectionState;
 
 /**
  * Created by andre on 4/19/17.
  */
 public class EventCard extends CardBase {
-    public EventCard(String ID) {
-        super(ID, "Event Card");
+    public EventCard(GameStateController GSC, String ID) {
+        super(GSC, ID, "Event Card");
     }
 
     @Override
@@ -16,42 +21,42 @@ public class EventCard extends CardBase {
         Dice d = new Dice();
         switch (d.Roll()) {
             case 1: {
-                GameStateController.getCurrentController().getCurrentPlayer().incFood(1);
-                GameStateController.getCurrentController().MessageStack.push("Found Food");
+                GSC.getCurrentPlayer().incFood(1);
+                GSC.MessageStack.push("Found Food");
                 Main.ErrorStream.println("Found ration");
                 break;
             }
             case 2: {
-                GameStateController.getCurrentController().getCurrentPlayer().incHP(1);
-                GameStateController.getCurrentController().MessageStack.push("Found Health Potion (+1HP)");
+                GSC.getCurrentPlayer().incHP(1);
+                GSC.MessageStack.push("Found Health Potion (+1HP)");
                 Main.ErrorStream.println("Found Health Potion");
                 break;
             }
             case 3: {
-                GameStateController.getCurrentController().getCurrentPlayer().incGold(1);
-                GameStateController.getCurrentController().MessageStack.push("Found Loot (+1Gold)");
+                GSC.getCurrentPlayer().incGold(1);
+                GSC.MessageStack.push("Found Loot (+1Gold)");
                 Main.ErrorStream.println("Found Loot");
                 break;
             }
             case 4: {
-                GameStateController.getCurrentController().getCurrentPlayer().incXP(2);
-                GameStateController.getCurrentController().MessageStack.push("Found Whetstone (+2XP)");
+                GSC.getCurrentPlayer().incXP(2);
+                GSC.MessageStack.push("Found Whetstone (+2XP)");
                 Main.ErrorStream.println("Found Whetstone");
                 break;
             }
             case 5: {
-                GameStateController.getCurrentController().getCurrentPlayer().incArmor(1);
-                GameStateController.getCurrentController().MessageStack.push("Found Armor");
+                GSC.getCurrentPlayer().incArmor(1);
+                GSC.MessageStack.push("Found Armor");
                 Main.ErrorStream.println("Found Armor");
                 break;
             }
             case 6: {
                 Main.ErrorStream.println("Found Monster");
-                GameStateController.getCurrentController().MessageStack.push("Found Monster");
-                return (new MonsterCard(Deck.MonsterCardID)).Effect(GameStateController.getCurrentController().getTrueRoom() + d.Roll(), 2, 0, GameStateController.getCurrentController().getCurrentZone(), false);
+                GSC.MessageStack.push("Found Monster");
+                return (new MonsterCard(GSC, Deck.MonsterCardID)).Effect(GSC.getTrueRoom() + d.Roll(), 2, 0, GSC.getCurrentZone(), false);
             }
 
         }
-        return new AwaitCardSelectionState();
+        return new AwaitCardSelectionState(GSC);
     }
 }

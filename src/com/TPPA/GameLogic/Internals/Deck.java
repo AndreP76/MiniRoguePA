@@ -1,6 +1,8 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
 
 import com.TPPA.GameLogic.Cards.*;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.Main;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,24 +20,22 @@ public class Deck implements Serializable {
     public final static String MerchantCardID = "MERCHANTCARD";
     public final static String RestCardID = "RESTCARD";
     public final static String BossMonsterCardID = "BOSSCARD";
+    private GameStateController GSC;
     private Random SR = new Random();
     private int DeckLength;
     private ArrayList<CardBase> Cards;
-    Deck(Deck original){
-        this.DeckLength = original.getDeckLength();
-        Cards = new ArrayList<>();
-        Cards.addAll(original.getCards());
-    }
-    Deck(int DeckSize){
+
+    public Deck(GameStateController GSC, int DeckSize) {
+        this.GSC = GSC;
         this.DeckLength = DeckSize;
         Cards = new ArrayList<>();
         SR.setSeed(System.nanoTime());
-        Cards.add(new TrapCard(TrapCardID));
-        Cards.add(new MonsterCard(MonsterCardID));
-        Cards.add(new EventCard(EventCardID));
-        Cards.add(new TreasureCard(TreasureCardID));
-        Cards.add(new MerchantCard(MerchantCardID));
-        Cards.add(new RestCard(RestCardID));
+        Cards.add(new TrapCard(GSC, TrapCardID));
+        Cards.add(new MonsterCard(GSC, MonsterCardID));
+        Cards.add(new EventCard(GSC, EventCardID));
+        Cards.add(new TreasureCard(GSC, TreasureCardID));
+        Cards.add(new MerchantCard(GSC, MerchantCardID));
+        Cards.add(new RestCard(GSC, RestCardID));
         this.CollectionsShuffle();
         this.DebugPrintDeck();
     }

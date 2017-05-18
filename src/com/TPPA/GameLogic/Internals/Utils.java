@@ -1,4 +1,4 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
 
 import java.util.Date;
 

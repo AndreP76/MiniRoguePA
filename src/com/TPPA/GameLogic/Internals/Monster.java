@@ -1,6 +1,11 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
 
 import com.TPPA.GameLogic.Cards.TreasureCard;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.States.AwaitCardSelectionState;
+import com.TPPA.GameLogic.States.GameOverState;
+import com.TPPA.GameLogic.States.RollPhase;
 
 import java.io.Serializable;
 
@@ -23,8 +28,10 @@ public class Monster implements Serializable {
     private Boolean CanAttack = true;
 
     private boolean poisoned = false;
+    private GameStateController GSC;
 
-    public Monster(int HPMax, int XPReward, int GoldReward, int MonsterAttack, Boolean isBoss, String Name) {
+    public Monster(GameStateController GSC, int HPMax, int XPReward, int GoldReward, int MonsterAttack, Boolean isBoss, String Name) {
+        this.GSC = GSC;
         this.HPMax = this.HPCurr = HPMax;
         this.XPReward = XPReward;
         this.GoldReward = GoldReward;
@@ -34,12 +41,12 @@ public class Monster implements Serializable {
     }
 
     public IState onDefeat() {
-        GameStateController.getCurrentController().getCurrentPlayer().incXP(XPReward);
-        GameStateController.getCurrentController().getCurrentPlayer().incGold(GoldReward);
+        GSC.getCurrentPlayer().incXP(XPReward);
+        GSC.getCurrentPlayer().incGold(GoldReward);
         if (isBoss) {
-            return (new TreasureCard(Deck.TreasureCardID)).Effect();
+            return (new TreasureCard(GSC, Deck.TreasureCardID)).Effect();
         } else {
-            return new AwaitCardSelectionState();
+            return new AwaitCardSelectionState(GSC);
         }
     }
 
@@ -124,12 +131,12 @@ public class Monster implements Serializable {
     }
 
     public IState onAttack() {
-        GameStateController.getCurrentController().getCurrentPlayer().incHP(this.Strength - GameStateController.getCurrentController().getCurrentPlayer().getArmor());
-        if (GameStateController.getCurrentController().getCurrentPlayer().getHP() <= 0) {
-            return new GameOverState();
+        GSC.getCurrentPlayer().incHP(this.Strength - GSC.getCurrentPlayer().getArmor());
+        if (GSC.getCurrentPlayer().getHP() <= 0) {
+            return new GameOverState(GSC);
         } else {
             //GameStateController.getCurrentController().getCurrentPlayer().resetDice();
-            return new RollPhase();
+            return new RollPhase(GSC);
         }
     }
 

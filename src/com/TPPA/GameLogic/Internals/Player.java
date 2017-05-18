@@ -1,5 +1,6 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
 
+import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 import java.io.Serializable;
@@ -45,7 +46,7 @@ public class Player implements Serializable {
     private boolean hasDefeatedMonster;
     private boolean hasUsedFeat;
 
-    Player(int StartAttack, int StartArmor, int StartGold, int StartFood, int StartXP, int StartHP) {
+    public Player(int StartAttack, int StartArmor, int StartGold, int StartFood, int StartXP, int StartHP) {
         Food = StartFood;
         XP = StartXP;
         Attack = StartAttack;

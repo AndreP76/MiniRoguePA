@@ -1,9 +1,18 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
+
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Main;
 
 /**
  * Created by andre on 4/5/17.
  */
 public class RollPhase extends GameState {
+    public RollPhase(GameStateController GSC) {
+        super(GSC);
+    }
 
     @Override
     public Action[] GetActions() {
@@ -20,7 +29,7 @@ public class RollPhase extends GameState {
         String[] SSplit = ActionString.split(" ");
 
         if (SSplit[0].equals(InternalCommandsDictionary.RollDice)) {
-            GameStateController.getCurrentController().getCurrentPlayer().rollDice();
+            getCurrentController().getCurrentPlayer().rollDice();
             return this;
         }
 
@@ -31,9 +40,9 @@ public class RollPhase extends GameState {
                     index = Integer.parseInt(SSplit[1]);
                     try {
                         int roll;
-                        roll = GameStateController.getCurrentController().getCurrentPlayer().getUnlockedDice().get(index).getLastRoll();
+                        roll = getCurrentController().getCurrentPlayer().getUnlockedDice().get(index).getLastRoll();
                         if (roll == 6)
-                            GameStateController.getCurrentController().getCurrentPlayer().reRollDice(index);
+                            getCurrentController().getCurrentPlayer().reRollDice(index);
                     } catch (IndexOutOfBoundsException e) {
                         Main.ErrorStream.println("Second argument of " + InternalCommandsDictionary.ReRollDice + " is not a valid index: " + e);
                         return this;
@@ -46,7 +55,7 @@ public class RollPhase extends GameState {
             return this;
         }
         if (SSplit[0].equals(InternalCommandsDictionary.EndRollPhase)) {
-            return new FeatPhase();
+            return new FeatPhase(getCurrentController());
         }
         return this;
     }

@@ -1,23 +1,28 @@
 package com.TPPA.GameLogic.Cards;
 
-import com.TPPA.GameLogic.*;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Dice;
+import com.TPPA.GameLogic.Internals.Monster;
+import com.TPPA.GameLogic.Main;
+import com.TPPA.GameLogic.States.RollPhase;
 
 /**
  * Created by andre on 4/19/17.
  * I have no idea what I''m doing
  */
 public class MonsterCard extends CardBase {
-    protected MonsterCard(String ID, String Name) {
-        super(ID, Name);
+    protected MonsterCard(GameStateController GS, String ID, String Name) {
+        super(GS, ID, Name);
     }
 
-    public MonsterCard(String ID) {
-        super(ID, "Monster Card");
+    public MonsterCard(GameStateController GS, String ID) {
+        super(GS, ID, "Monster Card");
     }
 
     public IState Effect(int HP, int XPR, int GR, int Strength, Boolean Boss) {
         String Name = "";
-        switch (GameStateController.getCurrentController().getCurrentZone()) {
+        switch (GSC.getCurrentZone()) {
             case 1: {
                 Name = "Undead Soldier";
                 break;
@@ -39,14 +44,14 @@ public class MonsterCard extends CardBase {
                 break;
             }
         }
-        GameStateController.getCurrentController().setCurrentMonster(new Monster(HP, XPR, GR, Strength, Boss, Name));
-        return new RollPhase();
+        GSC.setCurrentMonster(new Monster(GSC, HP, XPR, GR, Strength, Boss, Name));
+        return new RollPhase(GSC);
     }
 
     @Override
     public IState Effect() {//Start a battle with a monster
         Main.ErrorStream.println("MonsterCard effect called!");
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = this.GSC;
 
         int HP = (new Dice()).Roll() + GSC.getTrueRoom();
         int XPR = -1;

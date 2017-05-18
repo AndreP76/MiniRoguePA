@@ -1,4 +1,4 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
 
 /**
  * Created by andre on 4/10/17.
@@ -6,7 +6,8 @@ package com.TPPA.GameLogic;
 public class Action {
     private String ActionString;
     private String DescriptionString;
-    Action(String AS, String DS){
+
+    public Action(String AS, String DS) {
         ActionString  = AS;
         DescriptionString = DS;
     }

@@ -1,5 +1,6 @@
 package com.TPPA.GameLogic;
 
+import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 /**

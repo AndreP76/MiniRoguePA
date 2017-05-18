@@ -1,27 +1,32 @@
 package com.TPPA.GameLogic.Cards;
 
-import com.TPPA.GameLogic.*;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Dice;
+import com.TPPA.GameLogic.Internals.Player;
+import com.TPPA.GameLogic.Main;
+import com.TPPA.GameLogic.States.AwaitCardSelectionState;
 
 /**
  * Created by andre on 4/19/17.
  */
 public class TrapCard extends CardBase {
-    public TrapCard(String ID) {
-        super(ID, "Trap Card");
+    public TrapCard(GameStateController GSC, String ID) {
+        super(GSC, ID, "Trap Card");
     }
 
     @Override
     public IState Effect() {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = this.GSC;
         Main.ErrorStream.println("TrapCard effect called!");
 
         if (GSC.getCurrentPlayer().skillCheck()) {
             GSC.MessageStack.push("Skill check successful - trap avoided\n");
             Main.ErrorStream.println("Skill check successful - trap avoided");
-            return new AwaitCardSelectionState();
+            return new AwaitCardSelectionState(GSC);
         }
         Dice d = new Dice();
-        Player P = GameStateController.getCurrentController().getCurrentPlayer();
+        Player P = GSC.getCurrentPlayer();
         switch (d.Roll()) {
             case 1: {
                 if (P.getFood() >= 1) {
@@ -157,6 +162,6 @@ public class TrapCard extends CardBase {
             default:
                 break;
         }
-        return new AwaitCardSelectionState();
+        return new AwaitCardSelectionState(GSC);
     }
 }

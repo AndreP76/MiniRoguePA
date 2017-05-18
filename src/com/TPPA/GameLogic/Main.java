@@ -5,6 +5,8 @@ package com.TPPA.GameLogic;
 //Room : Area
 //Stage : Coluna
 
+import com.TPPA.GameLogic.States.StartState;
+import com.TPPA.TextUI.StartStateView;
 import com.TPPA.TextUI.StateView;
 import com.TPPA.TextUI.TextDrawHelper;
 
@@ -35,7 +37,9 @@ public class Main {
 
         TextDrawHelper.Init();
         GameStateController GSC = new GameStateController();
-        StateView SV = StateView.GenerateView();
+        GSC.setCurrentGameState(new StartState(GSC));
+        StateView SV = new StartStateView(GSC);
+        //StateView SV = StateView.GenerateView();
         if (SV != null) {
             Main.ErrorStream.println("Starting render cycle");
             SV.Render();

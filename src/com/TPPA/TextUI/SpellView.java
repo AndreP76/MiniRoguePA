@@ -1,7 +1,7 @@
 package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 /**
@@ -9,11 +9,15 @@ import com.TPPA.GameLogic.Main;
  * You're a Lizard, harry
  */
 public class SpellView extends StateView {
+    SpellView(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public void Render() {
         String Text = "";
         String ActionString = "";
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
         super.Render();
 
 

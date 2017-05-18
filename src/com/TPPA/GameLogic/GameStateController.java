@@ -1,6 +1,10 @@
 package com.TPPA.GameLogic;
 
 import com.TPPA.GameLogic.Cards.CardBase;
+import com.TPPA.GameLogic.Internals.Deck;
+import com.TPPA.GameLogic.Internals.DifficultyLevelEnum;
+import com.TPPA.GameLogic.Internals.Monster;
+import com.TPPA.GameLogic.Internals.Player;
 
 import java.util.Observable;
 import java.util.Stack;
@@ -11,7 +15,8 @@ import java.util.Stack;
 public class GameStateController extends Observable implements java.io.Serializable{
     //Acho que esta a ser misturada aqui um controlador de MVC e um "controlador" da logica...
     //The IView speaks only to this class
-    private static GameStateController CurrentController; //Keeps the current controller. THERE CAN BE ONLY ONE!
+    //private static GameStateController CurrentController; //Keeps the current controller. THERE CAN BE ONLY ONE!
+    //Idiots...
     public Stack<String> MessageStack = null;//the view reads messages from this
     private IState CurrentGameState; //The "Model"
     private DifficultyLevelEnum GameDifficulty;
@@ -29,26 +34,26 @@ public class GameStateController extends Observable implements java.io.Serializa
     private Boolean BattledInThisRoom = false;
     private Monster CurrentMonster = null;
     GameStateController(){//default
-        CurrentGameState = new StartState();
+        //CurrentGameState = new StartState();
         GameDifficulty = DifficultyLevelEnum.Normal;//User can change it on StartState
         MaxZones = 5;
         CurrentZone = 1;
         CurrentPlayer = new Player(0, 0, 0, 0, 0, 0);
-        CurrentController = this;
-        CurrentDeck = new Deck(6);
+        //CurrentController = this;
+        CurrentDeck = new Deck(this, 6);
         MessageStack = new Stack<>();
     }
 
-    public static GameStateController getCurrentController() {
+    /*public static GameStateController getCurrentController() {
         return CurrentController;
-    }
+    }*/
 
     //getter
 
-    public static void setCurrentController(GameStateController currentController) {
+    /*public static void setCurrentController(GameStateController currentController) {
         CurrentController = currentController;
         CurrentController.setCurrentGameState(CurrentController.getCurrentGameState());
-    }
+    }*/
 
     public Monster getCurrentMonster() {
         return CurrentMonster;
@@ -94,10 +99,10 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public void setCurrentStageInRoom(int currentStageInRoom) {
         CurrentStageInRoom = currentStageInRoom;
-        if (CurrentStageInRoom == this.getMaxStagesInRoom()) {
+        /*if (CurrentStageInRoom == this.getMaxStagesInRoom()) {
             CurrentStageInRoom = 0;
             this.setCurrentRoom(this.getCurrentRoom() + 1);
-        }
+        }*/
     }
 
     public Deck getCurrentDeck() {
@@ -127,15 +132,6 @@ public class GameStateController extends Observable implements java.io.Serializa
         } else {
             RoomsInZone = 0;
         }
-    }
-
-    public int getMaxRoomsInStage() {
-        int Level = getCurrentZone();
-        if (Level == 1 || Level == 2)
-            return 2;
-        else if (Level == 3 || Level == 4)
-            return 3;
-        else return 4;
     }
 
     public int getTrueRoom() {

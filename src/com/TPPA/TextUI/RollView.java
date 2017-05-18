@@ -1,7 +1,7 @@
 package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Main;
 
 import java.util.Arrays;
@@ -11,10 +11,14 @@ import java.util.Arrays;
  * Roll roll roll
  */
 public class RollView extends StateView {
+    RollView(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public void Render() {
         String Text = "";
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
         while (!GSC.MessageStack.empty())
             Text += GSC.MessageStack.pop() + "\n";
 

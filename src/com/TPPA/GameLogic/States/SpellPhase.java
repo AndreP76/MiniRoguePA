@@ -1,5 +1,9 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
 
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
 import static com.TPPA.GameLogic.Main.ErrorStream;
@@ -8,6 +12,10 @@ import static com.TPPA.GameLogic.Main.ErrorStream;
  * Created by andre on 4/5/17.
  */
 public class SpellPhase extends GameState {
+
+    public SpellPhase(GameStateController GSC) {
+        super(GSC);
+    }
 
     @Override
     public Action[] GetActions() {
@@ -20,7 +28,7 @@ public class SpellPhase extends GameState {
 
     @Override
     public Boolean CanUseSpell() {
-        return !GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().isEmpty();
+        return !getCurrentController().getCurrentPlayer().getSpellsInventory().isEmpty();
     }
 
     @Override
@@ -37,7 +45,7 @@ public class SpellPhase extends GameState {
                 int index;
                 index = Integer.parseInt(SSplit[1]);
                 try {
-                    SpellBase spellToUse = GameStateController.getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
+                    SpellBase spellToUse = getCurrentController().getCurrentPlayer().getSpellsInventory().remove(index);
                     return UseSpell(spellToUse);
                 } catch (IndexOutOfBoundsException e) {
                     ErrorStream.println("Second argument of " + InternalCommandsDictionary.UseSpell + " is not a valid index: " + e);
@@ -53,7 +61,7 @@ public class SpellPhase extends GameState {
 
     @Override
     public IState UseSpell(SpellBase spellToUse) {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = getCurrentController();
 
         spellToUse.Effect();
         if (GSC.getCurrentMonster().getHPCurr() <= 0)
@@ -64,7 +72,7 @@ public class SpellPhase extends GameState {
 
     @Override
     public IState DefendFromMonster() {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = getCurrentController();
 
         String s = "";
         if (!GSC.getCurrentMonster().getCanAttack()) {
@@ -72,7 +80,7 @@ public class SpellPhase extends GameState {
             s += GSC.getCurrentMonster().getName() + " can't attack this turn";
             GSC.MessageStack.push(s);
 
-            return new RollPhase();
+            return new RollPhase(getCurrentController());
         }
 
         int damage;
@@ -90,10 +98,10 @@ public class SpellPhase extends GameState {
         if (GSC.getCurrentPlayer().getHP() <= 0) {
             s = GSC.getCurrentMonster().getName() + " has defeated you!";
             GSC.MessageStack.push(s);
-            return new GameOverState();
+            return new GameOverState(getCurrentController());
         }
 
-        return new RollPhase();
+        return new RollPhase(getCurrentController());
     }
 
 }

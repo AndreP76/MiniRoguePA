@@ -1,22 +1,26 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Action;
 import com.TPPA.GameLogic.Cards.CardBase;
 import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Main;
 
 /**
  * Created by andre on 4/12/17.
  */
 public class DrawPhaseView extends StateView {
+    DrawPhaseView(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public void Render() {
         super.Render();
         String Text = "";
 
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = GS;
 
-        Text += "Nivel : " + GSC.getTrueRoom();
+        Text += "Nivel : " + GSC.getTrueRoom() + "\t Zone : " + GSC.getCurrentZone() + " Room : " + GSC.getCurrentRoom() + " Stage : " + GSC.getCurrentStageInRoom();
         int Zone = GSC.getCurrentZone();
         switch (Zone) {
             case 1: {

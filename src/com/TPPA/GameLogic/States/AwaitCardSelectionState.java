@@ -1,7 +1,14 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
 
 import com.TPPA.GameLogic.Cards.BossMonsterCard;
 import com.TPPA.GameLogic.Cards.CardBase;
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.Deck;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.Utils;
+import com.TPPA.GameLogic.Main;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,9 +21,9 @@ import java.util.InputMismatchException;
  */
 
 public class AwaitCardSelectionState extends GameState {
-    public AwaitCardSelectionState() {
-        super();
-        GameStateController GSC = GameStateController.getCurrentController();
+    public AwaitCardSelectionState(GameStateController GSC) {
+        super(GSC);
+        //GameStateController GSC = getCurrentController();
         if (GSC.getRoomStages() == null) {
             Deck CurrentDeck = GSC.getCurrentDeck();
             CurrentDeck.CollectionsShuffle();
@@ -43,7 +50,7 @@ public class AwaitCardSelectionState extends GameState {
                     }
                 }
             }
-            Rooms[GSC.getMaxStagesInRoom() - 1][0] = new BossMonsterCard(Deck.BossMonsterCardID);
+            Rooms[GSC.getMaxStagesInRoom() - 1][0] = new BossMonsterCard(GSC, Deck.BossMonsterCardID);
             Main.ErrorStream.println("Added new card to stage " + (GSC.getMaxStagesInRoom() - 1) + " : " + Rooms[GSC.getMaxStagesInRoom() - 1][0]);
             for (int i = 1; i < GSC.getMaxCardsInStage(); ++i)
                 Rooms[GSC.getMaxStagesInRoom() - 1][i] = null;
@@ -64,7 +71,7 @@ public class AwaitCardSelectionState extends GameState {
 
     @Override
     public IState Action(String ActionString) {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = getCurrentController();
 
         String[] SStr = ActionString.split(" ");
         if (SStr[0].equals(InternalCommandsDictionary.DrawCommand)) {
@@ -82,7 +89,7 @@ public class AwaitCardSelectionState extends GameState {
                 CardBase RoomCard = null;
                 if (CardIndex < 0 || CardIndex > GSC.getRoomStages()[GSC.getCurrentStageInRoom()].length || (RoomCard = GSC.getRoomStages()[GSC.getCurrentStageInRoom()][CardIndex]) == null) {
                     Main.ErrorStream.println("User drew an invalid card, ignoring...");
-                    GameStateController.getCurrentController().MessageStack.push("Sorry, what ?");
+                    getCurrentController().MessageStack.push("Sorry, what ?");
                     return this;
                 } else {
                     Main.ErrorStream.println("User drew " + RoomCard);
@@ -106,7 +113,7 @@ public class AwaitCardSelectionState extends GameState {
                 }
                 FileOutputStream FSO = new FileOutputStream(PathStr);
                 ObjectOutputStream OOS = new ObjectOutputStream(FSO);
-                OOS.writeObject(GameStateController.getCurrentController());
+                OOS.writeObject(getCurrentController());
                 GSC.MessageStack.push("Game saved in " + PathStr);
                 Main.ErrorStream.println("User saved the game in file : " + PathStr);
                 return this;

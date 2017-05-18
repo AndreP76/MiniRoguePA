@@ -1,10 +1,20 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.States;
+
+import com.TPPA.GameLogic.GameStateController;
+import com.TPPA.GameLogic.IState;
+import com.TPPA.GameLogic.Internals.Action;
+import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Main;
 
 /**
  * Created by andre on 4/5/17.
  * Change the course of battle through sheer despair
  */
 public class FeatPhase extends GameState {
+    public FeatPhase(GameStateController GS) {
+        super(GS);
+    }
+
     @Override
     public Action[] GetActions() {
         Action[] Act = new Action[4];
@@ -19,7 +29,7 @@ public class FeatPhase extends GameState {
     public IState Action(String ActionString) {
         String[] SSplit = ActionString.split(" ");
 
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = getCurrentController();
         if (SSplit[0].equals(InternalCommandsDictionary.EndFeatPhase)) {
             GSC.getCurrentPlayer().setHasUsedFeat(false);
             //calcular dano infligido ao monstro
@@ -65,9 +75,9 @@ public class FeatPhase extends GameState {
                     index = Integer.parseInt(SSplit[1]);
                     try {
                         int roll;
-                        roll = GameStateController.getCurrentController().getCurrentPlayer().getUnlockedDice().get(index).getLastRoll();
+                        roll = getCurrentController().getCurrentPlayer().getUnlockedDice().get(index).getLastRoll();
                         if (roll == 6)
-                            GameStateController.getCurrentController().getCurrentPlayer().reRollDice(index);
+                            getCurrentController().getCurrentPlayer().reRollDice(index);
                     } catch (IndexOutOfBoundsException e) {
                         Main.ErrorStream.println("Second argument of " + InternalCommandsDictionary.ReRollDice + " is not a valid index: " + e);
                     }
@@ -81,7 +91,7 @@ public class FeatPhase extends GameState {
 
     @Override
     public IState AttackMonster() {
-        GameStateController GSC = GameStateController.getCurrentController();
+        GameStateController GSC = getCurrentController();
 
         int playerAttack = GSC.getCurrentPlayer().getUnlockedDiceSum();
 
@@ -94,6 +104,6 @@ public class FeatPhase extends GameState {
             return OnDefeatingMonster();
 
         GSC.getCurrentPlayer().resetDice();
-        return new SpellPhase();
+        return new SpellPhase(GSC);
     }
 }

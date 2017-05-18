@@ -1,4 +1,4 @@
-package com.TPPA.GameLogic;
+package com.TPPA.GameLogic.Internals;
 
 /**
  * Created by andre on 4/10/17.
