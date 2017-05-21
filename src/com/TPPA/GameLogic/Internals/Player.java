@@ -1,7 +1,7 @@
 package com.TPPA.GameLogic.Internals;
 
-import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.Spells.SpellBase;
+import com.TPPA.Main;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -449,5 +449,9 @@ public class Player implements Serializable {
         s += "Rank: " + Rank + "\tXP: " + XP + "\tGold: " + Gold + "\tFood: " + Food + "\n";
         s += "Armor: " + Armor + "\tHP: " + HP + "\n";
         return s;
+    }
+
+    public int getMaxHP() {
+        return MaxHP;
     }
 }

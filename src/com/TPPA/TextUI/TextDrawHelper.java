@@ -1,6 +1,6 @@
 package com.TPPA.TextUI;
 
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 import org.fusesource.jansi.AnsiConsole;
 
 import java.util.Scanner;

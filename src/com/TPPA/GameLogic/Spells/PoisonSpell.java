@@ -1,7 +1,7 @@
 package com.TPPA.GameLogic.Spells;
 
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 /**
  * Created by andre on 4/20/17.

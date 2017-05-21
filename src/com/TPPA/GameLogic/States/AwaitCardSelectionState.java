@@ -8,7 +8,7 @@ import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Internals.Deck;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Internals.Utils;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

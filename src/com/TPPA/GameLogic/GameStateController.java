@@ -5,6 +5,7 @@ import com.TPPA.GameLogic.Internals.Deck;
 import com.TPPA.GameLogic.Internals.DifficultyLevelEnum;
 import com.TPPA.GameLogic.Internals.Monster;
 import com.TPPA.GameLogic.Internals.Player;
+import com.TPPA.Main;
 
 import java.util.Observable;
 import java.util.Stack;
@@ -33,7 +34,8 @@ public class GameStateController extends Observable implements java.io.Serializa
     private int CardsInEvenStage = 1;
     private Boolean BattledInThisRoom = false;
     private Monster CurrentMonster = null;
-    GameStateController(){//default
+
+    public GameStateController() {//default
         //CurrentGameState = new StartState();
         GameDifficulty = DifficultyLevelEnum.Normal;//User can change it on StartState
         MaxZones = 5;
@@ -219,5 +221,22 @@ public class GameStateController extends Observable implements java.io.Serializa
         CurrentScore += P.getFood();                            //Food *1
 
         return CurrentScore;
+    }
+
+    public String getZoneString(int currentZone) {
+        switch (currentZone) {
+            case 1:
+                return "Black Sewers";
+            case 2:
+                return "Poisonous Dungeon";
+            case 3:
+                return "Undead Catacombs";
+            case 4:
+                return "Flaming Underworld";
+            case 5:
+                return "Sunken keep of Og";
+            default:
+                return "Not defined";
+        }
     }
 }

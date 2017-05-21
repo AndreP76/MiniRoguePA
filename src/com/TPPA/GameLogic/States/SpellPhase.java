@@ -6,7 +6,7 @@ import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Spells.SpellBase;
 
-import static com.TPPA.GameLogic.Main.ErrorStream;
+import static com.TPPA.Main.ErrorStream;
 
 /**
  * Created by andre on 4/5/17.

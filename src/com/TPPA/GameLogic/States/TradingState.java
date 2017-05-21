@@ -4,13 +4,13 @@ import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.IState;
 import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
-import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.Spells.FireSpell;
 import com.TPPA.GameLogic.Spells.HealSpell;
 import com.TPPA.GameLogic.Spells.IceSpell;
 import com.TPPA.GameLogic.Spells.PoisonSpell;
+import com.TPPA.Main;
 
-import static com.TPPA.GameLogic.Main.ErrorStream;
+import static com.TPPA.Main.ErrorStream;
 
 /**
  * Created by andre on 4/5/17.

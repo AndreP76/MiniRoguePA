@@ -2,8 +2,8 @@ package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.IView;
-import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.States.*;
+import com.TPPA.Main;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -34,10 +34,9 @@ public abstract class StateView implements IView, Observer, Serializable {
         ModelToViewMap.put(FeatPhase.class, FeatView.class);
     }
 
-    public StateView CurrentView;
     public GameStateController GS;
 
-    StateView(GameStateController GS) {
+    protected StateView(GameStateController GS) {
         this.GS = GS;
         GS.addObserver(this);
     }
@@ -58,9 +57,7 @@ public abstract class StateView implements IView, Observer, Serializable {
         Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "HP : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getHP() + ansi().fg(Ansi.Color.DEFAULT);
         Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\tXP : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getXP() + ansi().fg(Ansi.Color.DEFAULT);
         Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\nGold : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getGold() + ansi().fg(Ansi.Color.DEFAULT);
-        ;
         Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\tArmor : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getArmor() + ansi().fg(Ansi.Color.DEFAULT);
-        ;
         Text += ansi().bgBrightDefault().fg(Ansi.Color.BLUE) + "\tFood : " + ansi().fg(Ansi.Color.YELLOW) + GSC.getCurrentPlayer().getFood() + ansi().fg(Ansi.Color.DEFAULT) + "\n";
 
         while (!GSC.MessageStack.empty())

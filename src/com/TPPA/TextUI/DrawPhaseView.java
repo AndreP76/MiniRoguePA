@@ -3,7 +3,7 @@ package com.TPPA.TextUI;
 import com.TPPA.GameLogic.Cards.CardBase;
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.Action;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 /**
  * Created by andre on 4/12/17.

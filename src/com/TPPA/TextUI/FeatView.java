@@ -3,7 +3,7 @@ package com.TPPA.TextUI;
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 import java.util.Arrays;
 

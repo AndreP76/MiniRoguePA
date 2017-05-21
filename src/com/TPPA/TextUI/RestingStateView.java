@@ -2,7 +2,7 @@ package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.Action;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 /**
  * Created by andre on 5/1/17.

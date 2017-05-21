@@ -6,8 +6,8 @@ import com.TPPA.GameLogic.IState;
 import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Internals.Deck;
 import com.TPPA.GameLogic.Internals.Dice;
-import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.Spells.SpellBase;
+import com.TPPA.Main;
 
 import java.io.Serializable;
 

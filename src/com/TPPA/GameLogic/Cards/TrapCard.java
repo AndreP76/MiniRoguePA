@@ -4,8 +4,8 @@ import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.IState;
 import com.TPPA.GameLogic.Internals.Dice;
 import com.TPPA.GameLogic.Internals.Player;
-import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.States.AwaitCardSelectionState;
+import com.TPPA.Main;
 
 /**
  * Created by andre on 4/19/17.

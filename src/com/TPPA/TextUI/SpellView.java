@@ -2,11 +2,11 @@ package com.TPPA.TextUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 /**
  * Created by andre on 5/3/17.
- * You're a Lizard, harry
+ * You're a Wizard, harry
  */
 public class SpellView extends StateView {
     SpellView(GameStateController GS) {
@@ -19,7 +19,6 @@ public class SpellView extends StateView {
         String ActionString = "";
         GameStateController GSC = GS;
         super.Render();
-
 
         if (!GSC.getCurrentGameState().CanUseSpell()) {
             Main.OutputStream.println("You have no available spells to use");

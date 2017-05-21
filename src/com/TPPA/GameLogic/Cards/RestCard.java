@@ -2,8 +2,8 @@ package com.TPPA.GameLogic.Cards;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.IState;
-import com.TPPA.GameLogic.Main;
 import com.TPPA.GameLogic.States.RestingState;
+import com.TPPA.Main;
 
 /**
  * Created by andre on 4/19/17.

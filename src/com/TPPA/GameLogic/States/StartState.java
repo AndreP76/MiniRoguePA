@@ -6,7 +6,7 @@ import com.TPPA.GameLogic.Internals.Action;
 import com.TPPA.GameLogic.Internals.DifficultyLevelEnum;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Internals.Player;
-import com.TPPA.GameLogic.Main;
+import com.TPPA.Main;
 
 import java.io.File;
 import java.io.FileInputStream;
