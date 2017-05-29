@@ -28,6 +28,12 @@ public class ResourceManager {
     public static Image RestCardFace;
     public static Image TreasureCardFace;
     public static Image MerchantCardFace;
+    public static Image DieFace1;
+    public static Image DieFace2;
+    public static Image DieFace3;
+    public static Image DieFace4;
+    public static Image DieFace5;
+    public static Image DieFace6;
     public static AudioClip ThemeSong;
     public static AudioClip BattleThemeSong;
     public static AudioClip BossBattleSong;
@@ -52,6 +58,12 @@ public class ResourceManager {
     private static String RestCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/RestingCardFace.png";
     private static String TreasureCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/TreasureCardFace.png";
     private static String MerchantCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/MerchantCardFace.png";
+    private static String DieFace1Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace1.png";
+    private static String DieFace2Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace2.png";
+    private static String DieFace3Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace3.png";
+    private static String DieFace4Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace4.png";
+    private static String DieFace5Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace5.png";
+    private static String DieFace6Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace6.png";
     private static String ThemeSongPath;
     private static String BattleThemeSongPath;
     private static String BossBattleSongPath;
@@ -65,6 +77,7 @@ public class ResourceManager {
     private static String HealSpellFXPath;
 
     private static HashMap<String, Image> CardToImageMap;
+    private static HashMap<Integer, Image> DieRollToImage;
 
     static {
         try {
@@ -82,6 +95,14 @@ public class ResourceManager {
             MerchantCardFace = ImageIO.read(new File(MerchantCardFacePath));
             TrapCardFace = ImageIO.read(new File(TrapCardFacePath));
             RestCardFace = ImageIO.read(new File(RestCardFacePath));
+
+            DieFace1 = ImageIO.read(new File(DieFace1Path));
+            DieFace2 = ImageIO.read(new File(DieFace2Path));
+            DieFace3 = ImageIO.read(new File(DieFace3Path));
+            DieFace4 = ImageIO.read(new File(DieFace4Path));
+            DieFace5 = ImageIO.read(new File(DieFace5Path));
+            DieFace6 = ImageIO.read(new File(DieFace6Path));
+
         } catch (IOException iox) {
             Main.ErrorStream.println(Paths.get("./").toAbsolutePath().toString());
             iox.printStackTrace();
@@ -98,10 +119,22 @@ public class ResourceManager {
         CardToImageMap.put(Deck.RestCardID, RestCardFace);
         CardToImageMap.put(Deck.TrapCardID, TrapCardFace);
         CardToImageMap.put(Deck.TreasureCardID, TreasureCardFace);
+
+        DieRollToImage = new HashMap<>();
+        DieRollToImage.put(1, DieFace1);
+        DieRollToImage.put(2, DieFace2);
+        DieRollToImage.put(3, DieFace3);
+        DieRollToImage.put(4, DieFace4);
+        DieRollToImage.put(5, DieFace5);
+        DieRollToImage.put(6, DieFace6);
     }
 
     public static Image ResolveCardImage(String CardID) {
         return CardToImageMap.get(CardID);
+    }
+
+    public static Image ResolveDieRollImage(Integer DieRoll) {
+        return DieRollToImage.get(DieRoll);
     }
 
     public static void Init() {
