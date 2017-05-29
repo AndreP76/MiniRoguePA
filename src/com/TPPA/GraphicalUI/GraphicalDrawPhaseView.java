@@ -172,6 +172,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     @Override
     public void Render() {
         Draw();
+        HookEvents();
     }
 
     @Override

@@ -24,10 +24,10 @@ public abstract class GraphicalStateView extends JFrame implements Observer {
         GraphicalMap.put(AwaitCardSelectionState.class, GraphicalDrawPhaseView.class);
         GraphicalMap.put(RestingState.class, GraphicalRestingStateView.class);
         GraphicalMap.put(TradingState.class, GraphicalTradeView.class);
-        GraphicalMap.put(SpellPhase.class, GraphicalBattleView.class);
-        GraphicalMap.put(RollPhase.class, GraphicalBattleView.class);
+        GraphicalMap.put(SpellPhase.class, GraphicalSpellView.class);
+        GraphicalMap.put(RollPhase.class, GraphicalRollView.class);
         GraphicalMap.put(GameOverState.class, GraphicalGameOverView.class);
-        GraphicalMap.put(FeatPhase.class, GraphicalBattleView.class);
+        GraphicalMap.put(FeatPhase.class, GraphicalFeatView.class);
     }
 
     protected GameStateController GS;
