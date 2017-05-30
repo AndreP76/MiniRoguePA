@@ -34,6 +34,10 @@ public class ResourceManager {
     public static Image DieFace4;
     public static Image DieFace5;
     public static Image DieFace6;
+
+    public static Image PlayerCardBig;
+    public static Image DungeonCardBig;
+
     public static AudioClip ThemeSong;
     public static AudioClip BattleThemeSong;
     public static AudioClip BossBattleSong;
@@ -64,6 +68,10 @@ public class ResourceManager {
     private static String DieFace4Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace4.png";
     private static String DieFace5Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace5.png";
     private static String DieFace6Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace6.png";
+
+    private static String PlayerCardBigPath = "./src/com/TPPA/GraphicalUI/Resources/PlayerCard.png";
+    private static String DungeonCardBigPath = "./src/com/TPPA/GraphicalUI/Resources/DungeonCard.png";
+
     private static String ThemeSongPath;
     private static String BattleThemeSongPath;
     private static String BossBattleSongPath;
@@ -103,6 +111,9 @@ public class ResourceManager {
             DieFace5 = ImageIO.read(new File(DieFace5Path));
             DieFace6 = ImageIO.read(new File(DieFace6Path));
 
+            PlayerCardBig = ImageIO.read(new File(PlayerCardBigPath));
+            DungeonCardBig = ImageIO.read(new File(DungeonCardBigPath));
+
         } catch (IOException iox) {
             Main.ErrorStream.println(Paths.get("./").toAbsolutePath().toString());
             iox.printStackTrace();
@@ -135,6 +146,14 @@ public class ResourceManager {
 
     public static Image ResolveDieRollImage(Integer DieRoll) {
         return DieRollToImage.get(DieRoll);
+    }
+
+    public static Image getPlayerCardBig() {
+        return PlayerCardBig;
+    }
+
+    public static Image getDungeonCardBig() {
+        return DungeonCardBig;
     }
 
     public static void Init() {

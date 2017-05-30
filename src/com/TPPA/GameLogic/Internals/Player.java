@@ -451,6 +451,14 @@ public class Player implements Serializable {
         return s;
     }
 
+    public int getTotalDiceSum() {
+        int total = 0;
+        for (Dice currDie : UnlockedDice) {
+            total += currDie.getRollSum();
+        }
+        return total;
+    }
+
     public int getMaxHP() {
         return MaxHP;
     }

@@ -14,26 +14,27 @@ import java.awt.*;
 //TODO: Falta mostrar carta do jogador e monster/dungeon card
 public class GraphicalRollView extends GraphicalStateView {
     private static final int MAX_UNLOCKED_DICE = 4;
-    private static final String DIE_DESC = "Sum: ";
 
     private SpringLayout Layout;
     private JLabel PhaseLabel;
     private JPanel ContentPanel;
     private JButton[] PlayerDice;   //show Roll results
     private JButton skipButton;
-    private JLabel[] DiceSum;
-    private JLabel RoundAttack;
+    private JLabel[] DieSum;
+    private JLabel TotalDiceSum;
+    private int startWidth;
+    private int startHeight;
+    private int Width;
+    private int Height;
+    private Player P;
+    private String phaseName;
+    private PlayerCardPanel playerStats;
+
 
     GraphicalRollView(GameStateController GS) {
         super(GS);
-    }
 
-    private void Draw() {
-        Player P = GS.getCurrentPlayer();
-        int startWidth = 0;
-        int startHeight = 0;
-        int Width = 0;
-        int Height = 0;
+        P = GS.getCurrentPlayer();
 
         Width = (int) (ScreenSize.getWidth() * 0.75);
         Height = (int) (ScreenSize.getHeight() * 0.75);
@@ -47,54 +48,78 @@ public class GraphicalRollView extends GraphicalStateView {
         this.setContentPane(ContentPanel);
 
         PhaseLabel = new JLabel();
-        String phaseName = "RollPhase";
+        phaseName = "RollPhase";
         this.PhaseLabel.setText(phaseName);
         ContentPanel.add(PhaseLabel);
 
         skipButton = new JButton("Skip");
         ContentPanel.add(skipButton);
 
+        TotalDiceSum = new JLabel();
+        ContentPanel.add(TotalDiceSum);
+
+        PlayerDice = new JButton[MAX_UNLOCKED_DICE];
+        DieSum = new JLabel[MAX_UNLOCKED_DICE];
+
+        for (int i = 0; i < MAX_UNLOCKED_DICE; i++) {
+            PlayerDice[i] = new JButton();
+            DieSum[i] = new JLabel();
+            PlayerDice[i].setPreferredSize(new Dimension(60, 60));
+            ContentPanel.add(PlayerDice[i]);
+            ContentPanel.add(DieSum[i]);
+        }
+
+        playerStats = new PlayerCardPanel(GS);
+        ContentPanel.add(playerStats);
+
+    }
+
+    private void Draw() {
+
+
         if (!P.hasRolledDice())  //roll dice automatically when entering this phase
             GS.RelayAction(InternalCommandsDictionary.RollDice);
 
-        PlayerDice = new JButton[MAX_UNLOCKED_DICE];
-        DiceSum = new JLabel[MAX_UNLOCKED_DICE];
+
         for (int i = 0; i < MAX_UNLOCKED_DICE; i++) {
-            PlayerDice[i] = new JButton();
-            DiceSum[i] = new JLabel();
-            ContentPanel.add(PlayerDice[i]);
-            ContentPanel.add(DiceSum[i]);
             if (P.getUnlockedDice().size() >= i + 1) {
                 PlayerDice[i].setIcon(new ImageIcon(ResourceManager.ResolveDieRollImage(P.getUnlockedDice().get(i).getLastRoll())));
-                PlayerDice[i].setPreferredSize(new Dimension(60, 60));
                 PlayerDice[i].setVisible(true);    //dice will only be visible if unlocked by player
-                DiceSum[i].setText(DIE_DESC + P.getUnlockedDice().get(i).getRollSum());
-                DiceSum[i].setVisible(true);
-                if (P.getUnlockedDice().get(i).getLastRoll() == 6)
-                    PlayerDice[i].setEnabled(true);
-                else
-                    PlayerDice[i].setEnabled(false);
+                DieSum[i].setText("Sum: " + P.getUnlockedDice().get(i).getRollSum());
+                DieSum[i].setVisible(true);
+
+                PlayerDice[i].setEnabled(P.getUnlockedDice().get(i).getLastRoll() == 6);
             } else {
                 PlayerDice[i].setVisible(false);
-                DiceSum[i].setVisible(false);
+                DieSum[i].setVisible(false);
             }
 
         }
 
+        TotalDiceSum.setText("Total dice sum: " + P.getTotalDiceSum());
+
+        Layout.putConstraint(SpringLayout.WEST, playerStats, 20, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, playerStats, 20, SpringLayout.NORTH, ContentPanel);
+
         Layout.putConstraint(SpringLayout.WEST, PhaseLabel, Width / 2 - phaseName.length(), SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, PhaseLabel, 30, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, PhaseLabel, 20, SpringLayout.NORTH, ContentPanel);
 
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[0], 5, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[0], Height - 260, SpringLayout.NORTH, ContentPanel);
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[1], 5, SpringLayout.EAST, PlayerDice[0]);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[1], Height - 260, SpringLayout.NORTH, ContentPanel);
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[2], 5, SpringLayout.EAST, PlayerDice[1]);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[2], Height - 260, SpringLayout.NORTH, ContentPanel);
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[3], 5, SpringLayout.EAST, PlayerDice[2]);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[3], Height - 260, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.WEST, PlayerDice[0], 0, SpringLayout.WEST, playerStats);
+        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[0], 10, SpringLayout.SOUTH, playerStats);
+        Layout.putConstraint(SpringLayout.WEST, DieSum[0], 0, SpringLayout.WEST, PlayerDice[0]);
+        Layout.putConstraint(SpringLayout.NORTH, DieSum[0], 5, SpringLayout.SOUTH, PlayerDice[0]);
+        for (int i = 1; i < MAX_UNLOCKED_DICE; i++) {
+            Layout.putConstraint(SpringLayout.WEST, PlayerDice[i], 5, SpringLayout.EAST, PlayerDice[i - 1]);
+            Layout.putConstraint(SpringLayout.NORTH, PlayerDice[i], 10, SpringLayout.SOUTH, playerStats);
+            Layout.putConstraint(SpringLayout.WEST, DieSum[i], 0, SpringLayout.WEST, PlayerDice[i]);
+            Layout.putConstraint(SpringLayout.NORTH, DieSum[i], 5, SpringLayout.SOUTH, PlayerDice[i]);
+        }
 
-        Layout.putConstraint(SpringLayout.WEST, skipButton, 20, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, skipButton, 20, SpringLayout.SOUTH, PlayerDice[0]);
+        Layout.putConstraint(SpringLayout.WEST, TotalDiceSum, 0, SpringLayout.WEST, DieSum[0]);
+        Layout.putConstraint(SpringLayout.NORTH, TotalDiceSum, 5, SpringLayout.SOUTH, DieSum[0]);
+
+        Layout.putConstraint(SpringLayout.WEST, skipButton, 5, SpringLayout.EAST, PlayerDice[MAX_UNLOCKED_DICE - 1]);
+        Layout.putConstraint(SpringLayout.NORTH, skipButton, -5, SpringLayout.NORTH, TotalDiceSum);
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));

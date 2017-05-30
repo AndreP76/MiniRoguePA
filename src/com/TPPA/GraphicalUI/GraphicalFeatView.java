@@ -94,12 +94,13 @@ public class GraphicalFeatView extends GraphicalStateView {
         PlayerDice[2].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 2));
         PlayerDice[3].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 3));
 
-        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndRollPhase));
+        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndFeatPhase));
     }
 
     @Override
     public void Render() {
-
+        Draw();
+        HookListeners();
     }
 
     @Override
