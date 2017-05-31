@@ -11,9 +11,8 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Falta mostrar carta do jogador e monster/dungeon card
+//TODO: Falta mostrar monster/dungeon card
 public class GraphicalRollView extends GraphicalStateView {
-    private static final int MAX_UNLOCKED_DICE = 4;
 
     private SpringLayout Layout;
     private JLabel PhaseLabel;
@@ -58,10 +57,10 @@ public class GraphicalRollView extends GraphicalStateView {
         TotalDiceSum = new JLabel();
         ContentPanel.add(TotalDiceSum);
 
-        PlayerDice = new JButton[MAX_UNLOCKED_DICE];
-        DieSum = new JLabel[MAX_UNLOCKED_DICE];
+        PlayerDice = new JButton[GraphicalConstants.MAX_UNLOCKED_DICE];
+        DieSum = new JLabel[GraphicalConstants.MAX_UNLOCKED_DICE];
 
-        for (int i = 0; i < MAX_UNLOCKED_DICE; i++) {
+        for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
             PlayerDice[i] = new JButton();
             DieSum[i] = new JLabel();
             PlayerDice[i].setPreferredSize(new Dimension(60, 60));
@@ -81,7 +80,7 @@ public class GraphicalRollView extends GraphicalStateView {
             GS.RelayAction(InternalCommandsDictionary.RollDice);
 
 
-        for (int i = 0; i < MAX_UNLOCKED_DICE; i++) {
+        for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
             if (P.getUnlockedDice().size() >= i + 1) {
                 PlayerDice[i].setIcon(new ImageIcon(ResourceManager.ResolveDieRollImage(P.getUnlockedDice().get(i).getLastRoll())));
                 PlayerDice[i].setVisible(true);    //dice will only be visible if unlocked by player
@@ -108,7 +107,7 @@ public class GraphicalRollView extends GraphicalStateView {
         Layout.putConstraint(SpringLayout.NORTH, PlayerDice[0], 10, SpringLayout.SOUTH, playerStats);
         Layout.putConstraint(SpringLayout.WEST, DieSum[0], 0, SpringLayout.WEST, PlayerDice[0]);
         Layout.putConstraint(SpringLayout.NORTH, DieSum[0], 5, SpringLayout.SOUTH, PlayerDice[0]);
-        for (int i = 1; i < MAX_UNLOCKED_DICE; i++) {
+        for (int i = 1; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
             Layout.putConstraint(SpringLayout.WEST, PlayerDice[i], 5, SpringLayout.EAST, PlayerDice[i - 1]);
             Layout.putConstraint(SpringLayout.NORTH, PlayerDice[i], 10, SpringLayout.SOUTH, playerStats);
             Layout.putConstraint(SpringLayout.WEST, DieSum[i], 0, SpringLayout.WEST, PlayerDice[i]);
@@ -118,7 +117,7 @@ public class GraphicalRollView extends GraphicalStateView {
         Layout.putConstraint(SpringLayout.WEST, TotalDiceSum, 0, SpringLayout.WEST, DieSum[0]);
         Layout.putConstraint(SpringLayout.NORTH, TotalDiceSum, 5, SpringLayout.SOUTH, DieSum[0]);
 
-        Layout.putConstraint(SpringLayout.WEST, skipButton, 5, SpringLayout.EAST, PlayerDice[MAX_UNLOCKED_DICE - 1]);
+        Layout.putConstraint(SpringLayout.WEST, skipButton, 5, SpringLayout.EAST, PlayerDice[GraphicalConstants.MAX_UNLOCKED_DICE - 1]);
         Layout.putConstraint(SpringLayout.NORTH, skipButton, -5, SpringLayout.NORTH, TotalDiceSum);
 
         this.setLocation(startWidth, startHeight);
