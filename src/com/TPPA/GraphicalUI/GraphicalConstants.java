@@ -6,6 +6,8 @@ package com.TPPA.GraphicalUI;
 public class GraphicalConstants {
     public static final int MAX_UNLOCKED_DICE = 4;
 
+    public static final int FRAME_SIDE_PADDING = 50;
+
     public static final int PANEL_HEIGHT = 385;
     public static final int PANEL_WIDTH = 275;
     public static final int PANEL_TOP_PADDING = 52;
@@ -36,4 +38,15 @@ public class GraphicalConstants {
 
     public static final int FOOD_PANEL_HEIGHT = 207;
     public static final int FOOD_ROWS = 7;
+
+    public static final int DUNGEON_LEFT_PADD = 22;
+    public static final int DUNGEON_RIGHT_PADD = 16;
+    public static final int DUNGEON_TOP_PADD = 35;
+    public static final int DUNGEON_BOTTOM_PADD = 20;
+    public static final int DUNGEON_ROOM_INTER_PADD = 20;
+    public static final int DUNGEON_HP_INTER_PADD = 4;
+    public static final int DUNGEON_ROOM_WIDTH = 120;
+    public static final int DUNGEON_ROOM_HEIGHT = 215;
+    public static final int DUNGEON_HP_WIDTH = 91;
+    public static final int DUNGEON_HP_HEIGHT = 343;
 }

@@ -2,6 +2,7 @@ package com.TPPA.GraphicalUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.Monster;
 import com.TPPA.GameLogic.Internals.Player;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
@@ -11,7 +12,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Falta mostrar monster/dungeon card
+//TODO: Falta mostrar nome do monster e stats do monster
 public class GraphicalRollView extends GraphicalStateView {
 
     private SpringLayout Layout;
@@ -26,14 +27,18 @@ public class GraphicalRollView extends GraphicalStateView {
     private int Width;
     private int Height;
     private Player P;
+    private Monster M;
     private String phaseName;
     private PlayerCardPanel playerStats;
+    private DungeonCardPanel currMonster;
+    private JTextArea monsterInfo;
 
 
     GraphicalRollView(GameStateController GS) {
         super(GS);
 
         P = GS.getCurrentPlayer();
+        M = GS.getCurrentMonster();
 
         Width = (int) (ScreenSize.getWidth() * 0.75);
         Height = (int) (ScreenSize.getHeight() * 0.75);
@@ -68,9 +73,16 @@ public class GraphicalRollView extends GraphicalStateView {
             ContentPanel.add(DieSum[i]);
         }
 
-        playerStats = new PlayerCardPanel(GS);
+        playerStats = new PlayerCardPanel(this.GS);
         ContentPanel.add(playerStats);
 
+        currMonster = new DungeonCardPanel(this.GS);
+        ContentPanel.add(currMonster);
+
+        monsterInfo = new JTextArea();
+        monsterInfo.setOpaque(false);
+        monsterInfo.setEditable(false);
+        ContentPanel.add(monsterInfo);
     }
 
     private void Draw() {
@@ -97,7 +109,9 @@ public class GraphicalRollView extends GraphicalStateView {
 
         TotalDiceSum.setText("Total dice sum: " + P.getTotalDiceSum());
 
-        Layout.putConstraint(SpringLayout.WEST, playerStats, 20, SpringLayout.WEST, ContentPanel);
+        monsterInfo.setText(M.getName() + (M.getBoss() ? "(BOSS)" : "") + "\n" + M.toString());
+
+        Layout.putConstraint(SpringLayout.WEST, playerStats, GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, playerStats, 20, SpringLayout.NORTH, ContentPanel);
 
         Layout.putConstraint(SpringLayout.WEST, PhaseLabel, Width / 2 - phaseName.length(), SpringLayout.WEST, ContentPanel);
@@ -119,6 +133,12 @@ public class GraphicalRollView extends GraphicalStateView {
 
         Layout.putConstraint(SpringLayout.WEST, skipButton, 5, SpringLayout.EAST, PlayerDice[GraphicalConstants.MAX_UNLOCKED_DICE - 1]);
         Layout.putConstraint(SpringLayout.NORTH, skipButton, -5, SpringLayout.NORTH, TotalDiceSum);
+
+        Layout.putConstraint(SpringLayout.EAST, currMonster, -GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.EAST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, currMonster, 20, SpringLayout.NORTH, ContentPanel);
+
+        Layout.putConstraint(SpringLayout.WEST, monsterInfo, 0, SpringLayout.WEST, currMonster);
+        Layout.putConstraint(SpringLayout.NORTH, monsterInfo, 20, SpringLayout.SOUTH, currMonster);
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));

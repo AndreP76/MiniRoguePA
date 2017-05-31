@@ -218,7 +218,10 @@ public class PlayerCardPanel extends JPanel implements Observer {
             x += GraphicalConstants.SMALL_CELL_HEIGHT;
 
         int y = 0;
-        y += (HP % 10) + 1;
+        if ((HP == 10) || (HP == 20))    //para token não ficar na base do painel quando HP%10 = 0
+            y = 11;
+        else
+            y += (HP % 10) + 1;
 
         HpLayout.putConstraint(SpringLayout.WEST, mark, x, SpringLayout.WEST, HpPanel);
         HpLayout.putConstraint(SpringLayout.NORTH, mark, GraphicalConstants.HP_PANEL_HEIGHT - (GraphicalConstants.SMALL_CELL_HEIGHT * y), SpringLayout.NORTH, HpPanel);
@@ -238,7 +241,10 @@ public class PlayerCardPanel extends JPanel implements Observer {
             x += GraphicalConstants.SMALL_CELL_HEIGHT;
 
         int y = 0;
-        y += (gold % 10) + 1;
+        if ((gold == 10) || (gold == 20))
+            y = 11;
+        else
+            y += (gold % 10) + 1;
 
         GoldLayout.putConstraint(SpringLayout.WEST, mark, x, SpringLayout.WEST, GoldPanel);
         GoldLayout.putConstraint(SpringLayout.NORTH, mark, GraphicalConstants.GOLD_PANEL_HEIGHT - (GraphicalConstants.SMALL_CELL_HEIGHT * y), SpringLayout.NORTH, GoldPanel);
@@ -255,26 +261,4 @@ public class PlayerCardPanel extends JPanel implements Observer {
 
     }
 
-    class Token extends JPanel {
-        JLabel mark;
-        String text;
-
-        private Token(String text) {
-            this.text = text;
-            setOpaque(false);
-            mark = new JLabel();
-            mark.setForeground(Color.yellow);
-            setLayout(new BorderLayout());
-            add(mark, BorderLayout.NORTH);
-            setPreferredSize(new Dimension(25, 25));
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            mark.setText(text);
-            g.setColor(Color.black);
-            g.fillOval(0, 0, 25, 25);
-        }
-    }
 }

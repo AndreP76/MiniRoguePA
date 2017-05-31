@@ -9,6 +9,7 @@ import java.awt.*;
 /**
  * Created by Lídia on 29/05/2017.
  */
+//TODO: finish this!!!
 public class GraphicalSpellView extends GraphicalStateView {
     private SpringLayout Layout;
     private JLabel PhaseLabel;

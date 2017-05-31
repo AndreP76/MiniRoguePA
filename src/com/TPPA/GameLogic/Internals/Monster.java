@@ -143,11 +143,11 @@ public class Monster implements Serializable {
     @Override
     public String toString() {
         String s = "";
-        s += "Monster stats:\n";
-        s += "HP: " + HPCurr + "\tAttack: " + Strength + "\n";
+
+        s += "HP: " + HPCurr + ",  Attack: " + Strength + "\n";
         s += "XP reward: " + XPReward;
         if (this.isBoss)
-            s += "\tGold reward: " + GoldReward;
+            s += ",  Gold reward: " + GoldReward;
         s += "\n";
         return s;
     }
