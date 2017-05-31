@@ -142,15 +142,15 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
 
         switch (GS.getCurrentStageInRoom()) {
             case 0:
-                CardButtons[1].setVisible(false);
-                CardButtons[2].setVisible(false);
+                CardButtons[1].setIcon(new ImageIcon(ResourceManager.CardBack));
+                CardButtons[2].setIcon(new ImageIcon(ResourceManager.CardBack));
             case 1:
-                CardButtons[3].setVisible(false);
+                CardButtons[3].setIcon(new ImageIcon(ResourceManager.CardBack));
             case 2:
-                CardButtons[4].setVisible(false);
-                CardButtons[5].setVisible(false);
-            case 3:
-                CardButtons[6].setVisible(false);
+                CardButtons[4].setIcon(new ImageIcon(ResourceManager.CardBack));
+                CardButtons[5].setIcon(new ImageIcon(ResourceManager.CardBack));
+            /*case 3:
+                CardButtons[6].setVisible(false);*/
         }
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));
