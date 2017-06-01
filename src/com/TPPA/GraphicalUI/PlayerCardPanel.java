@@ -79,7 +79,7 @@ public class PlayerCardPanel extends JPanel implements Observer {
         RankLayout = new SpringLayout();
         RankPanel.setLayout(RankLayout);
 
-        RankToken = new Token();
+        RankToken = new Token(GraphicalConstants.BIG_TOKEN_SIZE);
         RankPanel.add(RankToken);
 
         this.add(RankPanel);
@@ -93,7 +93,7 @@ public class PlayerCardPanel extends JPanel implements Observer {
         ArmorPanel.setOpaque(false);
         ArmorLayout = new SpringLayout();
         ArmorPanel.setLayout(ArmorLayout);
-        ArmorToken = new Token();
+        ArmorToken = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         ArmorPanel.add(ArmorToken);
         this.add(ArmorPanel);
         this.Layout.putConstraint(SpringLayout.WEST, ArmorPanel, GraphicalConstants.RANK_PANEL_SIDE_PADDING, SpringLayout.EAST, RankPanel);
@@ -107,8 +107,8 @@ public class PlayerCardPanel extends JPanel implements Observer {
         SpellLayout = new SpringLayout();
         SpellPanel.setLayout(SpellLayout);
         SpellTokens = new Token[2];
-        SpellTokens[0] = new Token();
-        SpellTokens[1] = new Token();
+        SpellTokens[0] = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
+        SpellTokens[1] = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         SpellPanel.add(SpellTokens[0]);
         SpellPanel.add(SpellTokens[1]);
         this.add(SpellPanel);
@@ -122,7 +122,7 @@ public class PlayerCardPanel extends JPanel implements Observer {
         HpPanel.setOpaque(false);
         HpLayout = new SpringLayout();
         HpPanel.setLayout(HpLayout);
-        HpToken = new Token();
+        HpToken = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         HpPanel.add(HpToken);
         this.add(HpPanel);
         this.Layout.putConstraint(SpringLayout.WEST, HpPanel, GraphicalConstants.SMALL_PANEL_SIDE_PADDING, SpringLayout.EAST, ArmorPanel);
@@ -135,7 +135,7 @@ public class PlayerCardPanel extends JPanel implements Observer {
         GoldPanel.setOpaque(false);
         GoldLayout = new SpringLayout();
         GoldPanel.setLayout(GoldLayout);
-        GoldToken = new Token();
+        GoldToken = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         GoldPanel.add(GoldToken);
         this.add(GoldPanel);
         this.Layout.putConstraint(SpringLayout.WEST, GoldPanel, GraphicalConstants.SMALL_PANEL_SIDE_PADDING, SpringLayout.EAST, HpPanel);
@@ -148,7 +148,7 @@ public class PlayerCardPanel extends JPanel implements Observer {
         FoodPanel.setOpaque(false);
         FoodLayout = new SpringLayout();
         FoodPanel.setLayout(FoodLayout);
-        FoodToken = new Token();
+        FoodToken = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         FoodPanel.add(FoodToken);
         this.add(FoodPanel);
         this.Layout.putConstraint(SpringLayout.WEST, FoodPanel, GraphicalConstants.SMALL_PANEL_SIDE_PADDING, SpringLayout.EAST, GoldPanel);

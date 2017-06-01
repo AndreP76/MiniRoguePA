@@ -16,10 +16,7 @@ public class GraphicalSpellView extends GraphicalStateView {
     private SpringLayout Layout;
     private JLabel PhaseLabel;
     private JPanel ContentPanel;
-    private JButton[] PlayerDice;   //show Roll results
     private JButton skipButton;
-    private JLabel[] DieSum;
-    private JLabel TotalDiceSum;
     private int startWidth;
     private int startHeight;
     private int Width;
@@ -32,11 +29,11 @@ public class GraphicalSpellView extends GraphicalStateView {
     private JTextArea monsterInfo;
     private Font boldFont;
     private JComboBox chooseSpell;
-    private JLabel chooseSpellLabel;
+    private JLabel SpellLabel;
+    private JButton useSpell;
 
     public GraphicalSpellView(GameStateController GS) {
         super(GS);
-
         P = GS.getCurrentPlayer();
         M = GS.getCurrentMonster();
 
@@ -52,26 +49,12 @@ public class GraphicalSpellView extends GraphicalStateView {
         this.setContentPane(ContentPanel);
 
         PhaseLabel = new JLabel();
-        phaseName = "FeatPhase";
+        phaseName = "SpellPhase";
         this.PhaseLabel.setText(phaseName);
         ContentPanel.add(PhaseLabel);
 
         skipButton = new JButton("Skip");
         ContentPanel.add(skipButton);
-
-        TotalDiceSum = new JLabel();
-        ContentPanel.add(TotalDiceSum);
-
-        PlayerDice = new JButton[GraphicalConstants.MAX_UNLOCKED_DICE];
-        DieSum = new JLabel[GraphicalConstants.MAX_UNLOCKED_DICE];
-
-        for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
-            PlayerDice[i] = new JButton();
-            DieSum[i] = new JLabel();
-            PlayerDice[i].setPreferredSize(new Dimension(60, 60));
-            ContentPanel.add(PlayerDice[i]);
-            ContentPanel.add(DieSum[i]);
-        }
 
         playerStats = new PlayerCardPanel(this.GS);
         ContentPanel.add(playerStats);
@@ -87,23 +70,76 @@ public class GraphicalSpellView extends GraphicalStateView {
         boldFont = monsterInfo.getFont();
         monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
 
-        chooseSpellLabel = new JLabel("Choose spell:");
-        ContentPanel.add(chooseSpellLabel);
-//        String []featModes = new String[2];
-//        featModes[0] = "Consume 2HP";
-//        featModes[1] = "Consume 1XP";
-//        chooseFeatMode = new JComboBox(featModes);
-//        chooseFeatMode.setSelectedIndex(0);
-//        ContentPanel.add(chooseFeatMode);
+        startChooseSpell();
+
+        addListeners();
 
     }
 
+    private void startChooseSpell() {
+        int nSpells = P.getSpellsInventory().size();
+
+        SpellLabel = new JLabel("Choose Spell:");
+        ContentPanel.add(SpellLabel);
+
+        chooseSpell = new JComboBox();
+        if (nSpells >= 1) {
+            String[] spells = new String[nSpells];
+            for (int i = 0; i < nSpells; i++) {
+                spells[i] = P.getSpellsInventory().get(i).getSpellID();
+                chooseSpell.addItem(spells[i]);
+            }
+        }
+
+        ContentPanel.add(chooseSpell);
+
+        useSpell = new JButton("Use Spell");
+        ContentPanel.add(useSpell);
+    }
+
+    private void addListeners() //impedir que os eventos sejam chamados múltiplas vezes!!!
+    {
+        if (P.getSpellsInventory().size() >= 1) {
+            int index = chooseSpell.getSelectedIndex();
+            useSpell.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.UseSpell + " " + index));
+        }
+
+        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndSpellPhase));
+    }
+
     public void Draw() {
-        if (!GS.getCurrentGameState().CanUseSpell())
+
+        if (!GS.getCurrentGameState().CanUseSpell()) {
             GS.RelayAction(InternalCommandsDictionary.EndSpellPhase);
+            return;
+        }
+
+        monsterInfo.setText(M.getName() + (M.getBoss() ? "(BOSS)" : "") + "\n" + M.toString());
+
+        Layout.putConstraint(SpringLayout.WEST, playerStats, GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, playerStats, 20, SpringLayout.NORTH, ContentPanel);
 
         Layout.putConstraint(SpringLayout.WEST, PhaseLabel, Width / 2 - phaseName.length(), SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, PhaseLabel, 30, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, PhaseLabel, 20, SpringLayout.NORTH, ContentPanel);
+
+        Layout.putConstraint(SpringLayout.WEST, SpellLabel, 20, SpringLayout.WEST, playerStats);
+        Layout.putConstraint(SpringLayout.NORTH, SpellLabel, 20, SpringLayout.SOUTH, playerStats);
+
+        Layout.putConstraint(SpringLayout.WEST, chooseSpell, 0, SpringLayout.WEST, SpellLabel);
+        Layout.putConstraint(SpringLayout.NORTH, chooseSpell, 5, SpringLayout.SOUTH, SpellLabel);
+
+        Layout.putConstraint(SpringLayout.WEST, useSpell, 20, SpringLayout.EAST, chooseSpell);
+        Layout.putConstraint(SpringLayout.NORTH, useSpell, 0, SpringLayout.NORTH, chooseSpell);
+
+        Layout.putConstraint(SpringLayout.WEST, skipButton, 0, SpringLayout.WEST, chooseSpell);
+        Layout.putConstraint(SpringLayout.NORTH, skipButton, 20, SpringLayout.SOUTH, chooseSpell);
+
+        Layout.putConstraint(SpringLayout.EAST, currMonster, -GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.EAST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, currMonster, 20, SpringLayout.NORTH, ContentPanel);
+
+        Layout.putConstraint(SpringLayout.WEST, monsterInfo, 0, SpringLayout.WEST, currMonster);
+        Layout.putConstraint(SpringLayout.NORTH, monsterInfo, 20, SpringLayout.SOUTH, currMonster);
+
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));
@@ -112,14 +148,10 @@ public class GraphicalSpellView extends GraphicalStateView {
 
     }
 
-    public void HookListeners() {
-        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndSpellPhase));
-    }
 
     @Override
     public void Render() {
         Draw();
-        HookListeners();
     }
 
     @Override

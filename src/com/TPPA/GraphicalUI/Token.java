@@ -6,19 +6,22 @@ import java.awt.*;
 /**
  * Created by Lídia on 31/05/2017.
  */
-//TODO: Melhorar tokens
+
 public class Token extends JPanel {
     JLabel mark;
     String text;
+    Dimension dim;
 
-    public Token() {
+    public Token(int size) {
+        this.dim = new Dimension(size, size);
         this.setOpaque(false);
         this.text = "";
         mark = new JLabel();
         mark.setForeground(Color.yellow);
         this.setLayout(new BorderLayout());
-        this.add(mark, BorderLayout.NORTH);
-        this.setPreferredSize(new Dimension(25, 25));
+        this.add(mark, BorderLayout.CENTER);
+        mark.setHorizontalAlignment(JLabel.CENTER);
+        this.setPreferredSize(dim);
     }
 
     public void setTokenText(String Text) {
@@ -31,6 +34,6 @@ public class Token extends JPanel {
         super.paintComponent(g);
         mark.setText(text);
         g.setColor(Color.black);
-        g.fillOval(0, 0, 25, 25);
+        g.fillOval(0, 0, dim.width, dim.height);
     }
 }

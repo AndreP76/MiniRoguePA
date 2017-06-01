@@ -59,7 +59,7 @@ public class DungeonCardPanel extends JPanel implements Observer {
 
         HpPanel.setPreferredSize(new Dimension(GraphicalConstants.DUNGEON_HP_WIDTH, GraphicalConstants.DUNGEON_HP_HEIGHT));
 
-        HpToken = new Token();
+        HpToken = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         HpPanel.add(HpToken);
 
         this.add(HpPanel);
@@ -77,7 +77,7 @@ public class DungeonCardPanel extends JPanel implements Observer {
 
         RoomPanel.setPreferredSize(new Dimension(GraphicalConstants.DUNGEON_ROOM_WIDTH, GraphicalConstants.DUNGEON_ROOM_HEIGHT));
 
-        RoomToken = new Token();
+        RoomToken = new Token(GraphicalConstants.SMALL_TOKEN_SIZE);
         RoomPanel.add(RoomToken);
 
         this.add(RoomPanel);

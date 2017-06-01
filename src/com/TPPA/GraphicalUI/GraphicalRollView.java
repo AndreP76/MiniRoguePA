@@ -103,7 +103,6 @@ public class GraphicalRollView extends GraphicalStateView {
 
     private void Draw() {
 
-
         if (!P.hasRolledDice())  //roll dice automatically when entering this phase
             GS.RelayAction(InternalCommandsDictionary.RollDice);
 

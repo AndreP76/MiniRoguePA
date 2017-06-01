@@ -49,4 +49,7 @@ public class GraphicalConstants {
     public static final int DUNGEON_ROOM_HEIGHT = 215;
     public static final int DUNGEON_HP_WIDTH = 91;
     public static final int DUNGEON_HP_HEIGHT = 343;
+
+    public static final int SMALL_TOKEN_SIZE = 25;
+    public static final int BIG_TOKEN_SIZE = 40;
 }

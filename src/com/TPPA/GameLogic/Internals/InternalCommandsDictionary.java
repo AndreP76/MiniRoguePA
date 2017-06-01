@@ -19,10 +19,10 @@ public class InternalCommandsDictionary { //Isto so guarda os comandos e as stri
     public final static String Heal = "HEAL";
 
     //ID dos Spells
-    public final static String FireSpellID = "FIRESPELL";
-    public final static String IceSpellID = "ICESPELL";
-    public final static String HealSpellID = "HEALSPELL";
-    public final static String PoisonSpellID = "POISONSPELL";
+    public final static String FireSpellID = "FireSpell";
+    public final static String IceSpellID = "IceSpell";
+    public final static String HealSpellID = "HealSpell";
+    public final static String PoisonSpellID = "PoisonSpell";
 
     //Comandos para TradingState
     public final static String BuyRation = "BUYRATION";

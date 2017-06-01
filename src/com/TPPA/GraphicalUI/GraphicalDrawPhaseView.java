@@ -13,7 +13,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Impedir que se adicionem múltiplas vezes o mesmo evento ao mesmo botão; chamar HookListeners() no construtor, e não em Render()
+
 //TODO: Aumentar um bocadinho a resolução? Talvez para 1280*720?
 public class GraphicalDrawPhaseView extends GraphicalStateView {
     private SpringLayout Layout;
@@ -154,6 +154,9 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
             /*case 3:
                 CardButtons[6].setVisible(false);*/
         }
+
+        HookEvents();
+
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));
         this.pack();
@@ -174,7 +177,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     @Override
     public void Render() {
         Draw();
-        HookEvents();
+
     }
 
     @Override
