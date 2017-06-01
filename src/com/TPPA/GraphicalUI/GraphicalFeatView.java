@@ -2,16 +2,20 @@ package com.TPPA.GraphicalUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GameLogic.Internals.Monster;
 import com.TPPA.GameLogic.Internals.Player;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
+import com.TPPA.Main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Created by Lídia on 29/05/2017.
  */
-//TODO: finish this!!!
+//TODO: adicionar log
 public class GraphicalFeatView extends GraphicalStateView {
 
     private SpringLayout Layout;
@@ -19,17 +23,26 @@ public class GraphicalFeatView extends GraphicalStateView {
     private JPanel ContentPanel;
     private JButton[] PlayerDice;   //show Roll results
     private JButton skipButton;
+    private JLabel[] DieSum;
+    private JLabel TotalDiceSum;
+    private int startWidth;
+    private int startHeight;
+    private int Width;
+    private int Height;
+    private Player P;
+    private Monster M;
+    private String phaseName;
+    private PlayerCardPanel playerStats;
+    private DungeonCardPanel currMonster;
+    private JTextArea monsterInfo;
+    private Font boldFont;
+    private JComboBox chooseFeatMode;
+    private JLabel featModeLabel;
 
     GraphicalFeatView(GameStateController GS) {
         super(GS);
-    }
-
-    private void Draw() {
-        Player P = GS.getCurrentPlayer();
-        int startWidth = 0;
-        int startHeight = 0;
-        int Width = 0;
-        int Height = 0;
+        P = GS.getCurrentPlayer();
+        M = GS.getCurrentMonster();
 
         Width = (int) (ScreenSize.getWidth() * 0.75);
         Height = (int) (ScreenSize.getHeight() * 0.75);
@@ -43,69 +56,153 @@ public class GraphicalFeatView extends GraphicalStateView {
         this.setContentPane(ContentPanel);
 
         PhaseLabel = new JLabel();
-        String phaseName = "FeatPhase";
+        phaseName = "FeatPhase";
         this.PhaseLabel.setText(phaseName);
         ContentPanel.add(PhaseLabel);
 
         skipButton = new JButton("Skip");
         ContentPanel.add(skipButton);
 
+        TotalDiceSum = new JLabel();
+        ContentPanel.add(TotalDiceSum);
 
-        PlayerDice = new JButton[4];
-        for (int i = 0; i < PlayerDice.length; i++) {
+        PlayerDice = new JButton[GraphicalConstants.MAX_UNLOCKED_DICE];
+        DieSum = new JLabel[GraphicalConstants.MAX_UNLOCKED_DICE];
+
+        for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
             PlayerDice[i] = new JButton();
+            DieSum[i] = new JLabel();
+            PlayerDice[i].setPreferredSize(new Dimension(60, 60));
             ContentPanel.add(PlayerDice[i]);
+            ContentPanel.add(DieSum[i]);
+        }
+
+        playerStats = new PlayerCardPanel(this.GS);
+        ContentPanel.add(playerStats);
+
+        currMonster = new DungeonCardPanel(this.GS);
+        ContentPanel.add(currMonster);
+
+        monsterInfo = new JTextArea();
+        monsterInfo.setOpaque(false);
+        monsterInfo.setEditable(false);
+        ContentPanel.add(monsterInfo);
+
+        boldFont = monsterInfo.getFont();
+        monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
+
+        featModeLabel = new JLabel("Choose feat mode:");
+        ContentPanel.add(featModeLabel);
+        String[] featModes = new String[2];
+        featModes[0] = "Consume 2HP";
+        featModes[1] = "Consume 1XP";
+        chooseFeatMode = new JComboBox(featModes);
+        //chooseFeatMode.setSelectedIndex(0);
+        ContentPanel.add(chooseFeatMode);
+
+        addListeners();
+    }
+
+    private void addListeners() //impedir que os eventos sejam chamados múltiplas vezes!!!
+    {
+        for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
+            PlayerDice[i].addMouseListener(new diceListener(i));
+        }
+        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndFeatPhase));
+    }
+
+
+    private void Draw() {
+        for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
             if (P.getUnlockedDice().size() >= i + 1) {
                 PlayerDice[i].setIcon(new ImageIcon(ResourceManager.ResolveDieRollImage(P.getUnlockedDice().get(i).getLastRoll())));
-                PlayerDice[i].setPreferredSize(new Dimension(60, 60));
                 PlayerDice[i].setVisible(true);    //dice will only be visible if unlocked by player
-                if (P.getUnlockedDice().get(i).getLastRoll() == 6)
-                    PlayerDice[i].setEnabled(true);
-                else
-                    PlayerDice[i].setEnabled(false);
-            } else
+                DieSum[i].setText("Sum: " + P.getUnlockedDice().get(i).getRollSum());
+                DieSum[i].setVisible(true);
+            } else {
                 PlayerDice[i].setVisible(false);
+                DieSum[i].setVisible(false);
+            }
 
         }
 
+        TotalDiceSum.setText("Total dice sum: " + P.getTotalDiceSum());
+
+        monsterInfo.setText(M.getName() + (M.getBoss() ? "(BOSS)" : "") + "\n" + M.toString());
+
+        Layout.putConstraint(SpringLayout.WEST, playerStats, GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, playerStats, 20, SpringLayout.NORTH, ContentPanel);
+
         Layout.putConstraint(SpringLayout.WEST, PhaseLabel, Width / 2 - phaseName.length(), SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, PhaseLabel, 30, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, PhaseLabel, 20, SpringLayout.NORTH, ContentPanel);
 
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[0], 5, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[0], Height - 260, SpringLayout.NORTH, ContentPanel);
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[1], 5, SpringLayout.EAST, PlayerDice[0]);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[1], Height - 260, SpringLayout.NORTH, ContentPanel);
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[2], 5, SpringLayout.EAST, PlayerDice[1]);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[2], Height - 260, SpringLayout.NORTH, ContentPanel);
-        Layout.putConstraint(SpringLayout.WEST, PlayerDice[3], 5, SpringLayout.EAST, PlayerDice[2]);
-        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[3], Height - 260, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.WEST, PlayerDice[0], 0, SpringLayout.WEST, playerStats);
+        Layout.putConstraint(SpringLayout.NORTH, PlayerDice[0], 10, SpringLayout.SOUTH, playerStats);
+        Layout.putConstraint(SpringLayout.WEST, DieSum[0], 0, SpringLayout.WEST, PlayerDice[0]);
+        Layout.putConstraint(SpringLayout.NORTH, DieSum[0], 5, SpringLayout.SOUTH, PlayerDice[0]);
+        for (int i = 1; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
+            Layout.putConstraint(SpringLayout.WEST, PlayerDice[i], 5, SpringLayout.EAST, PlayerDice[i - 1]);
+            Layout.putConstraint(SpringLayout.NORTH, PlayerDice[i], 10, SpringLayout.SOUTH, playerStats);
+            Layout.putConstraint(SpringLayout.WEST, DieSum[i], 0, SpringLayout.WEST, PlayerDice[i]);
+            Layout.putConstraint(SpringLayout.NORTH, DieSum[i], 5, SpringLayout.SOUTH, PlayerDice[i]);
+        }
 
-        Layout.putConstraint(SpringLayout.WEST, skipButton, 20, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, skipButton, 20, SpringLayout.SOUTH, PlayerDice[0]);
+        Layout.putConstraint(SpringLayout.WEST, TotalDiceSum, 0, SpringLayout.WEST, DieSum[0]);
+        Layout.putConstraint(SpringLayout.NORTH, TotalDiceSum, 5, SpringLayout.SOUTH, DieSum[0]);
+
+        Layout.putConstraint(SpringLayout.WEST, featModeLabel, 10, SpringLayout.WEST, PlayerDice[GraphicalConstants.MAX_UNLOCKED_DICE - 1]);
+        Layout.putConstraint(SpringLayout.NORTH, featModeLabel, 0, SpringLayout.NORTH, PlayerDice[GraphicalConstants.MAX_UNLOCKED_DICE - 1]);
+
+        Layout.putConstraint(SpringLayout.WEST, chooseFeatMode, 0, SpringLayout.WEST, featModeLabel);
+        Layout.putConstraint(SpringLayout.NORTH, chooseFeatMode, 5, SpringLayout.SOUTH, featModeLabel);
+
+        Layout.putConstraint(SpringLayout.EAST, skipButton, 0, SpringLayout.EAST, chooseFeatMode);
+        Layout.putConstraint(SpringLayout.NORTH, skipButton, -5, SpringLayout.NORTH, TotalDiceSum);
+
+        Layout.putConstraint(SpringLayout.EAST, currMonster, -GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.EAST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, currMonster, 20, SpringLayout.NORTH, ContentPanel);
+
+        Layout.putConstraint(SpringLayout.WEST, monsterInfo, 0, SpringLayout.WEST, currMonster);
+        Layout.putConstraint(SpringLayout.NORTH, monsterInfo, 20, SpringLayout.SOUTH, currMonster);
+
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));
         this.pack();
         this.setVisible(true);
-    }
 
-    private void HookListeners() {
-        PlayerDice[0].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 0));
-        PlayerDice[1].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 1));
-        PlayerDice[2].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 2));
-        PlayerDice[3].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 3));
-
-        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndFeatPhase));
     }
 
     @Override
     public void Render() {
         Draw();
-        HookListeners();
     }
 
     @Override
     public void DestroyView() {
         this.dispose();
+    }
+
+    private class diceListener extends MouseAdapter {
+        int index;
+
+        public diceListener(int index) {
+            this.index = index;
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int feat = chooseFeatMode.getSelectedIndex();
+
+            String command = (feat == 0 ? InternalCommandsDictionary.UseFeatLosingHP : InternalCommandsDictionary.UseFeatLosingXP);
+            Main.ErrorStream.println(command);
+
+            if (P.getUnlockedDice().size() > index) {
+                if (P.getUnlockedDice().get(index).getLastRoll() == 6)
+                    GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + index);
+                else
+                    GS.RelayAction(command + " " + index);
+            }
+        }
     }
 }

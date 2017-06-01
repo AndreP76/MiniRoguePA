@@ -19,8 +19,10 @@ public class DungeonCardPanel extends JPanel implements Observer {
     private SpringLayout Layout;
     private JPanel RoomPanel;
     private SpringLayout RoomLayout;
+    private Token RoomToken;
     private JPanel HpPanel;
     private SpringLayout HpLayout;
+    private Token HpToken;
 
     public DungeonCardPanel(GameStateController GS) {
         super();
@@ -39,6 +41,13 @@ public class DungeonCardPanel extends JPanel implements Observer {
         startRoomPanel();
 
         this.setVisible(true);
+        Draw();
+    }
+
+    private void Draw() //para corrigir bug
+    {
+        drawHpPanel();
+        drawRoomPanel();
     }
 
 
@@ -49,6 +58,9 @@ public class DungeonCardPanel extends JPanel implements Observer {
         HpPanel.setLayout(HpLayout);
 
         HpPanel.setPreferredSize(new Dimension(GraphicalConstants.DUNGEON_HP_WIDTH, GraphicalConstants.DUNGEON_HP_HEIGHT));
+
+        HpToken = new Token();
+        HpPanel.add(HpToken);
 
         this.add(HpPanel);
         HpPanel.setOpaque(false);
@@ -65,6 +77,9 @@ public class DungeonCardPanel extends JPanel implements Observer {
 
         RoomPanel.setPreferredSize(new Dimension(GraphicalConstants.DUNGEON_ROOM_WIDTH, GraphicalConstants.DUNGEON_ROOM_HEIGHT));
 
+        RoomToken = new Token();
+        RoomPanel.add(RoomToken);
+
         this.add(RoomPanel);
         RoomPanel.setOpaque(false);
 
@@ -80,8 +95,7 @@ public class DungeonCardPanel extends JPanel implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        drawHpPanel();
-        drawRoomPanel();
+        Draw();
     }
 
     private void drawRoomPanel() {
@@ -89,8 +103,7 @@ public class DungeonCardPanel extends JPanel implements Observer {
         room = this.GS.getCurrentRoom();
         zone = this.GS.getCurrentZone();
 
-        Token mark = new Token("" + GS.getTrueRoom());
-        RoomPanel.add(mark);
+        RoomToken.setTokenText("" + GS.getTrueRoom());
 
         int x = 0;
         x += (room - 1) * (GraphicalConstants.SMALL_PANEL_WIDTH + GraphicalConstants.DUNGEON_HP_INTER_PADD);
@@ -98,8 +111,8 @@ public class DungeonCardPanel extends JPanel implements Observer {
         int y = 0;
         y += (zone - 1) * (GraphicalConstants.SMALL_PANEL_WIDTH + GraphicalConstants.DUNGEON_ROOM_INTER_PADD);
 
-        RoomLayout.putConstraint(SpringLayout.WEST, mark, x, SpringLayout.WEST, RoomPanel);
-        RoomLayout.putConstraint(SpringLayout.NORTH, mark, y, SpringLayout.NORTH, RoomPanel);
+        RoomLayout.putConstraint(SpringLayout.WEST, RoomToken, x, SpringLayout.WEST, RoomPanel);
+        RoomLayout.putConstraint(SpringLayout.NORTH, RoomToken, y, SpringLayout.NORTH, RoomPanel);
     }
 
     private void drawHpPanel() {
@@ -107,8 +120,7 @@ public class DungeonCardPanel extends JPanel implements Observer {
         if (HP < 0)
             HP = 0;
 
-        Token mark = new Token("" + HP);
-        HpPanel.add(mark);
+        HpToken.setTokenText("" + HP);
 
         int x = 0;
         if (HP <= 10)
@@ -122,7 +134,7 @@ public class DungeonCardPanel extends JPanel implements Observer {
         else
             y += (HP % 10) + 1;
 
-        HpLayout.putConstraint(SpringLayout.WEST, mark, x, SpringLayout.WEST, HpPanel);
-        HpLayout.putConstraint(SpringLayout.NORTH, mark, GraphicalConstants.DUNGEON_HP_HEIGHT - ((GraphicalConstants.SMALL_PANEL_WIDTH + GraphicalConstants.DUNGEON_HP_INTER_PADD) * y), SpringLayout.NORTH, HpPanel);
+        HpLayout.putConstraint(SpringLayout.WEST, HpToken, x, SpringLayout.WEST, HpPanel);
+        HpLayout.putConstraint(SpringLayout.NORTH, HpToken, GraphicalConstants.DUNGEON_HP_HEIGHT - ((GraphicalConstants.SMALL_PANEL_WIDTH + GraphicalConstants.DUNGEON_HP_INTER_PADD) * y), SpringLayout.NORTH, HpPanel);
     }
 }

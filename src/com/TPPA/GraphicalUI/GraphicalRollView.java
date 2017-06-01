@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Falta mostrar nome do monster e stats do monster
+//TODO: Adicionar log
 public class GraphicalRollView extends GraphicalStateView {
 
     private SpringLayout Layout;
@@ -32,6 +32,7 @@ public class GraphicalRollView extends GraphicalStateView {
     private PlayerCardPanel playerStats;
     private DungeonCardPanel currMonster;
     private JTextArea monsterInfo;
+    private Font boldFont;
 
 
     GraphicalRollView(GameStateController GS) {
@@ -83,6 +84,21 @@ public class GraphicalRollView extends GraphicalStateView {
         monsterInfo.setOpaque(false);
         monsterInfo.setEditable(false);
         ContentPanel.add(monsterInfo);
+
+        boldFont = monsterInfo.getFont();
+        monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
+
+        addListeners();
+    }
+
+    private void addListeners() //impedir que eventos sejam chamados múltiplas vezes!!!
+    {
+        PlayerDice[0].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 0));
+        PlayerDice[1].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 1));
+        PlayerDice[2].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 2));
+        PlayerDice[3].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 3));
+
+        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndRollPhase));
     }
 
     private void Draw() {
@@ -146,19 +162,9 @@ public class GraphicalRollView extends GraphicalStateView {
         this.setVisible(true);
     }
 
-    private void HookListeners() {
-        PlayerDice[0].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 0));
-        PlayerDice[1].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 1));
-        PlayerDice[2].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 2));
-        PlayerDice[3].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 3));
-
-        skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndRollPhase));
-    }
-
     @Override
     public void Render() {
         Draw();
-        HookListeners();
     }
 
     @Override
