@@ -7,8 +7,8 @@ package com.TPPA;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.States.StartState;
-import com.TPPA.GraphicalUI.GraphicalStartStateView;
 import com.TPPA.GraphicalUI.GraphicalStateView;
+import com.TPPA.GraphicalUI.GraphicalTradeView;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
 import com.TPPA.TextUI.TextDrawHelper;
 
@@ -44,7 +44,7 @@ public class Main {
         GSC.setCurrentGameState(new StartState(GSC));
         //StateView SV = new StartStateView(GSC);
         ResourceManager.Init();
-        GraphicalStateView GSV = new GraphicalStartStateView(GSC);
+        GraphicalStateView GSV = new GraphicalTradeView(GSC);
         //StateView SV = StateView.GenerateView();
         if (GSV != null) {
             Main.ErrorStream.println("Starting render cycle");

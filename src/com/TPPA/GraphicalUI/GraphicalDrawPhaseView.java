@@ -24,6 +24,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     private JProgressBar HPBar;
     private JProgressBar ArmorBar;
     private JLabel FoodLabel;
+    private JTextArea Log;
 
     private JPanel ContentPanel;
     private JButton[] CardButtons;
@@ -142,17 +143,25 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         Layout.putConstraint(SpringLayout.WEST, CardButtons[6], majorGap, SpringLayout.EAST, CardButtons[4]);
         //Ends here...
 
+
         switch (GS.getCurrentStageInRoom()) {
             case 0:
+                CardButtons[1].setEnabled(false);
+                CardButtons[2].setEnabled(false);
                 CardButtons[1].setIcon(new ImageIcon(ResourceManager.CardBack));
                 CardButtons[2].setIcon(new ImageIcon(ResourceManager.CardBack));
             case 1:
+                CardButtons[3].setEnabled(false);
                 CardButtons[3].setIcon(new ImageIcon(ResourceManager.CardBack));
             case 2:
+                CardButtons[4].setEnabled(false);
+                CardButtons[5].setEnabled(false);
                 CardButtons[4].setIcon(new ImageIcon(ResourceManager.CardBack));
                 CardButtons[5].setIcon(new ImageIcon(ResourceManager.CardBack));
-            /*case 3:
-                CardButtons[6].setVisible(false);*/
+            case 3:
+
+                CardButtons[6].setEnabled(false);
+                //CardButtons[6].setVisible(false);
         }
 
         HookEvents();
