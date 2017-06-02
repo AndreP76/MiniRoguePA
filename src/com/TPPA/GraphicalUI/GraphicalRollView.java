@@ -33,6 +33,7 @@ public class GraphicalRollView extends GraphicalStateView {
     private DungeonCardPanel currMonster;
     private JTextArea monsterInfo;
     private Font boldFont;
+    private Menu menu;
 
 
     GraphicalRollView(GameStateController GS) {
@@ -87,6 +88,11 @@ public class GraphicalRollView extends GraphicalStateView {
 
         boldFont = monsterInfo.getFont();
         monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
+
+        menu = new Menu(this, GS.getCurrentGameState());
+        ContentPanel.add(menu);
+        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
 
         addListeners();
     }

@@ -38,6 +38,7 @@ public class GraphicalFeatView extends GraphicalStateView {
     private Font boldFont;
     private JComboBox chooseFeatMode;
     private JLabel featModeLabel;
+    private Menu menu;
 
     GraphicalFeatView(GameStateController GS) {
         super(GS);
@@ -99,6 +100,11 @@ public class GraphicalFeatView extends GraphicalStateView {
         chooseFeatMode = new JComboBox(featModes);
         //chooseFeatMode.setSelectedIndex(0);
         ContentPanel.add(chooseFeatMode);
+
+        menu = new Menu(this, GS.getCurrentGameState());
+        ContentPanel.add(menu);
+        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
 
         addListeners();
     }

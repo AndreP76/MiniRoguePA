@@ -33,6 +33,7 @@ public class GraphicalTradeView extends GraphicalStateView {
     private JButton BuyHealthBigBtn;
     private JButton BuyArmorBtn;
     private PlayerCardPanel PCP;
+    private Menu menu;
 
     public GraphicalTradeView(GameStateController GS) {
         super(GS);
@@ -64,6 +65,11 @@ public class GraphicalTradeView extends GraphicalStateView {
         ContentPanel = new JPanel();
         ContentPanel.setLayout(L);
         this.setContentPane(ContentPanel);
+
+        menu = new Menu(this, GS.getCurrentGameState());
+        ContentPanel.add(menu);
+        L.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
+        L.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
 
         SellPanel = new JPanel();
         SPL = new BoxLayout(SellPanel, BoxLayout.PAGE_AXIS);

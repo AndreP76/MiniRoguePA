@@ -31,6 +31,7 @@ public class GraphicalSpellView extends GraphicalStateView {
     private JComboBox chooseSpell;
     private JLabel SpellLabel;
     private JButton useSpell;
+    private Menu menu;
 
     public GraphicalSpellView(GameStateController GS) {
         super(GS);
@@ -71,6 +72,11 @@ public class GraphicalSpellView extends GraphicalStateView {
         monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
 
         startChooseSpell();
+
+        menu = new Menu(this, GS.getCurrentGameState());
+        ContentPanel.add(menu);
+        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
 
         addListeners();
 

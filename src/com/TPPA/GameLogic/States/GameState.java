@@ -68,12 +68,15 @@ public abstract class GameState implements IState, Serializable {
         return null;
     }
 
-    protected GameStateController getCurrentController() {
+    @Override
+    public GameStateController getCurrentController() {
         return currentController;
     }
 
+    @Override
     public void setCurrentController(GameStateController currentController) {
         this.currentController = currentController;
+        this.currentController.notificarObservadores();
     }
 
     @Override

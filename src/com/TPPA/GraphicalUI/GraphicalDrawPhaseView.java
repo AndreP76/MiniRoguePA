@@ -29,8 +29,11 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     private JPanel ContentPanel;
     private JButton[] CardButtons;
 
+    private Menu menu;
+
     GraphicalDrawPhaseView(GameStateController GS) {
         super(GS);
+        HookEvents();
     }
 
     private void Draw() {
@@ -164,7 +167,10 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
                 //CardButtons[6].setVisible(false);
         }
 
-        HookEvents();
+        menu = new Menu(this, GS.getCurrentGameState());
+        ContentPanel.add(menu);
+        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));

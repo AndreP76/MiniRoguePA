@@ -27,6 +27,8 @@ public class GraphicalStartStateView extends GraphicalStateView {
     private Boolean DiffSliderShowing = false;
     private Boolean AreaSpinnerShowing = false;
 
+    private Menu menu;
+
     public GraphicalStartStateView(GameStateController GS) {
         super(GS);
     }
@@ -114,6 +116,11 @@ public class GraphicalStartStateView extends GraphicalStateView {
         Layout.putConstraint(SpringLayout.WEST, LoadButton, buttonStartX, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, LoadButton, buttonStartY, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(LoadButton);
+
+        menu = new Menu(this, GS.getCurrentGameState());
+        ContentPanel.add(menu);
+        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));

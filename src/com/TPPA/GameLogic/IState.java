@@ -7,37 +7,57 @@ import com.TPPA.GameLogic.Spells.SpellBase;
  * Created by andre on 4/5/17.
  */
 public interface IState {
-    public Boolean CanDrawCard();
-    public Boolean CanDefend();
-    public Boolean CanUseFeat();
-    public Boolean CanLose();
-    public Boolean CanRest();
-    public Boolean CanRollDice();
-    public Boolean CanUseSpell();
-    public Boolean CanGoToStart();
-    public Boolean CanTrade();
+    Boolean CanDrawCard();
 
-    public Boolean CanReRollDice();
+    Boolean CanDefend();
 
-    public IState ToDrawPhase();
-    public IState ToDefensePhase();
-    public IState ToFeatPhase();
-    public IState ToGameOver();
-    public IState ToRestPhase();
-    public IState ToRollPhase();
-    public IState ToSpellPhase();
-    public IState ToStart();
-    public IState ToTradePhase();
+    Boolean CanUseFeat();
 
-    public IState Action(String ActionString);
+    Boolean CanLose();
 
-    public Action[] GetActions();
+    Boolean CanRest();
 
-    public IState UseSpell(SpellBase spellToUse);
+    Boolean CanRollDice();
 
-    public IState AttackMonster();
+    Boolean CanUseSpell();
 
-    public IState OnDefeatingMonster();
+    Boolean CanGoToStart();
 
-    public IState DefendFromMonster();
+    Boolean CanTrade();
+
+    Boolean CanReRollDice();
+
+    IState ToDrawPhase();
+
+    IState ToDefensePhase();
+
+    IState ToFeatPhase();
+
+    IState ToGameOver();
+
+    IState ToRestPhase();
+
+    IState ToRollPhase();
+
+    IState ToSpellPhase();
+
+    IState ToStart();
+
+    IState ToTradePhase();
+
+    IState Action(String ActionString);
+
+    Action[] GetActions();
+
+    IState UseSpell(SpellBase spellToUse);
+
+    IState AttackMonster();
+
+    IState OnDefeatingMonster();
+
+    IState DefendFromMonster();
+
+    GameStateController getCurrentController();
+
+    void setCurrentController(GameStateController currentController);
 }
