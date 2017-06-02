@@ -32,6 +32,7 @@ public abstract class GraphicalStateView extends JFrame implements Observer {
 
     protected GameStateController GS;
     protected Dimension2D ScreenSize;
+    private Menu menu;
 
     GraphicalStateView(GameStateController GS) {
         super();
@@ -77,4 +78,5 @@ public abstract class GraphicalStateView extends JFrame implements Observer {
             }
         }
     }
+
 }
