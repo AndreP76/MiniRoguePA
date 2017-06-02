@@ -158,6 +158,7 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public void setCurrentGameState(IState currentGameState) {
         CurrentGameState = currentGameState;
+        notificarObservadores();
     }
 
     public void notificarObservadores() {

@@ -33,6 +33,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
 
     GraphicalDrawPhaseView(GameStateController GS) {
         super(GS);
+        Draw();
         HookEvents();
     }
 
