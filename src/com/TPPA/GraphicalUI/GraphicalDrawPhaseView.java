@@ -34,7 +34,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     GraphicalDrawPhaseView(GameStateController GS) {
         super(GS);
         Draw();
-        HookEvents();
+
     }
 
     private void Draw() {
@@ -193,7 +193,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     @Override
     public void Render() {
         Draw();
-
+        HookEvents();
     }
 
     @Override
