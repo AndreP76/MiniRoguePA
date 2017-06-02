@@ -168,7 +168,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
         LoadButton.addActionListener(actionEvent -> {
             JFileChooser JFC = new JFileChooser();
             JFC.showOpenDialog(ContentPanel);
-            GS.RelayAction(InternalCommandsDictionary.LoadCommand + " " + (JFC.getSelectedFile()));
+            GS.RelayAction(InternalCommandsDictionary.LoadCommand + " " + (JFC.getSelectedFile().getName()));
         });
     }
 

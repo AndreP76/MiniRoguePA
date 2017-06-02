@@ -32,6 +32,7 @@ public class GraphicalTradeView extends GraphicalStateView {
     private JButton BuyHealthBtn;
     private JButton BuyHealthBigBtn;
     private JButton BuyArmorBtn;
+    private JButton EndBtn;
     private PlayerCardPanel PCP;
     private Menu menu;
 
@@ -84,24 +85,40 @@ public class GraphicalTradeView extends GraphicalStateView {
         BuyPanelTitle = new JLabel("Buy");
         BuyPanel.add(BuyPanelTitle);
 
-        BuyArmorBtn = CreateButton("Buy Armor", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
-        BuyRationBtn = CreateButton("Buy Ration", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
-        BuyHealthBtn = CreateButton("Buy Health Potion", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
-        BuyHealthBigBtn = CreateButton("Buy Big Health Potion", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
-        BuySpellBtn = CreateButton("Buy A spell", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
+        int PlayerGold = GS.getCurrentPlayer().getGold();
+        BuyArmorBtn = CreateButton("Buy Armor (+1 Armor, -6 Gold)", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
+        if (PlayerGold < 6)
+            BuyArmorBtn.setEnabled(false);
+        BuyRationBtn = CreateButton("Buy Ration (+1 Food, -1 Gold)", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
+        if (PlayerGold < 1)
+            BuyRationBtn.setEnabled(false);
+        BuyHealthBtn = CreateButton("Buy Health Potion (+1HP, -1 Gold)", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
+        if (PlayerGold < 1)
+            BuyHealthBtn.setEnabled(false);
+        BuyHealthBigBtn = CreateButton("Buy Big Health Potion (+4 HP, -3 Gold)", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
+        if (PlayerGold < 3)
+            BuyHealthBigBtn.setEnabled(false);
+        BuySpellBtn = CreateButton("Buy A spell (-8 Gold)", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
+        if (PlayerGold < 8)
+            BuySpellBtn.setEnabled(false);
 
         SellPanelTitle = new JLabel("Sell");
         SellPanel.add(SellPanelTitle);
         ContentPanel.add(SellPanel);
 
-        SellArmorBtn = CreateButton("Sell Armor", ButtonWidth, ButtonHeight, PaddingWidth, SellPanel);
+        SellArmorBtn = CreateButton("Sell Armor (-1 Armor, +3 Gold)", ButtonWidth, ButtonHeight, PaddingWidth, SellPanel);
+        if (GS.getCurrentPlayer().getArmor() < 1)
+            SellArmorBtn.setEnabled(false);
         SellSpellBtn = CreateButton("Sell a Spell", ButtonWidth, ButtonHeight, PaddingWidth, SellPanel);
-
+        if (GS.getCurrentPlayer().getSpellsInventory().size() < 1)
+            SellSpellBtn.setEnabled(false);
         PCP = new PlayerCardPanel(GS);
         PCP.setMaximumSize(new Dimension(Width, Height));
         PCP.setPreferredSize(new Dimension(Width / 2, Height / 2));
         SellPanel.add(PCP);
 
+        EndBtn = new JButton("Finish trading");
+        SellPanel.add(EndBtn);
         L.putConstraint(SpringLayout.NORTH, SellPanel, 0, SpringLayout.NORTH, ContentPanel);
         L.putConstraint(SpringLayout.SOUTH, SellPanel, Height / 2, SpringLayout.SOUTH, ContentPanel);
         L.putConstraint(SpringLayout.EAST, SellPanel, 0, SpringLayout.EAST, ContentPanel);
@@ -112,11 +129,13 @@ public class GraphicalTradeView extends GraphicalStateView {
         L.putConstraint(SpringLayout.EAST, BuyPanel, 0, SpringLayout.WEST, SellPanel);
         L.putConstraint(SpringLayout.WEST, BuyPanel, 0, SpringLayout.WEST, ContentPanel);
 
-        L.putConstraint(SpringLayout.NORTH, PCP, 10, SpringLayout.SOUTH, SellSpellBtn);
+        //L.putConstraint(SpringLayout.NORTH, PCP, 10, SpringLayout.SOUTH, SellSpellBtn);
         L.putConstraint(SpringLayout.SOUTH, PCP, 10, SpringLayout.SOUTH, ContentPanel);
         L.putConstraint(SpringLayout.EAST, PCP, 0, SpringLayout.EAST, ContentPanel);
-        L.putConstraint(SpringLayout.WEST, PCP, 10, SpringLayout.EAST, BuyPanel);
+        //L.putConstraint(SpringLayout.WEST, PCP, 10, SpringLayout.EAST, BuyPanel);
 
+        L.putConstraint(SpringLayout.EAST, EndBtn, 0, SpringLayout.EAST, SellPanel);
+        L.putConstraint(SpringLayout.SOUTH, EndBtn, 0, SpringLayout.NORTH, SellPanel);
         this.setLocation(startWidth, startHeight);
         this.setSize(Width, Height);
         this.setVisible(true);
@@ -131,6 +150,8 @@ public class GraphicalTradeView extends GraphicalStateView {
 
         SellSpellBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.SellSpell));//TODO: Also here
         SellArmorBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.SellArmorPiece));
+
+        EndBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndTradingState));
     }
 
     @Override
@@ -141,6 +162,6 @@ public class GraphicalTradeView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
-
+        this.dispose();
     }
 }
