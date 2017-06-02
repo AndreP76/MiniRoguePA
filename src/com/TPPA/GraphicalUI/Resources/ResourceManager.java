@@ -34,6 +34,8 @@ public class ResourceManager {
     public static Image DieFace4;
     public static Image DieFace5;
     public static Image DieFace6;
+    public static Image GameOver;
+    public static Image YouDied;
 
     public static Image PlayerCardBig;
     public static Image DungeonCardBig;
@@ -68,7 +70,8 @@ public class ResourceManager {
     private static String DieFace4Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace4.png";
     private static String DieFace5Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace5.png";
     private static String DieFace6Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace6.png";
-
+    private static String GameOverPath = "./src/com/TPPA/GraphicalUI/Resources/GameOver.jpg";
+    private static String YouDiedPath = "./src/com/TPPA/GraphicalUI/Resources/YouDied.png";
     private static String PlayerCardBigPath = "./src/com/TPPA/GraphicalUI/Resources/PlayerCard.png";
     private static String DungeonCardBigPath = "./src/com/TPPA/GraphicalUI/Resources/DungeonCard.png";
 
@@ -113,7 +116,8 @@ public class ResourceManager {
 
             PlayerCardBig = ImageIO.read(new File(PlayerCardBigPath));
             DungeonCardBig = ImageIO.read(new File(DungeonCardBigPath));
-
+            GameOver = ImageIO.read(new File(GameOverPath));
+            YouDied = ImageIO.read(new File(YouDiedPath));
         } catch (IOException iox) {
             Main.ErrorStream.println(Paths.get("./").toAbsolutePath().toString());
             iox.printStackTrace();

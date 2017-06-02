@@ -26,11 +26,13 @@ public class GameOverState extends GameState {
     @Override
     public IState Action(String ActionString) {
         if (ActionString.equals(InternalCommandsDictionary.QuitCommand)) {
-            System.exit(0);
+            //System.exit(0);
+            return new StartState(getCurrentController());
+        } else if (ActionString.equals(InternalCommandsDictionary.StartCommand)) {
+            return new StartState(getCurrentController());
         } else {
             Main.ErrorStream.println("Got unknown command " + ActionString + " on GameOverPhase");
             return this;
         }
-        return this;
     }
 }
