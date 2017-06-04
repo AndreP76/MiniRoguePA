@@ -26,8 +26,11 @@ public class GameOverState extends GameState {
     @Override
     public IState Action(String ActionString) {
         if (ActionString.equals(InternalCommandsDictionary.QuitCommand)) {
-            //System.exit(0);
-            return new StartState(getCurrentController());
+            GameStateController GSC = getCurrentController();
+            GSC.setCurrentController(new GameStateController());
+            StartState SS = new StartState(GSC);
+            GSC.setCurrentGameState(SS);
+            return SS;
         } else if (ActionString.equals(InternalCommandsDictionary.StartCommand)) {
             return new StartState(getCurrentController());
         } else {

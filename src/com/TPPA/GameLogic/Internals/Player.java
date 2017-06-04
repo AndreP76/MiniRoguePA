@@ -183,7 +183,7 @@ public class Player implements Serializable {
     }
 
     public boolean incFood(int ammount) {
-        if (this.Food == 6 && ammount > 0)
+        if ((this.Food == 6 && ammount > 0) || (this.Food < 1 && ammount < 0))
             return false;
 
         if (this.Food + ammount < 0)
@@ -229,7 +229,7 @@ public class Player implements Serializable {
     }
 
     public boolean incHP(int ammount) {
-        if (this.HP == 20 && ammount > 0)
+        if ((this.HP == 20 && ammount > 0) || (this.HP == 1 && ammount < 0))
             return false;
 
         if (this.HP + ammount > 20)

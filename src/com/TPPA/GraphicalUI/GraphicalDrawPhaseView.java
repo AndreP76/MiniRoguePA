@@ -71,7 +71,9 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
             CardHere = CBLinear[i];
             CardButtons[i] = new JButton();
             CardButtons[i].setIcon(new ImageIcon(ResourceManager.CardBack));
+            CardButtons[i].setDisabledIcon(new ImageIcon(ResourceManager.CardBack));
             CardButtons[i].setEnabled(false);
+
             CardButtons[i].setPreferredSize(new Dimension(GraphicalConstants.CARD_BUTTON_WIDTH, GraphicalConstants.CARD_BUTTON_HEIGHT));
             //It should be Card Back, but let's test first...
             ContentPanel.add(CardButtons[i]);
@@ -109,34 +111,39 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         switch (GS.getCurrentStageInRoom()) {
             case 0:
                 CardButtons[0].setEnabled(true);
+                CardButtons[0].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[0].getCardID())));
+                CardButtons[0].setDisabledIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[0].getCardID())));
                 break;
             case 1:
                 CardButtons[1].setEnabled(true);
                 CardButtons[2].setEnabled(true);
-                CardButtons[0].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[0].getCardID())));
+                for (int i = 0; i < 3; ++i) {
+                    CardButtons[i].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                    CardButtons[i].setDisabledIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                }
                 break;
             case 2:
                 CardButtons[3].setEnabled(true);
-                CardButtons[0].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[0].getCardID())));
-                CardButtons[1].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[1].getCardID())));
-                CardButtons[2].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[2].getCardID())));
+                for (int i = 0; i < 4; ++i) {
+                    CardButtons[i].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                    CardButtons[i].setDisabledIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                }
                 break;
             case 3:
                 CardButtons[4].setEnabled(true);
                 CardButtons[5].setEnabled(true);
-                CardButtons[0].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[0].getCardID())));
-                CardButtons[1].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[1].getCardID())));
-                CardButtons[2].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[2].getCardID())));
-                CardButtons[3].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[2].getCardID())));
+                for (int i = 0; i < 6; ++i) {
+                    CardButtons[i].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                    CardButtons[i].setDisabledIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                }
                 break;
             case 4:
                 CardButtons[6].setEnabled(true);
-                CardButtons[0].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[0].getCardID())));
-                CardButtons[1].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[1].getCardID())));
-                CardButtons[2].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[2].getCardID())));
-                CardButtons[3].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[3].getCardID())));
-                CardButtons[4].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[4].getCardID())));
-                CardButtons[5].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[5].getCardID())));
+                for (int i = 0; i < 7; ++i) {
+                    CardButtons[i].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                    CardButtons[i].setDisabledIcon(new ImageIcon(ResourceManager.ResolveCardImage(CBLinear[i].getCardID())));
+                }
+
         }
 
         myMenu = new MyMenu(this, GS.getCurrentGameState());

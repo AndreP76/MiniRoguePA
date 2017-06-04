@@ -153,12 +153,18 @@ public abstract class GameState implements IState, Serializable {
     @Override
     public IState OnDefeatingMonster() {
         GameStateController GSC = getCurrentController();
-
+        if (!GSC.getCurrentPlayer().incFood(-1)) {
+            GSC.MessageStack.push("You are starving...");
+            if (GSC.getCurrentPlayer().incHP(-2)) {
+                GSC.MessageStack.pop();
+                GSC.MessageStack.push("You starved to death...");
+                return new GameOverState(getCurrentController());
+            }
+        }
         if (GSC.getCurrentMonster().getBoss()) {
 
             if (GSC.getTrueRoom() >= 14) {//Final room
                 GSC.MessageStack.push("==== Final Boss defeated! ====\nYou've won Og's Blood!\n");
-
                 GSC.getCurrentPlayer().resetDice();
                 return new StartState(getCurrentController());
             } else {
