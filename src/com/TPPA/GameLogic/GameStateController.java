@@ -52,10 +52,20 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     //getter
 
-    /*public static void setCurrentController(GameStateController currentController) {
-        CurrentController = currentController;
-        CurrentController.setCurrentGameState(CurrentController.getCurrentGameState());
-    }*/
+    public IState setCurrentController(GameStateController currentController) {
+        //CurrentController = currentController;
+        this.setCurrentMonster(currentController.getCurrentMonster());
+        this.setBattledInThisRoom(currentController.getBattledInThisRoom());
+        this.setCurrentRoom(currentController.getCurrentRoom());
+        this.setCurrentStageInRoom(currentController.getCurrentStageInRoom());
+        this.setCurrentZone(currentController.getCurrentZone());
+        this.setGameDifficulty(currentController.getGameDifficulty());
+        this.setRoomStages(currentController.getRoomStages());
+
+        this.setCurrentPlayer(currentController.getCurrentPlayer());
+        this.setCurrentGameState(currentController.getCurrentGameState());
+        return this.getCurrentGameState();
+    }
 
     public Monster getCurrentMonster() {
         return CurrentMonster;
@@ -85,6 +95,10 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public Player getCurrentPlayer() {
         return CurrentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.CurrentPlayer = currentPlayer;
     }
 
     public CardBase[][] getRoomStages() {
@@ -179,11 +193,11 @@ public class GameStateController extends Observable implements java.io.Serializa
         return RoomsInZone;
     }
 
+    //C methods
+
     public DifficultyLevelEnum getGameDifficulty() {
         return GameDifficulty;
     }
-
-    //C methods
 
     public void setGameDifficulty(DifficultyLevelEnum gameDifficulty) {
         GameDifficulty = gameDifficulty;

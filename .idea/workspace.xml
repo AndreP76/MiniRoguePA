@@ -4,7 +4,7 @@
     <list default="true" id="cce43112-76d8-48ef-89ab-199ca89d57d2" name="Default" comment="Got started creating the graphical views.&#10;Need to make a Text/Graphical switch&#10;Most views still missing&#10;Added some images as Resources&#10;Need some audio&#10;Oh god, we'll never finish this in time....">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java" />
     </list>
     <ignored path="MiniRoguePA.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GraphicalDrawPhaseView.java" pinned="true" current-in-tab="true">
+      <file leaf-file-name="GraphicalDrawPhaseView.java" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="121">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1496420951471" expanded="true" signature="9506:9512" ph="{...}" />
@@ -42,28 +42,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ErrorLog.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ErrorLog.txt">
+      <file leaf-file-name="GraphicalStateView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStateView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+            <state relative-caret-position="171">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GraphicalTradeView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalTradeView.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="120" column="30" lean-forward="false" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1072#1073#0" expanded="true" />
-                <element signature="e#1097#1098#0" expanded="true" />
-                <element signature="e#7209#7210#0" expanded="true" />
-                <element signature="e#7239#7240#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -71,9 +55,31 @@
       <file leaf-file-name="StartState.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+            <state relative-caret-position="178">
+              <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DifficultyLevelEnum.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/DifficultyLevelEnum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/GameState.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="131">
+              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <folding>
+                <element signature="e#1457#1458#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,8 +87,8 @@
       <file leaf-file-name="GraphicalStartStateView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStartStateView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+            <state relative-caret-position="101">
+              <caret line="169" column="20" lean-forward="true" selection-start-line="169" selection-start-column="20" selection-end-line="169" selection-end-column="20" />
               <folding>
                 <element signature="e#895#896#0" expanded="true" />
                 <element signature="e#920#921#0" expanded="true" />
@@ -92,64 +98,60 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameStateController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameStateController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+            <state relative-caret-position="160">
+              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
               <folding>
-                <element signature="e#4521#4522#0" expanded="true" />
-                <element signature="e#4560#4561#0" expanded="true" />
-                <element signature="e#5394#5395#0" expanded="true" />
-                <element signature="e#5473#5474#0" expanded="true" />
-                <marker date="1496420438041" expanded="false" signature="4850:4861" ph=" { " />
-                <marker date="1496420438041" expanded="false" signature="4880:4886" ph=" }" />
-                <marker date="1496420438041" expanded="false" signature="5079:5090" ph=" { " />
-                <marker date="1496420438041" expanded="false" signature="5109:5115" ph=" }" />
-                <marker date="1496420438041" expanded="false" signature="5167:5178" ph=" { " />
-                <marker date="1496420438041" expanded="false" signature="5200:5206" ph=" }" />
-                <marker date="1496420438041" expanded="false" signature="5294:5305" ph=" { " />
-                <marker date="1496420438041" expanded="false" signature="5337:5343" ph=" }" />
+                <element signature="e#2994#2995#0" expanded="true" />
+                <element signature="e#3034#3035#0" expanded="true" />
+                <element signature="e#3101#3102#0" expanded="true" />
+                <element signature="e#3154#3155#0" expanded="true" />
+                <element signature="e#5105#5106#0" expanded="true" />
+                <element signature="e#5144#5145#0" expanded="true" />
+                <element signature="e#5435#5436#0" expanded="true" />
+                <element signature="e#5469#5470#0" expanded="true" />
+                <element signature="e#5978#5979#0" expanded="true" />
+                <element signature="e#6057#6058#0" expanded="true" />
+                <element signature="e#7795#7796#0" expanded="true" />
+                <element signature="e#7845#7846#0" expanded="true" />
+                <marker date="1496573910657" expanded="false" signature="5663:5674" ph=" { " />
+                <marker date="1496573910657" expanded="false" signature="5693:5699" ph=" }" />
+                <marker date="1496573910657" expanded="false" signature="5751:5762" ph=" { " />
+                <marker date="1496573910657" expanded="false" signature="5784:5790" ph=" }" />
+                <marker date="1496573910657" expanded="false" signature="5878:5889" ph=" { " />
+                <marker date="1496573910657" expanded="false" signature="5921:5927" ph=" }" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/GameState.java">
+      <file leaf-file-name="Action.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/Action.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-520">
-              <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="25" />
+            <state relative-caret-position="100">
+              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartStateView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/TextUI/StartStateView.java">
+      <file leaf-file-name="AwaitCardSelectionState.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/AwaitCardSelectionState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="321">
+              <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphicalStateView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStateView.java">
+      <file leaf-file-name="FeatPhase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/FeatPhase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/TPPA/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+            <state relative-caret-position="69">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -163,6 +165,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>setCurrentCo</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -234,9 +241,9 @@
         <option value="$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStartStateView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalTradeView.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java" />
-        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java" />
         <option value="$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java" />
+        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java" />
+        <option value="$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java" />
       </list>
     </option>
   </component>
@@ -379,6 +386,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="GameLogic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiniRoguePA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MiniRoguePA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TPPA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameLogic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="States" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1005,7 +1038,7 @@
       <workItem from="1496264229694" duration="29000" />
       <workItem from="1496313806751" duration="2220000" />
       <workItem from="1496348312562" duration="9497000" />
-      <workItem from="1496403668121" duration="9508000" />
+      <workItem from="1496403668121" duration="14161000" />
     </task>
     <task id="LOCAL-00003" summary="Merged changes, created views">
       <created>1493803116321</created>
@@ -1147,11 +1180,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496420183443</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Got started creating the graphical views.&#10;Need to make a Text/Graphical switch&#10;Most views still missing&#10;Added some images as Resources&#10;Need some audio&#10;Oh god, we'll never finish this in time....">
+      <created>1496421082684</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1496421082684</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="146246000" />
+    <option name="totallyTimeSpent" value="150899000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1283,7 +1323,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java</url>
-          <line>102</line>
+          <line>112</line>
           <properties />
           <option name="timeStamp" value="71" />
         </line-breakpoint>
@@ -1298,12 +1338,6 @@
           <line>137</line>
           <properties />
           <option name="timeStamp" value="80" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java</url>
-          <line>150</line>
-          <properties />
-          <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalTradeView.java</url>
@@ -1330,28 +1364,16 @@
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java</url>
-          <line>36</line>
+          <url>file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java</url>
+          <line>118</line>
           <properties />
-          <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java</url>
-          <line>182</line>
-          <properties />
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java</url>
-          <line>40</line>
-          <properties />
-          <option name="timeStamp" value="112" />
+          <option name="timeStamp" value="113" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="113" />
+      <option name="time" value="114" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1360,27 +1382,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/Deck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="30" column="38" lean-forward="false" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/Dice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/DifficultyLevelEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="12" lean-forward="false" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/InternalCommandsDictionary.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -1469,20 +1470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/FeatPhase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/AwaitCardSelectionState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1667,26 +1654,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-520">
-          <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1699,31 +1670,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/FileUtilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/FeatPhase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStateView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/AwaitCardSelectionState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="321">
+          <caret line="96" column="0" lean-forward="false" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
-          <caret line="160" column="0" lean-forward="false" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="e#4521#4522#0" expanded="true" />
-            <element signature="e#4560#4561#0" expanded="true" />
-            <element signature="e#5394#5395#0" expanded="true" />
-            <element signature="e#5473#5474#0" expanded="true" />
-            <marker date="1496420438041" expanded="false" signature="4850:4861" ph=" { " />
-            <marker date="1496420438041" expanded="false" signature="4880:4886" ph=" }" />
-            <marker date="1496420438041" expanded="false" signature="5079:5090" ph=" { " />
-            <marker date="1496420438041" expanded="false" signature="5109:5115" ph=" }" />
-            <marker date="1496420438041" expanded="false" signature="5167:5178" ph=" { " />
-            <marker date="1496420438041" expanded="false" signature="5200:5206" ph=" }" />
-            <marker date="1496420438041" expanded="false" signature="5294:5305" ph=" { " />
-            <marker date="1496420438041" expanded="false" signature="5337:5343" ph=" }" />
+            <element signature="imports" expanded="true" />
+            <marker date="1496420951471" expanded="true" signature="9506:9512" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#1457#1458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/Internals/DifficultyLevelEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="123" column="0" lean-forward="false" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStartStateView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="144" column="0" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="144" selection-end-column="0" />
+        <state relative-caret-position="101">
+          <caret line="169" column="20" lean-forward="true" selection-start-line="169" selection-start-column="20" selection-end-line="169" selection-end-column="20" />
           <folding>
             <element signature="e#895#896#0" expanded="true" />
             <element signature="e#920#921#0" expanded="true" />
@@ -1732,21 +1759,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalStateView.java">
+    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TPPA/GraphicalUI/GraphicalDrawPhaseView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="160">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <marker date="1496420951471" expanded="true" signature="9506:9512" ph="{...}" />
+            <element signature="e#2994#2995#0" expanded="true" />
+            <element signature="e#3034#3035#0" expanded="true" />
+            <element signature="e#3101#3102#0" expanded="true" />
+            <element signature="e#3154#3155#0" expanded="true" />
+            <element signature="e#5105#5106#0" expanded="true" />
+            <element signature="e#5144#5145#0" expanded="true" />
+            <element signature="e#5435#5436#0" expanded="true" />
+            <element signature="e#5469#5470#0" expanded="true" />
+            <element signature="e#5978#5979#0" expanded="true" />
+            <element signature="e#6057#6058#0" expanded="true" />
+            <element signature="e#7795#7796#0" expanded="true" />
+            <element signature="e#7845#7846#0" expanded="true" />
+            <marker date="1496573910657" expanded="false" signature="5663:5674" ph=" { " />
+            <marker date="1496573910657" expanded="false" signature="5693:5699" ph=" }" />
+            <marker date="1496573910657" expanded="false" signature="5751:5762" ph=" { " />
+            <marker date="1496573910657" expanded="false" signature="5784:5790" ph=" }" />
+            <marker date="1496573910657" expanded="false" signature="5878:5889" ph=" { " />
+            <marker date="1496573910657" expanded="false" signature="5921:5927" ph=" }" />
           </folding>
         </state>
       </provider>

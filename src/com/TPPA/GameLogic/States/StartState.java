@@ -121,7 +121,7 @@ public class StartState extends GameState {
             if (x.exists()) {
                 try {
                     Main.ErrorStream.println("Loading savegame in location : " + SSplit[SSplit.length - 1]);
-                    setCurrentController((GameStateController) (new ObjectInputStream(new FileInputStream(x)).readObject()));
+                    return getCurrentController().setCurrentController((GameStateController) (new ObjectInputStream(new FileInputStream(x)).readObject()));
                 } catch (IOException e) {
                     Main.ErrorStream.println("Error deserealizing object : IOException\n\t" + e.fillInStackTrace());
                 } catch (ClassNotFoundException e) {
