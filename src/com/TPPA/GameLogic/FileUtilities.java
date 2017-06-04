@@ -7,20 +7,17 @@ import java.io.*;
  */
 public class FileUtilities {
 
-    public static GameStateController retrieveGameFromFile(File loadFile) throws ClassNotFoundException, IOException {
-        GameStateController loadedGame;
+    public static Object retrieveGameFromFile(File loadFile) throws ClassNotFoundException, IOException {
         ObjectInputStream readFile = null;
 
         try {
             readFile = new ObjectInputStream(new FileInputStream(loadFile));
 
-            loadedGame = (GameStateController) readFile.readObject();
+            return readFile.readObject();
         } finally {
             if (readFile != null)
                 readFile.close();
         }
-
-        return loadedGame;
     }
 
     public static void saveGameToFile(Object o, File saveFile) throws IOException {

@@ -20,7 +20,7 @@ public class GraphicalRestingStateView extends GraphicalStateView {
     private Player P;
     private String phaseName;
     private PlayerCardPanel playerStats;
-    private Menu menu;
+    private MyMenu myMenu;
     private int startWidth;
     private int startHeight;
     private int Width;
@@ -56,10 +56,10 @@ public class GraphicalRestingStateView extends GraphicalStateView {
         playerStats = new PlayerCardPanel(this.GS);
         ContentPanel.add(playerStats);
 
-        menu = new Menu(this, GS.getCurrentGameState());
-        ContentPanel.add(menu);
-        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
-        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
+        myMenu = new MyMenu(this, GS.getCurrentGameState());
+        ContentPanel.add(myMenu);
+        Layout.putConstraint(SpringLayout.WEST, myMenu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, myMenu, 0, SpringLayout.NORTH, this);
 
         gainXP = new JButton("Reinforce your weapon: +1XP");
         gainHP = new JButton("Heal: +2HP");
@@ -87,7 +87,7 @@ public class GraphicalRestingStateView extends GraphicalStateView {
         Layout.putConstraint(SpringLayout.NORTH, playerStats, 40, SpringLayout.NORTH, this);
 
         Layout.putConstraint(SpringLayout.WEST, gainXP, GraphicalConstants.FRAME_SIDE_PADDING * 2, SpringLayout.EAST, playerStats);
-        Layout.putConstraint(SpringLayout.NORTH, gainXP, 40, SpringLayout.NORTH, this);
+        Layout.putConstraint(SpringLayout.NORTH, gainXP, 40, SpringLayout.SOUTH, PhaseLabel);
 
         Layout.putConstraint(SpringLayout.WEST, gainFood, GraphicalConstants.FRAME_SIDE_PADDING * 2, SpringLayout.EAST, playerStats);
         Layout.putConstraint(SpringLayout.NORTH, gainFood, PaddingWidth, SpringLayout.SOUTH, gainXP);

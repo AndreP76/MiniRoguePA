@@ -1,7 +1,9 @@
 package com.TPPA.GraphicalUI;
 
 import com.TPPA.GameLogic.FileUtilities;
+import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.IState;
+import com.TPPA.Main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +16,7 @@ import static javax.swing.JFileChooser.APPROVE_OPTION;
 /**
  * Created by Lídia on 02/06/2017.
  */
-public class Menu extends JMenuBar {
+public class MyMenu extends JMenuBar {
     private JMenu menu;
     private JMenuItem loadGame;
     private JMenuItem saveGame;
@@ -22,7 +24,7 @@ public class Menu extends JMenuBar {
     private GraphicalStateView parentView;
     private IState GS;
 
-    public Menu(GraphicalStateView parent, IState GS) {
+    public MyMenu(GraphicalStateView parent, IState GS) {
         this.parentView = parent;
         this.GS = GS;
 
@@ -48,8 +50,9 @@ public class Menu extends JMenuBar {
         int result = fc.showOpenDialog(parentView);
         if (result == APPROVE_OPTION) {
             try {
+                Main.ErrorStream.println("Retrieving saved game");
                 File fl = fc.getSelectedFile();
-                GS.setCurrentController(FileUtilities.retrieveGameFromFile(fl));
+                GS.setCurrentController((GameStateController) FileUtilities.retrieveGameFromFile(fl));
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }

@@ -17,19 +17,25 @@ import java.awt.*;
 //TODO: Aumentar um bocadinho a resolução? Talvez para 1280*720?
 public class GraphicalDrawPhaseView extends GraphicalStateView {
     private SpringLayout Layout;
-    private JLabel HPLabel;
+/*    private JLabel HPLabel;
     private JLabel GoldIconLabel;
     private JLabel XPLabel;
     private JLabel ArmorLabel;
     private JProgressBar HPBar;
     private JProgressBar ArmorBar;
-    private JLabel FoodLabel;
-    private JTextArea Log;
+    private JLabel FoodLabel;*/
 
     private JPanel ContentPanel;
     private JButton[] CardButtons;
 
-    private Menu menu;
+    private MyMenu myMenu;
+
+    private LogArea log;
+
+    private PlayerCardPanel playerStats;
+    private DungeonCardPanel dungeonInfo;
+    private JPanel dungeonInfoContainer;
+    private SpringLayout dungeonLayout;
 
     GraphicalDrawPhaseView(GameStateController GS) {
         super(GS);
@@ -50,13 +56,13 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         startHeight = (int) (ScreenSize.getHeight() * 0.125);
         startWidth = (int) (ScreenSize.getWidth() * 0.125);
 
-        //draw the Stats menu
+        //draw the Stats myMenu
         Layout = new SpringLayout();
         ContentPanel = new JPanel();
         ContentPanel.setLayout(Layout);
         this.setContentPane(ContentPanel);
 
-        HPLabel = new JLabel();
+/*        HPLabel = new JLabel();
         HPLabel.setIcon(new ImageIcon(ResourceManager.HPIcon));
         ContentPanel.add(HPLabel);
 
@@ -83,17 +89,20 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         FoodLabel = new JLabel();
         FoodLabel.setIcon(new ImageIcon(ResourceManager.FoodIcon));
         FoodLabel.setText("" + P.getFood());
-        ContentPanel.add(FoodLabel);
+        ContentPanel.add(FoodLabel);*/
 
         CardBase[] CBLinear = Utils.MakeLinear(GS.getRoomStages());
         CardButtons = new JButton[CBLinear.length];
 
+        log = new LogArea(GS);
+        ContentPanel.add(log);
 
         for (int i = 0; i < CBLinear.length; ++i) {
             CardBase CardHere;
             CardHere = CBLinear[i];
             CardButtons[i] = new JButton();
             CardButtons[i].setIcon(new ImageIcon(ResourceManager.ResolveCardImage(CardHere.getCardID())));
+            CardButtons[i].setPreferredSize(new Dimension(GraphicalConstants.CARD_BUTTON_WIDTH, GraphicalConstants.CARD_BUTTON_HEIGHT));
             //It should be Card Back, but let's test first...
             ContentPanel.add(CardButtons[i]);
         }
@@ -101,7 +110,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         //Layout math starts here...
         int minorGap = 3;
         int majorGap = 9;
-        Layout.putConstraint(SpringLayout.WEST, HPLabel, minorGap, SpringLayout.WEST, ContentPanel);
+/*        Layout.putConstraint(SpringLayout.WEST, HPLabel, minorGap, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, HPLabel, minorGap, SpringLayout.NORTH, ContentPanel);
         //Layout.putConstraint(SpringLayout.SOUTH,HPLabel,(int)(ContentPanel.getHeight() - HPLabel.getVisibleRect().getFrame().getMaxY()),SpringLayout.SOUTH,ContentPanel);
 
@@ -115,37 +124,42 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         Layout.putConstraint(SpringLayout.WEST, ArmorLabel, minorGap, SpringLayout.EAST, GoldIconLabel);
         Layout.putConstraint(SpringLayout.NORTH, ArmorLabel, 0, SpringLayout.NORTH, GoldIconLabel);
         Layout.putConstraint(SpringLayout.WEST, FoodLabel, minorGap, SpringLayout.EAST, XPLabel);
-        Layout.putConstraint(SpringLayout.NORTH, FoodLabel, 0, SpringLayout.NORTH, XPLabel);
+        Layout.putConstraint(SpringLayout.NORTH, FoodLabel, 0, SpringLayout.NORTH, XPLabel);*/
         //somebody send help
         //F̸̡̢̭͉͙̹̝̱̯̒͘͜u̷̡̧̞̱̻͚͍̙͎̖͕͂c̴̡̬̖̼̦̖͚̥͚̣̣̦̦̞̿k̷̡̜͆ ̸̟͎̗̲̪͑̉J̴͔͉̉̒̊̿̌̃a̶̛̛̠̽̄̀͋͂v̶̛͖̦̰̹̪̲̦̽͒̅̽̿͊̎̚͜ͅą̸̛͍̙͈̫̲͇͙̹͇̯̹̎͋̑̂͛͘ ̶̛̠̣͓̈́͂̐̈́̉̍̿̌̚͜͝
-        Layout.putConstraint(SpringLayout.NORTH, CardButtons[0], majorGap, SpringLayout.SOUTH, XPLabel);
-        Layout.putConstraint(SpringLayout.EAST, CardButtons[0], majorGap, SpringLayout.EAST, HPBar);
+        Layout.putConstraint(SpringLayout.NORTH, CardButtons[0], 100, SpringLayout.NORTH, this);
+        Layout.putConstraint(SpringLayout.WEST, CardButtons[0], 30, SpringLayout.WEST, this);
         //Layout.putConstraint(SpringLayout.SOUTH,CardButtons[0],majorGap,SpringLayout.SOUTH,ContentPanel);
 
         Layout.putConstraint(SpringLayout.WEST, CardButtons[1], majorGap, SpringLayout.EAST, CardButtons[0]);
         Layout.putConstraint(SpringLayout.SOUTH, CardButtons[1], majorGap / 2, SpringLayout.VERTICAL_CENTER, CardButtons[0]);
-        Layout.putConstraint(SpringLayout.NORTH, CardButtons[1], majorGap, SpringLayout.NORTH, ContentPanel);
+        //Layout.putConstraint(SpringLayout.NORTH, CardButtons[1], majorGap, SpringLayout.NORTH, ContentPanel);
 
         Layout.putConstraint(SpringLayout.NORTH, CardButtons[2], majorGap, SpringLayout.SOUTH, CardButtons[1]);
         Layout.putConstraint(SpringLayout.WEST, CardButtons[2], 0, SpringLayout.WEST, CardButtons[1]);
         Layout.putConstraint(SpringLayout.EAST, CardButtons[2], 0, SpringLayout.EAST, CardButtons[1]);
         //Layout.putConstraint(SpringLayout.SOUTH,CardButtons[2],0,SpringLayout.SOUTH,ContentPanel);
 
-        Layout.putConstraint(SpringLayout.NORTH, CardButtons[3], CardButtons[3].getHeight() / 2 + majorGap, SpringLayout.SOUTH, XPLabel);
+        //Layout.putConstraint(SpringLayout.NORTH, CardButtons[3], CardButtons[3].getHeight() / 2 + majorGap, SpringLayout.SOUTH, XPLabel);
+        Layout.putConstraint(SpringLayout.NORTH, CardButtons[3], 0, SpringLayout.NORTH, CardButtons[0]);
         Layout.putConstraint(SpringLayout.WEST, CardButtons[3], majorGap, SpringLayout.EAST, CardButtons[2]);
         //Layout.putConstraint(SpringLayout.SOUTH,CardButtons[0],majorGap,SpringLayout.SOUTH,ContentPanel);
 
         Layout.putConstraint(SpringLayout.WEST, CardButtons[4], majorGap, SpringLayout.EAST, CardButtons[3]);
         Layout.putConstraint(SpringLayout.SOUTH, CardButtons[4], majorGap / 2, SpringLayout.VERTICAL_CENTER, CardButtons[3]);
-        Layout.putConstraint(SpringLayout.NORTH, CardButtons[4], majorGap, SpringLayout.NORTH, ContentPanel);
+        //Layout.putConstraint(SpringLayout.NORTH, CardButtons[4], majorGap, SpringLayout.NORTH, ContentPanel);
 
         Layout.putConstraint(SpringLayout.NORTH, CardButtons[5], majorGap, SpringLayout.SOUTH, CardButtons[4]);
         Layout.putConstraint(SpringLayout.WEST, CardButtons[5], 0, SpringLayout.WEST, CardButtons[4]);
-        Layout.putConstraint(SpringLayout.EAST, CardButtons[5], 0, SpringLayout.EAST, CardButtons[4]);
+        //Layout.putConstraint(SpringLayout.EAST, CardButtons[5], 0, SpringLayout.EAST, CardButtons[4]);
 
-        Layout.putConstraint(SpringLayout.NORTH, CardButtons[6], CardButtons[6].getHeight() / 2 + majorGap, SpringLayout.SOUTH, XPLabel);
+        //Layout.putConstraint(SpringLayout.NORTH, CardButtons[6], CardButtons[6].getHeight() / 2 + majorGap, SpringLayout.SOUTH, XPLabel);
+        Layout.putConstraint(SpringLayout.NORTH, CardButtons[6], 0, SpringLayout.NORTH, CardButtons[0]);
         Layout.putConstraint(SpringLayout.WEST, CardButtons[6], majorGap, SpringLayout.EAST, CardButtons[4]);
         //Ends here...
+
+        Layout.putConstraint(SpringLayout.EAST, log, -20, SpringLayout.EAST, ContentPanel);
+        Layout.putConstraint(SpringLayout.SOUTH, log, -20, SpringLayout.SOUTH, ContentPanel);
 
 
         switch (GS.getCurrentStageInRoom()) {
@@ -168,10 +182,17 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
                 //CardButtons[6].setVisible(false);
         }
 
-        menu = new Menu(this, GS.getCurrentGameState());
-        ContentPanel.add(menu);
-        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
-        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
+        myMenu = new MyMenu(this, GS.getCurrentGameState());
+        ContentPanel.add(myMenu);
+        Layout.putConstraint(SpringLayout.WEST, myMenu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, myMenu, 0, SpringLayout.NORTH, this);
+
+        playerStats = new PlayerCardPanel(GS);
+        ContentPanel.add(playerStats);
+        Layout.putConstraint(SpringLayout.EAST, playerStats, -20, SpringLayout.EAST, this);
+        Layout.putConstraint(SpringLayout.NORTH, playerStats, 20, SpringLayout.NORTH, this);
+
+        drawDungeonInfo();
 
         this.setLocation(startWidth, startHeight);
         this.setPreferredSize(new Dimension(Width, Height));
@@ -189,6 +210,21 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
         CardButtons[6].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.DrawCommand + " " + 1));
     }
 
+    public void drawDungeonInfo() {
+        dungeonInfoContainer = new JPanel();
+        dungeonLayout = new SpringLayout();
+        dungeonInfoContainer.setLayout(dungeonLayout);
+        dungeonInfoContainer.setPreferredSize(new Dimension(135, 235));
+        dungeonInfo = new DungeonCardPanel(GS);
+        dungeonInfoContainer.add(dungeonInfo);
+        dungeonLayout.putConstraint(SpringLayout.WEST, dungeonInfo, -15, SpringLayout.WEST, dungeonInfoContainer);
+        dungeonLayout.putConstraint(SpringLayout.NORTH, dungeonInfo, -134, SpringLayout.NORTH, dungeonInfoContainer);
+
+        this.add(dungeonInfoContainer);
+
+        Layout.putConstraint(SpringLayout.NORTH, dungeonInfoContainer, 20, SpringLayout.SOUTH, CardButtons[0]);
+        Layout.putConstraint(SpringLayout.WEST, dungeonInfoContainer, 20, SpringLayout.WEST, this);
+    }
 
     @Override
     public void Render() {

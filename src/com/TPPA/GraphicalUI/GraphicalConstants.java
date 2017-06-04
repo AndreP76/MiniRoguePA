@@ -4,6 +4,10 @@ package com.TPPA.GraphicalUI;
  * Created by Lídia on 31/05/2017.
  */
 public class GraphicalConstants {
+
+    public static final int CARD_BUTTON_WIDTH = 125;
+    public static final int CARD_BUTTON_HEIGHT = 175;
+
     public static final int MAX_UNLOCKED_DICE = 4;
 
     public static final int FRAME_SIDE_PADDING = 50;

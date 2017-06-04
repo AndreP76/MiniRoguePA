@@ -9,6 +9,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
+//TODO: Corrigir posição do menu; adicionar log
 public class GraphicalTradeView extends GraphicalStateView {
     int startWidth = 0;
     int startHeight = 0;
@@ -34,7 +35,7 @@ public class GraphicalTradeView extends GraphicalStateView {
     private JButton BuyArmorBtn;
     private JButton EndBtn;
     private PlayerCardPanel PCP;
-    private Menu menu;
+    private MyMenu myMenu;
 
     public GraphicalTradeView(GameStateController GS) {
         super(GS);
@@ -67,10 +68,10 @@ public class GraphicalTradeView extends GraphicalStateView {
         ContentPanel.setLayout(L);
         this.setContentPane(ContentPanel);
 
-        menu = new Menu(this, GS.getCurrentGameState());
-        ContentPanel.add(menu);
-        L.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
-        L.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
+        myMenu = new MyMenu(this, GS.getCurrentGameState());
+        ContentPanel.add(myMenu);
+        L.putConstraint(SpringLayout.WEST, myMenu, 0, SpringLayout.WEST, this);
+        L.putConstraint(SpringLayout.NORTH, myMenu, 0, SpringLayout.NORTH, this);
 
         SellPanel = new JPanel();
         SPL = new BoxLayout(SellPanel, BoxLayout.PAGE_AXIS);
@@ -134,8 +135,10 @@ public class GraphicalTradeView extends GraphicalStateView {
         L.putConstraint(SpringLayout.EAST, PCP, 0, SpringLayout.EAST, ContentPanel);
         //L.putConstraint(SpringLayout.WEST, PCP, 10, SpringLayout.EAST, BuyPanel);
 
-        L.putConstraint(SpringLayout.EAST, EndBtn, 0, SpringLayout.EAST, SellPanel);
-        L.putConstraint(SpringLayout.SOUTH, EndBtn, 0, SpringLayout.NORTH, SellPanel);
+        //L.putConstraint(SpringLayout.EAST, EndBtn, 0, SpringLayout.EAST, SellPanel);
+        //L.putConstraint(SpringLayout.SOUTH, EndBtn, 0, SpringLayout.NORTH, SellPanel);
+
+
         this.setLocation(startWidth, startHeight);
         this.setSize(Width, Height);
         this.setVisible(true);

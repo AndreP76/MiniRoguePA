@@ -116,6 +116,9 @@ public class DungeonCardPanel extends JPanel implements Observer {
     }
 
     private void drawHpPanel() {
+        if (M == null)
+            return;
+
         int HP = M.getHPCurr();
         if (HP < 0)
             HP = 0;

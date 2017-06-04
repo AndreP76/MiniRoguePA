@@ -31,7 +31,8 @@ public class GraphicalSpellView extends GraphicalStateView {
     private JComboBox chooseSpell;
     private JLabel SpellLabel;
     private JButton useSpell;
-    private Menu menu;
+    private MyMenu myMenu;
+    private LogArea log;
 
     public GraphicalSpellView(GameStateController GS) {
         super(GS);
@@ -73,10 +74,10 @@ public class GraphicalSpellView extends GraphicalStateView {
 
         startChooseSpell();
 
-        menu = new Menu(this, GS.getCurrentGameState());
-        ContentPanel.add(menu);
-        Layout.putConstraint(SpringLayout.WEST, menu, 0, SpringLayout.WEST, this);
-        Layout.putConstraint(SpringLayout.NORTH, menu, 0, SpringLayout.NORTH, this);
+        myMenu = new MyMenu(this, GS.getCurrentGameState());
+        ContentPanel.add(myMenu);
+        Layout.putConstraint(SpringLayout.WEST, myMenu, 0, SpringLayout.WEST, this);
+        Layout.putConstraint(SpringLayout.NORTH, myMenu, 0, SpringLayout.NORTH, this);
 
         addListeners();
 
@@ -145,6 +146,11 @@ public class GraphicalSpellView extends GraphicalStateView {
 
         Layout.putConstraint(SpringLayout.WEST, monsterInfo, 0, SpringLayout.WEST, currMonster);
         Layout.putConstraint(SpringLayout.NORTH, monsterInfo, 20, SpringLayout.SOUTH, currMonster);
+
+        log = new LogArea(GS);
+        ContentPanel.add(log);
+        Layout.putConstraint(SpringLayout.WEST, log, 30, SpringLayout.EAST, playerStats);
+        Layout.putConstraint(SpringLayout.SOUTH, log, -GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.SOUTH, playerStats);
 
 
         this.setLocation(startWidth, startHeight);
