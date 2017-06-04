@@ -52,7 +52,7 @@ public class MyMenu extends JMenuBar {
             try {
                 Main.ErrorStream.println("Retrieving saved game");
                 File fl = fc.getSelectedFile();
-                GS.setCurrentController((GameStateController) FileUtilities.retrieveGameFromFile(fl));
+                GS.getCurrentController().setCurrentController((GameStateController) FileUtilities.retrieveGameFromFile(fl));
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }

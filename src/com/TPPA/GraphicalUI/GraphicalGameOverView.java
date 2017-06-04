@@ -21,9 +21,9 @@ public class GraphicalGameOverView extends GraphicalStateView {
         this.setPreferredSize(new Dimension((int) (ScreenSize.getWidth() * 0.75), (int) (ScreenSize.getHeight() * 0.75)));
         this.setMaximumSize(new Dimension((int) (ScreenSize.getWidth() * 0.75), (int) (ScreenSize.getHeight() * 0.75)));
         this.setContentPane(new GameOverPanel(this.getSize()));
-        JLabel ScoreLabel = new JLabel("Score : ");
+        JLabel ScoreLabel = new JLabel("Score : " + GS.CalculateScore());
         Font F = null;
-        //F = Font.getFont(ResourceManager.YouDiedFont);//TODO : THIS
+        F = ResourceManager.YouDiedFont;
         if (F == null)
             F = ScoreLabel.getFont();
         F = F.deriveFont(48.0f);

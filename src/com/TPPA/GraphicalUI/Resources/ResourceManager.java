@@ -40,6 +40,7 @@ public class ResourceManager {
     public static Image PlayerCardBig;
     public static Image DungeonCardBig;
 
+    public static Font YouDiedFont;
     public static AudioClip ThemeSong;
     public static AudioClip BattleThemeSong;
     public static AudioClip BossBattleSong;
@@ -51,29 +52,31 @@ public class ResourceManager {
     public static AudioClip FireSpellFX;
     public static AudioClip PoisonSpellFX;
     public static AudioClip HealSpellFX;
-    private static String HPIconPath = "./src/com/TPPA/GraphicalUI/Resources/HPIcon.png";
-    private static String GoldIconPath = "./src/com/TPPA/GraphicalUI/Resources/GoldIcon.png";
-    private static String XPIconPath = "./src/com/TPPA/GraphicalUI/Resources/XPIcon.png";
-    private static String ArmorIconPath = "./src/com/TPPA/GraphicalUI/Resources/ArmorIcon.png";
-    private static String FoodIconPath = "./src/com/TPPA/GraphicalUI/Resources/FoodIcon.png";
-    private static String CardBackPath = "./src/com/TPPA/GraphicalUI/Resources/CardBack.png";
-    private static String MonsterCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/MonsterCardFace.png";
-    private static String BossMonsterCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/BossMonsterCardFace.png";
-    private static String EventCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/EventCardFace.png";
-    private static String TrapCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/TrapCardFace.png";
-    private static String RestCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/RestingCardFace.png";
-    private static String TreasureCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/TreasureCardFace.png";
-    private static String MerchantCardFacePath = "./src/com/TPPA/GraphicalUI/Resources/MerchantCardFace.png";
-    private static String DieFace1Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace1.png";
-    private static String DieFace2Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace2.png";
-    private static String DieFace3Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace3.png";
-    private static String DieFace4Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace4.png";
-    private static String DieFace5Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace5.png";
-    private static String DieFace6Path = "./src/com/TPPA/GraphicalUI/Resources/DieFace6.png";
-    private static String GameOverPath = "./src/com/TPPA/GraphicalUI/Resources/GameOver.jpg";
-    private static String YouDiedPath = "./src/com/TPPA/GraphicalUI/Resources/YouDied.png";
-    private static String PlayerCardBigPath = "./src/com/TPPA/GraphicalUI/Resources/PlayerCard.png";
-    private static String DungeonCardBigPath = "./src/com/TPPA/GraphicalUI/Resources/DungeonCard.png";
+    private static String ResourceFolderPath = "./src/com/TPPA/GraphicalUI/Resources/";
+    private static String HPIconPath = ResourceFolderPath + "HPIcon.png";
+    private static String GoldIconPath = ResourceFolderPath + "GoldIcon.png";
+    private static String XPIconPath = ResourceFolderPath + "XPIcon.png";
+    private static String ArmorIconPath = ResourceFolderPath + "ArmorIcon.png";
+    private static String FoodIconPath = ResourceFolderPath + "FoodIcon.png";
+    private static String CardBackPath = ResourceFolderPath + "CardBack.png";
+    private static String MonsterCardFacePath = ResourceFolderPath + "MonsterCardFace.png";
+    private static String BossMonsterCardFacePath = ResourceFolderPath + "BossMonsterCardFace.png";
+    private static String EventCardFacePath = ResourceFolderPath + "EventCardFace.png";
+    private static String TrapCardFacePath = ResourceFolderPath + "TrapCardFace.png";
+    private static String RestCardFacePath = ResourceFolderPath + "RestingCardFace.png";
+    private static String TreasureCardFacePath = ResourceFolderPath + "TreasureCardFace.png";
+    private static String MerchantCardFacePath = ResourceFolderPath + "MerchantCardFace.png";
+    private static String DieFace1Path = ResourceFolderPath + "DieFace1.png";
+    private static String DieFace2Path = ResourceFolderPath + "DieFace2.png";
+    private static String DieFace3Path = ResourceFolderPath + "DieFace3.png";
+    private static String DieFace4Path = ResourceFolderPath + "DieFace4.png";
+    private static String DieFace5Path = ResourceFolderPath + "DieFace5.png";
+    private static String DieFace6Path = ResourceFolderPath + "DieFace6.png";
+    private static String GameOverPath = ResourceFolderPath + "GameOver.jpg";
+    private static String YouDiedPath = ResourceFolderPath + "YouDied.png";
+    private static String PlayerCardBigPath = ResourceFolderPath + "PlayerCard.png";
+    private static String DungeonCardBigPath = ResourceFolderPath + "DungeonCard.png";
+    private static String YouDiedFontPath = ResourceFolderPath + "OptimusPrinceps.ttf";
 
     private static String ThemeSongPath;
     private static String BattleThemeSongPath;
@@ -118,12 +121,15 @@ public class ResourceManager {
             DungeonCardBig = ImageIO.read(new File(DungeonCardBigPath));
             GameOver = ImageIO.read(new File(GameOverPath));
             YouDied = ImageIO.read(new File(YouDiedPath));
+            YouDiedFont = Font.createFont(Font.TRUETYPE_FONT, new File(YouDiedFontPath));
         } catch (IOException iox) {
             Main.ErrorStream.println(Paths.get("./").toAbsolutePath().toString());
             iox.printStackTrace();
             Main.ErrorStream.println(iox.toString());
             Main.ErrorStream.println(iox.getCause());
             Main.ErrorStream.println(iox.fillInStackTrace());
+        } catch (FontFormatException e) {
+            e.printStackTrace();
         }
 
         CardToImageMap = new HashMap<>();

@@ -88,7 +88,7 @@ public class TrapCard extends CardBase {
                     Main.ErrorStream.println("Player cannot fall anymore.");
                     GSC.MessageStack.push("Pit - you've lost 2 HP when you fell down an hole");
                 } else {
-                    Main.ErrorStream.println("Fall not implemented");
+                    GSC.setRoomStages(null);
                     GSC.MessageStack.push("Pit - you've lost 2 HP and fell down to the next Level");
                     if (GSC.getCurrentZone() < GSC.getMaxZones()) {//player can still fall down
                         GSC.setCurrentZone(GSC.getCurrentZone() + 1);
