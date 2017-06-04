@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cce43112-76d8-48ef-89ab-199ca89d57d2" name="Default" comment="Got started creating the graphical views.&#10;Need to make a Text/Graphical switch&#10;Most views still missing&#10;Added some images as Resources&#10;Need some audio&#10;Oh god, we'll never finish this in time....">
+    <list default="true" id="cce43112-76d8-48ef-89ab-199ca89d57d2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java" afterPath="$PROJECT_DIR$/src/com/TPPA/GameLogic/States/StartState.java" />
     </list>
     <ignored path="MiniRoguePA.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +34,8 @@
               <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1496420951471" expanded="true" signature="9506:9512" ph="{...}" />
+                <marker date="1496574088355" expanded="true" signature="9506:9512" ph="{...}" />
+                <marker date="1496574088355" expanded="false" signature="9557:9568" ph=" { " />
               </folding>
             </state>
           </provider>
@@ -108,20 +107,20 @@
                 <element signature="e#3034#3035#0" expanded="true" />
                 <element signature="e#3101#3102#0" expanded="true" />
                 <element signature="e#3154#3155#0" expanded="true" />
-                <element signature="e#5105#5106#0" expanded="true" />
-                <element signature="e#5144#5145#0" expanded="true" />
-                <element signature="e#5435#5436#0" expanded="true" />
-                <element signature="e#5469#5470#0" expanded="true" />
-                <element signature="e#5978#5979#0" expanded="true" />
-                <element signature="e#6057#6058#0" expanded="true" />
-                <element signature="e#7795#7796#0" expanded="true" />
-                <element signature="e#7845#7846#0" expanded="true" />
-                <marker date="1496573910657" expanded="false" signature="5663:5674" ph=" { " />
-                <marker date="1496573910657" expanded="false" signature="5693:5699" ph=" }" />
-                <marker date="1496573910657" expanded="false" signature="5751:5762" ph=" { " />
-                <marker date="1496573910657" expanded="false" signature="5784:5790" ph=" }" />
-                <marker date="1496573910657" expanded="false" signature="5878:5889" ph=" { " />
-                <marker date="1496573910657" expanded="false" signature="5921:5927" ph=" }" />
+                <element signature="e#3444#3445#0" expanded="true" />
+                <element signature="e#3494#3495#0" expanded="true" />
+                <element signature="e#5213#5214#0" expanded="true" />
+                <element signature="e#5252#5253#0" expanded="true" />
+                <element signature="e#5543#5544#0" expanded="true" />
+                <element signature="e#5577#5578#0" expanded="true" />
+                <element signature="e#6086#6087#0" expanded="true" />
+                <element signature="e#6165#6166#0" expanded="true" />
+                <marker date="1496574060071" expanded="false" signature="5771:5782" ph=" { " />
+                <marker date="1496574060071" expanded="false" signature="5801:5807" ph=" }" />
+                <marker date="1496574060071" expanded="false" signature="5876:5887" ph=" { " />
+                <marker date="1496574060071" expanded="false" signature="5909:5915" ph=" }" />
+                <marker date="1496574060071" expanded="false" signature="5986:5997" ph=" { " />
+                <marker date="1496574060071" expanded="false" signature="6029:6035" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -1038,7 +1037,7 @@
       <workItem from="1496264229694" duration="29000" />
       <workItem from="1496313806751" duration="2220000" />
       <workItem from="1496348312562" duration="9497000" />
-      <workItem from="1496403668121" duration="14161000" />
+      <workItem from="1496403668121" duration="14234000" />
     </task>
     <task id="LOCAL-00003" summary="Merged changes, created views">
       <created>1493803116321</created>
@@ -1187,11 +1186,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496421082684</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Got the savegame working">
+      <created>1496574068367</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1496574068367</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150899000" />
+    <option name="totallyTimeSpent" value="150972000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1295,7 +1301,8 @@
     <MESSAGE value="A" />
     <MESSAGE value="I did the Trade View&#10;Lidia did a lot of stuff&#10;Merged our work&#10;CHECK THE TODO!" />
     <MESSAGE value="Got started creating the graphical views.&#10;Need to make a Text/Graphical switch&#10;Most views still missing&#10;Added some images as Resources&#10;Need some audio&#10;Oh god, we'll never finish this in time...." />
-    <option name="LAST_COMMIT_MESSAGE" value="Got started creating the graphical views.&#10;Need to make a Text/Graphical switch&#10;Most views still missing&#10;Added some images as Resources&#10;Need some audio&#10;Oh god, we'll never finish this in time...." />
+    <MESSAGE value="Got the savegame working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got the savegame working" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1323,7 +1330,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/com/TPPA/GameLogic/GameStateController.java</url>
-          <line>112</line>
+          <line>116</line>
           <properties />
           <option name="timeStamp" value="71" />
         </line-breakpoint>
@@ -1589,10 +1596,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding>
-            <element signature="e#241#242#0" expanded="false" />
-            <element signature="e#266#267#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1716,7 +1720,8 @@
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1496420951471" expanded="true" signature="9506:9512" ph="{...}" />
+            <marker date="1496574088355" expanded="true" signature="9506:9512" ph="{...}" />
+            <marker date="1496574088355" expanded="false" signature="9557:9568" ph=" { " />
           </folding>
         </state>
       </provider>
@@ -1768,20 +1773,20 @@
             <element signature="e#3034#3035#0" expanded="true" />
             <element signature="e#3101#3102#0" expanded="true" />
             <element signature="e#3154#3155#0" expanded="true" />
-            <element signature="e#5105#5106#0" expanded="true" />
-            <element signature="e#5144#5145#0" expanded="true" />
-            <element signature="e#5435#5436#0" expanded="true" />
-            <element signature="e#5469#5470#0" expanded="true" />
-            <element signature="e#5978#5979#0" expanded="true" />
-            <element signature="e#6057#6058#0" expanded="true" />
-            <element signature="e#7795#7796#0" expanded="true" />
-            <element signature="e#7845#7846#0" expanded="true" />
-            <marker date="1496573910657" expanded="false" signature="5663:5674" ph=" { " />
-            <marker date="1496573910657" expanded="false" signature="5693:5699" ph=" }" />
-            <marker date="1496573910657" expanded="false" signature="5751:5762" ph=" { " />
-            <marker date="1496573910657" expanded="false" signature="5784:5790" ph=" }" />
-            <marker date="1496573910657" expanded="false" signature="5878:5889" ph=" { " />
-            <marker date="1496573910657" expanded="false" signature="5921:5927" ph=" }" />
+            <element signature="e#3444#3445#0" expanded="true" />
+            <element signature="e#3494#3495#0" expanded="true" />
+            <element signature="e#5213#5214#0" expanded="true" />
+            <element signature="e#5252#5253#0" expanded="true" />
+            <element signature="e#5543#5544#0" expanded="true" />
+            <element signature="e#5577#5578#0" expanded="true" />
+            <element signature="e#6086#6087#0" expanded="true" />
+            <element signature="e#6165#6166#0" expanded="true" />
+            <marker date="1496574060071" expanded="false" signature="5771:5782" ph=" { " />
+            <marker date="1496574060071" expanded="false" signature="5801:5807" ph=" }" />
+            <marker date="1496574060071" expanded="false" signature="5876:5887" ph=" { " />
+            <marker date="1496574060071" expanded="false" signature="5909:5915" ph=" }" />
+            <marker date="1496574060071" expanded="false" signature="5986:5997" ph=" { " />
+            <marker date="1496574060071" expanded="false" signature="6029:6035" ph=" }" />
           </folding>
         </state>
       </provider>
