@@ -1,7 +1,6 @@
 package com.TPPA.GraphicalUI;
 
 import com.TPPA.GameLogic.GameStateController;
-import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
 import javax.swing.*;
@@ -30,18 +29,19 @@ public class GraphicalGameOverView extends GraphicalStateView {
         ScoreLabel.setFont(F);
         ScoreLabel.setForeground(Color.RED);
         this.getContentPane().add(ScoreLabel);
-        JButton JB = new JButton("Back to main menu");
-        JB.addActionListener(actionEvent -> {
+        //JButton JB = new JButton("Back to main menu");
+        /*JB.addActionListener(actionEvent -> {
             GS.RelayAction(InternalCommandsDictionary.QuitCommand);
-        });
-        this.getContentPane().add(JB);
+        });*/
+        //this.getContentPane().add(JB);
         SpringLayout SL = (SpringLayout) this.getContentPane().getLayout();
         SL.putConstraint(SpringLayout.NORTH, ScoreLabel, (int) (this.getHeight() * 0.7), SpringLayout.NORTH, this.getContentPane());
         SL.putConstraint(SpringLayout.WEST, ScoreLabel, (int) (this.getWidth() * 0.65), SpringLayout.WEST, this.getContentPane());
 
+        /*
         SL.putConstraint(SpringLayout.NORTH, JB, 0, SpringLayout.NORTH, ScoreLabel);
         SL.putConstraint(SpringLayout.EAST, JB, -55, SpringLayout.WEST, ScoreLabel);
-        SL.putConstraint(SpringLayout.SOUTH, JB, 0, SpringLayout.SOUTH, ScoreLabel);
+        SL.putConstraint(SpringLayout.SOUTH, JB, 0, SpringLayout.SOUTH, ScoreLabel);*/
         //SL.putConstraint(SpringLayout.EAST,this.getContentPane(),(int)(ScreenSize.getWidth() * 0.75),SpringLayout.WEST,this.getContentPane());
         //SL.putConstraint(SpringLayout.SOUTH,this.getContentPane(),(int)(ScreenSize.getHeight() * 0.75),SpringLayout.NORTH,this.getContentPane());
         this.setVisible(true);
