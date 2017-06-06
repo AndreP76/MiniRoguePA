@@ -53,14 +53,14 @@ public class GraphicalStartStateView extends GraphicalStateView {
 
         DifficultyLabel = new JLabel();
         DifficultyLabel.setText(GS.getGameDifficulty().toString());
-        Layout.putConstraint(SpringLayout.WEST, DifficultyLabel, 0, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, DifficultyLabel, 0, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.WEST, DifficultyLabel, 20, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, DifficultyLabel, 50, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(DifficultyLabel);
 
         AreaLabel = new JLabel();
         AreaLabel.setText(GS.getZoneString(GS.getCurrentZone()));
         Layout.putConstraint(SpringLayout.NORTH, AreaLabel, gapSize, SpringLayout.SOUTH, DifficultyLabel);
-        Layout.putConstraint(SpringLayout.WEST, AreaLabel, 0, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.WEST, AreaLabel, 20, SpringLayout.WEST, ContentPanel);
         ContentPanel.add(AreaLabel);
 
         Dimension buttonSize = new Dimension(Width / 3, Height / 7);

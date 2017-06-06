@@ -17,7 +17,7 @@ public class LogArea extends JPanel {
         myTextArea = new JTextArea();
         String Text = "Dungeon Log:\n";
         while (!GS.MessageStack.empty()) {
-            Text += GS.MessageStack.pop() + "\n";
+            Text += "  " + GS.MessageStack.pop() + "\n";
         }
         myTextArea.setText(Text);
 
