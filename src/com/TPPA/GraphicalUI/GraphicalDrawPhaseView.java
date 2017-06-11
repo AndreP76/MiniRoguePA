@@ -14,7 +14,6 @@ import java.awt.*;
  * Created by andre on 5/20/17.
  */
 
-//TODO: Aumentar um bocadinho a resolução? Talvez para 1280*720?
 public class GraphicalDrawPhaseView extends GraphicalStateView {
     private SpringLayout Layout;
 /*    private JLabel HPLabel;

@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 /**
  * Created by andre on 5/3/17.
- * Roll roll roll
  */
 public class RollView extends StateView {
     RollView(GameStateController GS) {

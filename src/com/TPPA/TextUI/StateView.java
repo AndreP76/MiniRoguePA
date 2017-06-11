@@ -43,7 +43,6 @@ public abstract class StateView implements IView, Observer, Serializable {
 
     /*@Nullable
     public StateView GenerateView() {
-        //Honestly I think this is useless...
         if (GS.getCurrentGameState().getClass() == StartState.class) {
             return new StartStateView();
         } else return null;

@@ -1,6 +1,5 @@
 package com.TPPA;
-//Sorry Lidia, eu programo tudo em ingles xD
-//Se for problema diz que eu mudo xD
+
 //Zone : Nivel
 //Room : Area
 //Stage : Coluna

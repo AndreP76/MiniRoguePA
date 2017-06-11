@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Corrigir posição do menu; adicionar log
+
 public class GraphicalTradeView extends GraphicalStateView {
     int startWidth = 0;
     int startHeight = 0;

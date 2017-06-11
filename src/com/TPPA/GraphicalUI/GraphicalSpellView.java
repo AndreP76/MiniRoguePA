@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * Created by Lídia on 29/05/2017.
  */
-//TODO: finish this!!! -> Yay, more homework for me
+
 public class GraphicalSpellView extends GraphicalStateView {
     private SpringLayout Layout;
     private JLabel PhaseLabel;
@@ -104,7 +104,7 @@ public class GraphicalSpellView extends GraphicalStateView {
         ContentPanel.add(useSpell);
     }
 
-    private void addListeners() //impedir que os eventos sejam chamados múltiplas vezes!!!
+    private void addListeners()
     {
         if (P.getSpellsInventory().size() >= 1) {
             int index = chooseSpell.getSelectedIndex();

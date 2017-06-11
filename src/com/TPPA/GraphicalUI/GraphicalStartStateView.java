@@ -11,7 +11,7 @@ import java.util.Hashtable;
 /**
  * Created by andre on 5/18/17.
  */
-//TODO: corrigir sliders e posição do menu
+
 public class GraphicalStartStateView extends GraphicalStateView {
     private JSlider DiffSlider;
     private JButton SetDiffButton;
@@ -131,7 +131,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
     }
 
     private void HookListeners() {
-        //Lambdas Master Race
+
         SetDiffButton.addActionListener(actionEvent -> {
             if (DiffSliderShowing) {
                 DiffSliderShowing = false;

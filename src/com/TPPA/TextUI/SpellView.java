@@ -6,7 +6,6 @@ import com.TPPA.Main;
 
 /**
  * Created by andre on 5/3/17.
- * You're a Wizard, harry
  */
 public class SpellView extends StateView {
     SpellView(GameStateController GS) {

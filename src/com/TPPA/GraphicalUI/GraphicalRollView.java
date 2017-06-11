@@ -12,7 +12,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Adicionar log
+
 public class GraphicalRollView extends GraphicalStateView {
 
     private SpringLayout Layout;
@@ -98,7 +98,7 @@ public class GraphicalRollView extends GraphicalStateView {
         addListeners();
     }
 
-    private void addListeners() //impedir que eventos sejam chamados múltiplas vezes!!!
+    private void addListeners()
     {
         PlayerDice[0].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 0));
         PlayerDice[1].addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.ReRollDice + " " + 1));

@@ -9,7 +9,6 @@ import com.TPPA.Main;
 
 /**
  * Created by andre on 4/19/17.
- * I have no idea what I''m doing
  */
 public class MonsterCard extends CardBase {
     protected MonsterCard(GameStateController GS, String ID, String Name) {

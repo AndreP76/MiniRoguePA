@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 /**
  * Created by andre on 5/3/17.
- * GODDAMN WARNINGS!
  */
 public class FeatView extends StateView {
     FeatView(GameStateController GS) {
@@ -46,7 +45,7 @@ public class FeatView extends StateView {
 
                 Main.OutputStream.print(Text);
                 Selected = -1;
-                //what is this ?
+
                 String[] SSplit = GSC.getCurrentPlayer().getCriticalDiceDescription().split("\n");
                 Integer[] validIndexes = new Integer[SSplit.length];
                 for (int i = 0; i < validIndexes.length; i++) {

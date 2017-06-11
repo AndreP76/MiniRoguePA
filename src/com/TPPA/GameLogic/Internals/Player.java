@@ -229,13 +229,16 @@ public class Player implements Serializable {
     }
 
     public boolean incHP(int ammount) {
-        if ((this.HP == 20 && ammount > 0) || (this.HP == 1 && ammount < 0))
+        if (this.HP == 20 && ammount > 0)// || (this.HP == 1 && ammount < 0))
             return false;
 
         if (this.HP + ammount > 20)
             this.HP = 20;
         else
             this.HP += ammount;
+
+        if (this.HP < 0)
+            this.HP = 0;
 
         return true;
     }
