@@ -111,6 +111,10 @@ public class ResourceManager {
     static {
         SR = new Random();
         try {
+            Mixer.Info[] Lines = AudioSystem.getMixerInfo();
+            for (Mixer.Info L : Lines) {
+                Main.ErrorStream.println("Line : " + L);
+            }
             HPIcon = ImageIO.read(new File(HPIconPath));
             GoldIcon = ImageIO.read(new File(GoldIconPath));
             XPIcon = ImageIO.read(new File(XPIconPath));
