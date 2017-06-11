@@ -4,6 +4,7 @@ import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Internals.Monster;
 import com.TPPA.GameLogic.Internals.Player;
+import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,11 +12,11 @@ import java.awt.*;
 /**
  * Created by Lídia on 29/05/2017.
  */
-//TODO: finish this!!! -> Yay, more homework for me
+
 public class GraphicalSpellView extends GraphicalStateView {
     private SpringLayout Layout;
     private JLabel PhaseLabel;
-    private JPanel ContentPanel;
+    private TablePanel ContentPanel;
     private JButton skipButton;
     private int startWidth;
     private int startHeight;
@@ -46,11 +47,12 @@ public class GraphicalSpellView extends GraphicalStateView {
 
 
         Layout = new SpringLayout();
-        ContentPanel = new JPanel();
+        ContentPanel = new TablePanel();
         ContentPanel.setLayout(Layout);
         this.setContentPane(ContentPanel);
 
         PhaseLabel = new JLabel();
+        PhaseLabel.setForeground(Color.WHITE);
         phaseName = "SpellPhase";
         this.PhaseLabel.setText(phaseName);
         ContentPanel.add(PhaseLabel);
@@ -67,10 +69,11 @@ public class GraphicalSpellView extends GraphicalStateView {
         monsterInfo = new JTextArea();
         monsterInfo.setOpaque(false);
         monsterInfo.setEditable(false);
+        monsterInfo.setForeground(Color.WHITE);
         ContentPanel.add(monsterInfo);
 
         boldFont = monsterInfo.getFont();
-        monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
+        monsterInfo.setFont(ResourceManager.YouDiedFont.deriveFont(Font.BOLD).deriveFont(boldFont.getSize() * 1.0f));
 
         startChooseSpell();
 
@@ -87,6 +90,7 @@ public class GraphicalSpellView extends GraphicalStateView {
         int nSpells = P.getSpellsInventory().size();
 
         SpellLabel = new JLabel("Choose Spell:");
+        SpellLabel.setForeground(Color.WHITE);
         ContentPanel.add(SpellLabel);
 
         chooseSpell = new JComboBox();

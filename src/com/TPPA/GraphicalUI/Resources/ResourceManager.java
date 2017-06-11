@@ -36,6 +36,8 @@ public class ResourceManager {
     public static Image DieFace6;
     public static Image GameOver;
     public static Image YouDied;
+    public static Image TitleImage;
+    public static Image TableImage;
 
     public static Image PlayerCardBig;
     public static Image DungeonCardBig;
@@ -53,6 +55,7 @@ public class ResourceManager {
     public static AudioClip PoisonSpellFX;
     public static AudioClip HealSpellFX;
     private static String ResourceFolderPath = "./src/com/TPPA/GraphicalUI/Resources/";
+    private static String TitleImagePath = ResourceFolderPath + "MiniRogueTitle.png";
     private static String HPIconPath = ResourceFolderPath + "HPIcon.png";
     private static String GoldIconPath = ResourceFolderPath + "GoldIcon.png";
     private static String XPIconPath = ResourceFolderPath + "XPIcon.png";
@@ -77,7 +80,7 @@ public class ResourceManager {
     private static String PlayerCardBigPath = ResourceFolderPath + "PlayerCard.png";
     private static String DungeonCardBigPath = ResourceFolderPath + "DungeonCard.png";
     private static String YouDiedFontPath = ResourceFolderPath + "OptimusPrinceps.ttf";
-
+    private static String TableImagePath = ResourceFolderPath + "WoodTable.jpg";
     private static String ThemeSongPath;
     private static String BattleThemeSongPath;
     private static String BossBattleSongPath;
@@ -122,6 +125,8 @@ public class ResourceManager {
             GameOver = ImageIO.read(new File(GameOverPath));
             YouDied = ImageIO.read(new File(YouDiedPath));
             YouDiedFont = Font.createFont(Font.TRUETYPE_FONT, new File(YouDiedFontPath));
+            TitleImage = ImageIO.read(new File(TitleImagePath));
+            TableImage = ImageIO.read(new File(TableImagePath));
         } catch (IOException iox) {
             Main.ErrorStream.println(Paths.get("./").toAbsolutePath().toString());
             iox.printStackTrace();

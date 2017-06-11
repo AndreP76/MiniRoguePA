@@ -18,9 +18,9 @@ public class GraphicalTradeView extends GraphicalStateView {
     int PaddingWidth = 0;
     int ButtonWidth = 0;
     int ButtonHeight = 0;
-    private JPanel ContentPanel;
-    private JPanel SellPanel;
-    private JPanel BuyPanel;
+    private TablePanel ContentPanel;
+    private TablePanel SellPanel;
+    private TablePanel BuyPanel;
     private JLabel BuyPanelTitle;
     private JLabel SellPanelTitle;
     private SpringLayout L;
@@ -68,7 +68,7 @@ public class GraphicalTradeView extends GraphicalStateView {
         PaddingWidth = (int) ((Width / 2) * 0.125);
 
         L = new SpringLayout();
-        ContentPanel = new JPanel();
+        ContentPanel = new TablePanel();
         ContentPanel.setLayout(L);
         this.setContentPane(ContentPanel);
 
@@ -77,17 +77,18 @@ public class GraphicalTradeView extends GraphicalStateView {
         L.putConstraint(SpringLayout.WEST, myMenu, 0, SpringLayout.WEST, this);
         L.putConstraint(SpringLayout.NORTH, myMenu, 0, SpringLayout.NORTH, this);
 
-        SellPanel = new JPanel();
+        SellPanel = new TablePanel();
         SPL = new BoxLayout(SellPanel, BoxLayout.PAGE_AXIS);
         SellPanel.setLayout(SPL);
         ContentPanel.add(SellPanel);
 
-        BuyPanel = new JPanel();
+        BuyPanel = new TablePanel();
         BPL = new BoxLayout(BuyPanel, BoxLayout.PAGE_AXIS);
         BuyPanel.setLayout(BPL);
         ContentPanel.add(BuyPanel);
 
         BuyPanelTitle = new JLabel("Buy");
+        BuyPanelTitle.setForeground(Color.WHITE);
         BuyPanel.add(BuyPanelTitle);
 
         int PlayerGold = GS.getCurrentPlayer().getGold();
@@ -111,6 +112,7 @@ public class GraphicalTradeView extends GraphicalStateView {
             BuySpellBtn.setEnabled(false);
 
         SellPanelTitle = new JLabel("Sell");
+        SellPanelTitle.setForeground(Color.WHITE);
         SellPanel.add(SellPanelTitle);
         ContentPanel.add(SellPanel);
 

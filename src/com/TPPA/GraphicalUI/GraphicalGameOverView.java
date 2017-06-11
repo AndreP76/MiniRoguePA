@@ -54,7 +54,6 @@ public class GraphicalGameOverView extends GraphicalStateView {
 
     private class GameOverPanel extends JPanel {
         Dimension PanelSize;
-
         GameOverPanel(Dimension Size) {
             super();
             this.setLayout(new SpringLayout());

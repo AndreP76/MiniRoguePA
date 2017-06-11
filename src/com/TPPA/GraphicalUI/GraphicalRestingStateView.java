@@ -14,7 +14,7 @@ public class GraphicalRestingStateView extends GraphicalStateView {
     private JButton gainXP;
     private JButton gainHP;
     private JButton gainFood;
-    private JPanel ContentPanel;
+    private TablePanel ContentPanel;
     private SpringLayout Layout;
     private JLabel PhaseLabel;
     private Player P;
@@ -44,12 +44,13 @@ public class GraphicalRestingStateView extends GraphicalStateView {
 
 
         Layout = new SpringLayout();
-        ContentPanel = new JPanel();
+        ContentPanel = new TablePanel();
         ContentPanel.setLayout(Layout);
         this.setContentPane(ContentPanel);
 
         PhaseLabel = new JLabel();
         phaseName = "Resting State";
+        PhaseLabel.setForeground(Color.WHITE);
         this.PhaseLabel.setText(phaseName);
         ContentPanel.add(PhaseLabel);
 

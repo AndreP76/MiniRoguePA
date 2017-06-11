@@ -17,15 +17,8 @@ import java.awt.*;
 //TODO: Aumentar um bocadinho a resolução? Talvez para 1280*720?
 public class GraphicalDrawPhaseView extends GraphicalStateView {
     private SpringLayout Layout;
-/*    private JLabel HPLabel;
-    private JLabel GoldIconLabel;
-    private JLabel XPLabel;
-    private JLabel ArmorLabel;
-    private JProgressBar HPBar;
-    private JProgressBar ArmorBar;
-    private JLabel FoodLabel;*/
 
-    private JPanel ContentPanel;
+    private TablePanel ContentPanel;
     private JButton[] CardButtons;
 
     private MyMenu myMenu;
@@ -56,7 +49,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
 
         //draw the Stats myMenu
         Layout = new SpringLayout();
-        ContentPanel = new JPanel();
+        ContentPanel = new TablePanel();
         ContentPanel.setLayout(Layout);
         this.setContentPane(ContentPanel);
 

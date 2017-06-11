@@ -19,7 +19,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
     private JButton SetAreaButton;
     private JSpinner StartAreaSpinner;
     private JButton LoadButton;
-    private JPanel ContentPanel;
+    private TitlePanel ContentPanel;
     private SpringLayout Layout;
 
     private JLabel DifficultyLabel;
@@ -47,25 +47,27 @@ public class GraphicalStartStateView extends GraphicalStateView {
         startWidth = (int) (ScreenSize.getWidth() * 0.25);
 
         Layout = new SpringLayout();
-        ContentPanel = new JPanel();
+        ContentPanel = new TitlePanel();
         ContentPanel.setLayout(Layout);
         this.setContentPane(ContentPanel);
 
         DifficultyLabel = new JLabel();
         DifficultyLabel.setText(GS.getGameDifficulty().toString());
+        DifficultyLabel.setForeground(Color.WHITE);
         Layout.putConstraint(SpringLayout.WEST, DifficultyLabel, 0, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, DifficultyLabel, 0, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, DifficultyLabel, 25, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(DifficultyLabel);
 
         AreaLabel = new JLabel();
         AreaLabel.setText(GS.getZoneString(GS.getCurrentZone()));
+        AreaLabel.setForeground(Color.WHITE);
         Layout.putConstraint(SpringLayout.NORTH, AreaLabel, gapSize, SpringLayout.SOUTH, DifficultyLabel);
         Layout.putConstraint(SpringLayout.WEST, AreaLabel, 0, SpringLayout.WEST, ContentPanel);
         ContentPanel.add(AreaLabel);
 
-        Dimension buttonSize = new Dimension(Width / 3, Height / 7);
+        Dimension buttonSize = new Dimension(Width / 3, Height / 8);
         int buttonStartX = gapSize + (Width / 3);
-        int buttonStartY = gapSize;
+        int buttonStartY = 0;
         StartButton = new JButton("Start game");
         StartButton.setPreferredSize(buttonSize);
         Layout.putConstraint(SpringLayout.WEST, StartButton, buttonStartX, SpringLayout.WEST, ContentPanel);
@@ -74,7 +76,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
 
         SetDiffButton = new JButton("Set Game Difficulty");
         SetDiffButton.setPreferredSize(buttonSize);
-        buttonStartY += gapSize + (Height / 7);
+        buttonStartY += gapSize + (Height / 8);
         Layout.putConstraint(SpringLayout.WEST, SetDiffButton, buttonStartX, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, SetDiffButton, buttonStartY, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(SetDiffButton);
@@ -88,7 +90,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
             LabelTable.put(i + 1, new JLabel(DifficultyLevelEnum.values()[i].toString()));
         }
         DiffSlider.setLabelTable(LabelTable);
-        DiffSlider.setPaintLabels(true);
+        DiffSlider.setPaintLabels(false);
         Layout.putConstraint(SpringLayout.WEST, DiffSlider, gapSize, SpringLayout.EAST, SetDiffButton);
         Layout.putConstraint(SpringLayout.NORTH, DiffSlider, buttonStartY, SpringLayout.NORTH, ContentPanel);
         Layout.putConstraint(SpringLayout.EAST, DiffSlider, gapSize, SpringLayout.EAST, ContentPanel);
@@ -99,7 +101,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
 
         SetAreaButton = new JButton("Set Starting Area");
         SetAreaButton.setPreferredSize(buttonSize);
-        buttonStartY += gapSize + (Height / 7);
+        buttonStartY += gapSize + (Height / 8);
         Layout.putConstraint(SpringLayout.WEST, SetAreaButton, buttonStartX, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, SetAreaButton, buttonStartY, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(SetAreaButton);
@@ -113,7 +115,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
 
         LoadButton = new JButton("Load game");
         LoadButton.setPreferredSize(buttonSize);
-        buttonStartY += gapSize + (Height / 7);
+        buttonStartY += gapSize + (Height / 8);
         Layout.putConstraint(SpringLayout.WEST, LoadButton, buttonStartX, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, LoadButton, buttonStartY, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(LoadButton);

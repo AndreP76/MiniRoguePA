@@ -17,7 +17,7 @@ public class GraphicalRollView extends GraphicalStateView {
 
     private SpringLayout Layout;
     private JLabel PhaseLabel;
-    private JPanel ContentPanel;
+    private TablePanel ContentPanel;
     private JButton[] PlayerDice;   //show Roll results
     private JButton skipButton;
     private JLabel[] DieSum;
@@ -50,12 +50,13 @@ public class GraphicalRollView extends GraphicalStateView {
 
 
         Layout = new SpringLayout();
-        ContentPanel = new JPanel();
+        ContentPanel = new TablePanel();
         ContentPanel.setLayout(Layout);
         this.setContentPane(ContentPanel);
 
         PhaseLabel = new JLabel();
         phaseName = "RollPhase";
+        PhaseLabel.setForeground(Color.WHITE);
         this.PhaseLabel.setText(phaseName);
         ContentPanel.add(PhaseLabel);
 
@@ -63,6 +64,7 @@ public class GraphicalRollView extends GraphicalStateView {
         ContentPanel.add(skipButton);
 
         TotalDiceSum = new JLabel();
+        TotalDiceSum.setForeground(Color.WHITE);
         ContentPanel.add(TotalDiceSum);
 
         PlayerDice = new JButton[GraphicalConstants.MAX_UNLOCKED_DICE];
@@ -72,6 +74,7 @@ public class GraphicalRollView extends GraphicalStateView {
             PlayerDice[i] = new JButton();
             DieSum[i] = new JLabel();
             PlayerDice[i].setPreferredSize(new Dimension(60, 60));
+            DieSum[i].setForeground(Color.WHITE);
             ContentPanel.add(PlayerDice[i]);
             ContentPanel.add(DieSum[i]);
         }
@@ -85,10 +88,11 @@ public class GraphicalRollView extends GraphicalStateView {
         monsterInfo = new JTextArea();
         monsterInfo.setOpaque(false);
         monsterInfo.setEditable(false);
+        monsterInfo.setForeground(Color.WHITE);
         ContentPanel.add(monsterInfo);
 
         boldFont = monsterInfo.getFont();
-        monsterInfo.setFont(boldFont.deriveFont(Font.BOLD));
+        monsterInfo.setFont(ResourceManager.YouDiedFont.deriveFont(Font.BOLD).deriveFont(boldFont.getSize() * 1.0f));
 
         myMenu = new MyMenu(this, GS.getCurrentGameState());
         ContentPanel.add(myMenu);
