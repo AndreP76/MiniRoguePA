@@ -115,8 +115,10 @@ public class GraphicalRollView extends GraphicalStateView {
     }
 
     private void Draw() {
-        BattleClip = ResourceManager.BattleThemeSong;
-        BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (ResourceManager.SoundAvailable) {
+            BattleClip = ResourceManager.BattleThemeSong;
+            BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
         if (!P.hasRolledDice())  //roll dice automatically when entering this phase
             GS.RelayAction(InternalCommandsDictionary.RollDice);
 
@@ -187,7 +189,7 @@ public class GraphicalRollView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
-        BattleClip.stop();
+        if (ResourceManager.SoundAvailable) BattleClip.stop();
         this.dispose();
     }
 }

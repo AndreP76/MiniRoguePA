@@ -36,8 +36,10 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     }
 
     private void Draw() {
-        DrawClip = ResourceManager.RestSong;//yea, I know
-        DrawClip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (ResourceManager.SoundAvailable) {
+            DrawClip = ResourceManager.RestSong;//yea, I know
+            DrawClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
         Player P = GS.getCurrentPlayer();
         int gapSize = 7;
         int startWidth = 0;
@@ -194,7 +196,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
-        DrawClip.stop();
+        if (ResourceManager.SoundAvailable) DrawClip.stop();
         this.dispose();
     }
 }

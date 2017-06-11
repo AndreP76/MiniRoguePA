@@ -16,6 +16,7 @@ import java.util.Random;
  * Created by andre on 5/20/17.
  */
 public class ResourceManager {
+    public static Boolean SoundAvailable = true;
     public static Image HPIcon;
     public static Image GoldIcon;
     public static Image XPIcon;
@@ -234,7 +235,9 @@ public class ResourceManager {
             in.open(audioIn);
             return in;
         } else {
-            throw new LineUnavailableException();
+            Main.ErrorStream.println("Sound not available");
+            SoundAvailable = false;
+            return null;
         }
     }
 

@@ -127,8 +127,10 @@ public class GraphicalFeatView extends GraphicalStateView {
 
 
     private void Draw() {
-        BattleClip = ResourceManager.BattleThemeSong;
-        BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (ResourceManager.SoundAvailable) {
+            BattleClip = ResourceManager.BattleThemeSong;
+            BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
         for (int i = 0; i < GraphicalConstants.MAX_UNLOCKED_DICE; i++) {
             if (P.getUnlockedDice().size() >= i + 1) {
                 PlayerDice[i].setIcon(new ImageIcon(ResourceManager.ResolveDieRollImage(P.getUnlockedDice().get(i).getLastRoll())));
@@ -201,9 +203,11 @@ public class GraphicalFeatView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
-        ResourceManager.getNextPlayerAttack().start();
-        ResourceManager.getNextMonsterHurt().start();
-        BattleClip.stop();
+        if (ResourceManager.SoundAvailable) {
+            ResourceManager.getNextPlayerAttack().start();
+            ResourceManager.getNextMonsterHurt().start();
+            BattleClip.stop();
+        }
         this.dispose();
     }
 

@@ -38,8 +38,10 @@ public class GraphicalStartStateView extends GraphicalStateView {
     }
 
     private void Draw() {
-        ThemeClip = ResourceManager.ThemeSong;
-        ThemeClip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (ResourceManager.SoundAvailable) {
+            ThemeClip = ResourceManager.ThemeSong;
+            ThemeClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
         int gapSize = 7;
         int startWidth = 0;
         int startHeight = 0;
@@ -181,7 +183,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
     }
 
     public void DestroyView() {
-        ThemeClip.stop();
+        if (ResourceManager.SoundAvailable) ThemeClip.stop();
         this.dispose();
     }
 

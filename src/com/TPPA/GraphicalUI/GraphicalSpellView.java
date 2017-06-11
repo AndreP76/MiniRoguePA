@@ -136,8 +136,10 @@ public class GraphicalSpellView extends GraphicalStateView {
     }
 
     public void Draw() {
-        BattleClip = ResourceManager.BattleThemeSong;
-        BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (ResourceManager.SoundAvailable) {
+            BattleClip = ResourceManager.BattleThemeSong;
+            BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
         if (!GS.getCurrentGameState().CanUseSpell()) {
             GS.RelayAction(InternalCommandsDictionary.EndSpellPhase);
             return;
@@ -189,7 +191,7 @@ public class GraphicalSpellView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
-        BattleClip.stop();
+        if (ResourceManager.SoundAvailable) BattleClip.stop();
         this.dispose();
     }
 }

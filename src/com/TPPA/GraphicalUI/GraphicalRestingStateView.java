@@ -87,8 +87,10 @@ public class GraphicalRestingStateView extends GraphicalStateView {
     }
 
     public void Draw() {
-        RestClip = ResourceManager.RestSong;
-        RestClip.loop(Clip.LOOP_CONTINUOUSLY);
+        if (ResourceManager.SoundAvailable) {
+            RestClip = ResourceManager.RestSong;
+            RestClip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
         Layout.putConstraint(SpringLayout.WEST, playerStats, GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.WEST, this);
         Layout.putConstraint(SpringLayout.NORTH, playerStats, 40, SpringLayout.NORTH, this);
 
@@ -117,7 +119,7 @@ public class GraphicalRestingStateView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
-        RestClip.stop();
+        if (ResourceManager.SoundAvailable) RestClip.stop();
         this.dispose();
     }
 }
