@@ -4,8 +4,13 @@ import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Internals.Monster;
 import com.TPPA.GameLogic.Internals.Player;
+import com.TPPA.GameLogic.Spells.FireSpell;
+import com.TPPA.GameLogic.Spells.HealSpell;
+import com.TPPA.GameLogic.Spells.IceSpell;
+import com.TPPA.GameLogic.Spells.PoisonSpell;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,6 +39,7 @@ public class GraphicalSpellView extends GraphicalStateView {
     private JButton useSpell;
     private MyMenu myMenu;
     private LogArea log;
+    private Clip BattleClip;
 
     public GraphicalSpellView(GameStateController GS) {
         super(GS);
@@ -112,14 +118,26 @@ public class GraphicalSpellView extends GraphicalStateView {
     {
         if (P.getSpellsInventory().size() >= 1) {
             int index = chooseSpell.getSelectedIndex();
-            useSpell.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.UseSpell + " " + index));
+            useSpell.addActionListener(actionEvent -> {
+                if (P.getSpellsInventory().get(index) instanceof FireSpell)
+                    ResourceManager.FireSpellFX.loop(1);
+                else if (P.getSpellsInventory().get(index) instanceof IceSpell)
+                    ResourceManager.IceSpellFX.loop(1);
+                else if (P.getSpellsInventory().get(index) instanceof PoisonSpell)
+                    ResourceManager.PoisonSpellFX.loop(1);
+                else if (P.getSpellsInventory().get(index) instanceof HealSpell)
+                    ResourceManager.HealSpellFX.loop(1);
+
+                GS.RelayAction(InternalCommandsDictionary.UseSpell + " " + index);
+            });
         }
 
         skipButton.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndSpellPhase));
     }
 
     public void Draw() {
-
+        BattleClip = ResourceManager.BattleThemeSong;
+        BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
         if (!GS.getCurrentGameState().CanUseSpell()) {
             GS.RelayAction(InternalCommandsDictionary.EndSpellPhase);
             return;
@@ -161,7 +179,6 @@ public class GraphicalSpellView extends GraphicalStateView {
         this.setPreferredSize(new Dimension(Width, Height));
         this.pack();
         this.setVisible(true);
-
     }
 
 
@@ -172,6 +189,7 @@ public class GraphicalSpellView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
+        BattleClip.stop();
         this.dispose();
     }
 }

@@ -7,6 +7,7 @@ import com.TPPA.GameLogic.Internals.Player;
 import com.TPPA.GameLogic.Internals.Utils;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,12 +29,15 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
     private DungeonCardPanel dungeonInfo;
     private JPanel dungeonInfoContainer;
     private SpringLayout dungeonLayout;
+    private Clip DrawClip;
 
     GraphicalDrawPhaseView(GameStateController GS) {
         super(GS);
     }
 
     private void Draw() {
+        DrawClip = ResourceManager.RestSong;//yea, I know
+        DrawClip.loop(Clip.LOOP_CONTINUOUSLY);
         Player P = GS.getCurrentPlayer();
         int gapSize = 7;
         int startWidth = 0;
@@ -190,6 +194,7 @@ public class GraphicalDrawPhaseView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
+        DrawClip.stop();
         this.dispose();
     }
 }

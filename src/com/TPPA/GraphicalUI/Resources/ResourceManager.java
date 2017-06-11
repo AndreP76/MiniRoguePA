@@ -4,12 +4,13 @@ import com.TPPA.GameLogic.Internals.Deck;
 import com.TPPA.Main;
 
 import javax.imageio.ImageIO;
-import java.applet.AudioClip;
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by andre on 5/20/17.
@@ -43,17 +44,22 @@ public class ResourceManager {
     public static Image DungeonCardBig;
 
     public static Font YouDiedFont;
-    public static AudioClip ThemeSong;
-    public static AudioClip BattleThemeSong;
-    public static AudioClip BossBattleSong;
-    public static AudioClip RestSong;
-    public static AudioClip TrapSong;
-    public static AudioClip EventFX;
-    public static AudioClip TrapFX;
-    public static AudioClip IceSpellFX;
-    public static AudioClip FireSpellFX;
-    public static AudioClip PoisonSpellFX;
-    public static AudioClip HealSpellFX;
+    public static Clip ThemeSong;
+    public static Clip BattleThemeSong;
+    public static Clip BossBattleSong;
+    public static Clip RestSong;
+    public static Clip EventFX;
+    public static Clip TrapFX;
+    public static Clip IceSpellFX;
+    public static Clip FireSpellFX;
+    public static Clip PoisonSpellFX;
+    public static Clip HealSpellFX;
+    public static Clip GameOverFX;
+    public static Clip GameOverGong;
+    public static Clip[] MonsterHurtFX;
+    public static Clip[] MonsterAttackFX;
+    public static Clip[] PlayerAttackFX;
+    public static Clip[] TradeFX;
     private static String ResourceFolderPath = "./src/com/TPPA/GraphicalUI/Resources/";
     private static String TitleImagePath = ResourceFolderPath + "MiniRogueTitle.png";
     private static String HPIconPath = ResourceFolderPath + "HPIcon.png";
@@ -81,22 +87,29 @@ public class ResourceManager {
     private static String DungeonCardBigPath = ResourceFolderPath + "DungeonCard.png";
     private static String YouDiedFontPath = ResourceFolderPath + "OptimusPrinceps.ttf";
     private static String TableImagePath = ResourceFolderPath + "WoodTable.jpg";
-    private static String ThemeSongPath;
-    private static String BattleThemeSongPath;
-    private static String BossBattleSongPath;
-    private static String RestSongPath;
-    private static String TrapSongPath;
-    private static String EventFXPath;
-    private static String TrapFXPath;
-    private static String IceSpellFXPath;
-    private static String FireSpellFXPath;
-    private static String PoisonSpellFXPath;
-    private static String HealSpellFXPath;
+    private static String SoundFolderPath = ResourceFolderPath + "SoundResources/";
+    private static String ThemeSongPath = SoundFolderPath + "MainTheme.wav";
+    private static String BattleThemeSongPath = SoundFolderPath + "BattleLoop.wav";
+    private static String BossBattleSongPath = SoundFolderPath + "BattleLoop.wav";
+    private static String RestSongPath = SoundFolderPath + "DrawTheme.wav";
+    private static String EventFXPath = SoundFolderPath + "EventFX.wav";
+    private static String TrapFXPath = SoundFolderPath + "PlayerAttack1.wav";
+    private static String IceSpellFXPath = SoundFolderPath + "IceSpell.wav";
+    private static String FireSpellFXPath = SoundFolderPath + "FireBall.wav";
+    private static String PoisonSpellFXPath = SoundFolderPath + "Poison.wav";
+    private static String HealSpellFXPath = SoundFolderPath + "HealSpell.wav";
+    private static String GameOverFXPath = SoundFolderPath + "GameOver.wav";
+    private static String GameOverGongPath = SoundFolderPath + "GameOverGong.wav";
+    private static String[] MonsterAttackFXPath = {SoundFolderPath + "MonsterAttack1.wav", SoundFolderPath + "MonsterAttack2.wav", SoundFolderPath + "MonsterAttack3.wav"};
+    private static String[] MonsterHurtFXPath = {SoundFolderPath + "MonsterHurt1.wav", SoundFolderPath + "MonsterHurt2.wav", SoundFolderPath + "MonsterHurt3.wav", SoundFolderPath + "MonsterHurt4.wav", SoundFolderPath + "MonsterHurt5.wav"};
+    private static String[] PlayerAttackFXPath = {SoundFolderPath + "PlayerAttack1.wav", SoundFolderPath + "PlayerAttack2.wav", SoundFolderPath + "PlayerAttack3.wav", SoundFolderPath + "PlayerAttack4.wav", SoundFolderPath + "PlayerAttack5.wav"};
+    private static String[] TradeFXPath = {SoundFolderPath + "Trade1.wav", SoundFolderPath + "Trade2.wav", SoundFolderPath + "Trade3.wav"};
 
     private static HashMap<String, Image> CardToImageMap;
     private static HashMap<Integer, Image> DieRollToImage;
-
+    private static Random SR;
     static {
+        SR = new Random();
         try {
             HPIcon = ImageIO.read(new File(HPIconPath));
             GoldIcon = ImageIO.read(new File(GoldIconPath));
@@ -127,6 +140,39 @@ public class ResourceManager {
             YouDiedFont = Font.createFont(Font.TRUETYPE_FONT, new File(YouDiedFontPath));
             TitleImage = ImageIO.read(new File(TitleImagePath));
             TableImage = ImageIO.read(new File(TableImagePath));
+
+            MonsterAttackFX = new Clip[MonsterAttackFXPath.length];
+            for (int i = 0; i < MonsterAttackFXPath.length; ++i) {
+                MonsterAttackFX[i] = LoadAudioClip(MonsterAttackFXPath[i]);
+            }
+
+            MonsterHurtFX = new Clip[MonsterHurtFXPath.length];
+            for (int i = 0; i < MonsterHurtFXPath.length; ++i) {
+                MonsterHurtFX[i] = LoadAudioClip(MonsterHurtFXPath[i]);
+            }
+
+            PlayerAttackFX = new Clip[PlayerAttackFXPath.length];
+            for (int i = 0; i < PlayerAttackFXPath.length; ++i) {
+                PlayerAttackFX[i] = LoadAudioClip(PlayerAttackFXPath[i]);
+            }
+
+            TradeFX = new Clip[TradeFXPath.length];
+            for (int i = 0; i < TradeFXPath.length; ++i) {
+                TradeFX[i] = LoadAudioClip(TradeFXPath[i]);
+            }
+
+            ThemeSong = LoadAudioClip(ThemeSongPath);
+            BattleThemeSong = LoadAudioClip(BattleThemeSongPath);
+            BossBattleSong = LoadAudioClip(BossBattleSongPath);
+            RestSong = LoadAudioClip(RestSongPath);
+            EventFX = LoadAudioClip(EventFXPath);
+            TrapFX = LoadAudioClip(TrapFXPath);
+            IceSpellFX = LoadAudioClip(IceSpellFXPath);
+            FireSpellFX = LoadAudioClip(FireSpellFXPath);
+            PoisonSpellFX = LoadAudioClip(PoisonSpellFXPath);
+            HealSpellFX = LoadAudioClip(HealSpellFXPath);
+            GameOverFX = LoadAudioClip(GameOverFXPath);
+            GameOverGong = LoadAudioClip(GameOverGongPath);
         } catch (IOException iox) {
             Main.ErrorStream.println(Paths.get("./").toAbsolutePath().toString());
             iox.printStackTrace();
@@ -134,6 +180,10 @@ public class ResourceManager {
             Main.ErrorStream.println(iox.getCause());
             Main.ErrorStream.println(iox.fillInStackTrace());
         } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
 
@@ -169,6 +219,34 @@ public class ResourceManager {
 
     public static Image getDungeonCardBig() {
         return DungeonCardBig;
+    }
+
+    public static Clip LoadAudioClip(String FilePath) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+        Clip in;
+        AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(FilePath));
+        in = AudioSystem.getClip();
+        in.open(audioIn);
+        return in;
+    }
+
+    public static Clip getNextMonsterAttack() {
+        int R = SR.nextInt(MonsterAttackFX.length);
+        return MonsterAttackFX[R];
+    }
+
+    public static Clip getNextMonsterHurt() {
+        int R = SR.nextInt(MonsterHurtFX.length);
+        return MonsterHurtFX[R];
+    }
+
+    public static Clip getNextTrade() {
+        int R = SR.nextInt(TradeFX.length);
+        return TradeFX[R];
+    }
+
+    public static Clip getNextPlayerAttack() {
+        int R = SR.nextInt(PlayerAttackFX.length);
+        return PlayerAttackFX[R];
     }
 
     public static void Init() {

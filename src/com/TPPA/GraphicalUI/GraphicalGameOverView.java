@@ -16,6 +16,8 @@ public class GraphicalGameOverView extends GraphicalStateView {
 
     @Override
     public void Render() {
+        ResourceManager.GameOverFX.start();
+        ResourceManager.GameOverGong.start();
         this.setMinimumSize(new Dimension((int) (ScreenSize.getWidth() * 0.75), (int) (ScreenSize.getHeight() * 0.75)));
         this.setPreferredSize(new Dimension((int) (ScreenSize.getWidth() * 0.75), (int) (ScreenSize.getHeight() * 0.75)));
         this.setMaximumSize(new Dimension((int) (ScreenSize.getWidth() * 0.75), (int) (ScreenSize.getHeight() * 0.75)));

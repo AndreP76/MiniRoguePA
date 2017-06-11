@@ -2,7 +2,9 @@ package com.TPPA.GraphicalUI;
 
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,6 +38,7 @@ public class GraphicalTradeView extends GraphicalStateView {
     private JButton EndBtn;
     private PlayerCardPanel PCP;
     private MyMenu myMenu;
+    private Clip TradeClip;
 
     public GraphicalTradeView(GameStateController GS) {
         super(GS);
@@ -59,6 +62,8 @@ public class GraphicalTradeView extends GraphicalStateView {
     }
 
     private void Draw() {
+        TradeClip = ResourceManager.RestSong;
+        TradeClip.loop(Clip.LOOP_CONTINUOUSLY);
         Width = (int) (ScreenSize.getWidth() * 0.75);
         Height = (int) (ScreenSize.getHeight() * 0.75);
         startHeight = (int) (ScreenSize.getHeight() * 0.125);
@@ -153,18 +158,40 @@ public class GraphicalTradeView extends GraphicalStateView {
     }
 
     public void HookListeners() {
-        BuyArmorBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.BuyArmorPiece));
-        BuyRationBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.BuyRation));
-        BuyHealthBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.BuyHealthPotion));
+        BuyArmorBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.BuyArmorPiece);
+        });
+        BuyRationBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.BuyRation);
+        });
+        BuyHealthBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.BuyHealthPotion);
+        });
         BuySpellBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
             GS.RelayAction(InternalCommandsDictionary.BuySpell + " " + SpellSelector.GetBuySpell(BuyPanel));
         });
-        BuyHealthBigBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.BuyBigHealthPotion));
+        BuyHealthBigBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.BuyBigHealthPotion);
+        });
 
-        SellSpellBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.SellSpell + " " + SpellSelector.GetSpellIndex(BuyPanel, GS.getCurrentPlayer())));
-        SellArmorBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.SellArmorPiece));
+        SellSpellBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.SellSpell + " " + SpellSelector.GetSpellIndex(BuyPanel, GS.getCurrentPlayer()));
+        });
+        SellArmorBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.SellArmorPiece);
+        });
 
-        EndBtn.addActionListener(actionEvent -> GS.RelayAction(InternalCommandsDictionary.EndTradingState));
+        EndBtn.addActionListener(actionEvent -> {
+            ResourceManager.getNextTrade().loop(1);
+            GS.RelayAction(InternalCommandsDictionary.EndTradingState);
+        });
     }
 
     @Override
@@ -175,6 +202,7 @@ public class GraphicalTradeView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
+        TradeClip.stop();
         this.dispose();
     }
 }

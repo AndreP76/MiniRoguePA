@@ -6,6 +6,7 @@ import com.TPPA.GameLogic.Internals.Monster;
 import com.TPPA.GameLogic.Internals.Player;
 import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,6 +36,7 @@ public class GraphicalRollView extends GraphicalStateView {
     private Font boldFont;
     private MyMenu myMenu;
     private LogArea log;
+    private Clip BattleClip;
 
 
     GraphicalRollView(GameStateController GS) {
@@ -113,7 +115,8 @@ public class GraphicalRollView extends GraphicalStateView {
     }
 
     private void Draw() {
-
+        BattleClip = ResourceManager.BattleThemeSong;
+        BattleClip.loop(Clip.LOOP_CONTINUOUSLY);
         if (!P.hasRolledDice())  //roll dice automatically when entering this phase
             GS.RelayAction(InternalCommandsDictionary.RollDice);
 
@@ -184,6 +187,7 @@ public class GraphicalRollView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
+        BattleClip.stop();
         this.dispose();
     }
 }

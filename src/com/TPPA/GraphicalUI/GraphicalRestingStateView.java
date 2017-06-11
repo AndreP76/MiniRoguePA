@@ -3,7 +3,9 @@ package com.TPPA.GraphicalUI;
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
 import com.TPPA.GameLogic.Internals.Player;
+import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,6 +30,7 @@ public class GraphicalRestingStateView extends GraphicalStateView {
     private int ButtonWidth;
     private int ButtonHeight;
     private int PaddingWidth;
+    private Clip RestClip;
 
     GraphicalRestingStateView(GameStateController GS) {
         super(GS);
@@ -84,6 +87,8 @@ public class GraphicalRestingStateView extends GraphicalStateView {
     }
 
     public void Draw() {
+        RestClip = ResourceManager.RestSong;
+        RestClip.loop(Clip.LOOP_CONTINUOUSLY);
         Layout.putConstraint(SpringLayout.WEST, playerStats, GraphicalConstants.FRAME_SIDE_PADDING, SpringLayout.WEST, this);
         Layout.putConstraint(SpringLayout.NORTH, playerStats, 40, SpringLayout.NORTH, this);
 
@@ -112,6 +117,7 @@ public class GraphicalRestingStateView extends GraphicalStateView {
 
     @Override
     public void DestroyView() {
+        RestClip.stop();
         this.dispose();
     }
 }

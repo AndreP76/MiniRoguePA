@@ -3,7 +3,9 @@ package com.TPPA.GraphicalUI;
 import com.TPPA.GameLogic.GameStateController;
 import com.TPPA.GameLogic.Internals.DifficultyLevelEnum;
 import com.TPPA.GameLogic.Internals.InternalCommandsDictionary;
+import com.TPPA.GraphicalUI.Resources.ResourceManager;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Hashtable;
@@ -29,12 +31,15 @@ public class GraphicalStartStateView extends GraphicalStateView {
     private Boolean AreaSpinnerShowing = false;
 
     private MyMenu myMenu;
+    private Clip ThemeClip;
 
     public GraphicalStartStateView(GameStateController GS) {
         super(GS);
     }
 
     private void Draw() {
+        ThemeClip = ResourceManager.ThemeSong;
+        ThemeClip.loop(Clip.LOOP_CONTINUOUSLY);
         int gapSize = 7;
         int startWidth = 0;
         int startHeight = 0;
@@ -176,6 +181,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
     }
 
     public void DestroyView() {
+        ThemeClip.stop();
         this.dispose();
     }
 
