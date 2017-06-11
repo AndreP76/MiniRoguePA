@@ -132,6 +132,7 @@ public class GraphicalTradeView extends GraphicalStateView {
         PCP = new PlayerCardPanel(GS);
         PCP.setMaximumSize(new Dimension(Width, Height));
         PCP.setPreferredSize(new Dimension(Width / 2, Height / 2));
+        PCP.setOpaque(false);
         SellPanel.add(PCP);
 
         EndBtn = CreateButton("Finish trading", ButtonWidth, ButtonHeight, PaddingWidth, BuyPanel);
