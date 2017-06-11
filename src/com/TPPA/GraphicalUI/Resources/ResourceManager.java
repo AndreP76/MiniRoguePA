@@ -60,7 +60,7 @@ public class ResourceManager {
     public static Clip[] MonsterAttackFX;
     public static Clip[] PlayerAttackFX;
     public static Clip[] TradeFX;
-    private static String ResourceFolderPath = "./src/com/TPPA/GraphicalUI/Resources/";
+    private static String ResourceFolderPath = "./res/";
     private static String TitleImagePath = ResourceFolderPath + "MiniRogueTitle.png";
     private static String HPIconPath = ResourceFolderPath + "HPIcon.png";
     private static String GoldIconPath = ResourceFolderPath + "GoldIcon.png";
