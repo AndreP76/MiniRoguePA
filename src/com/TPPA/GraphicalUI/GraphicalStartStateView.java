@@ -11,7 +11,7 @@ import java.util.Hashtable;
 /**
  * Created by andre on 5/18/17.
  */
-//TODO: corrigir sliders e posição do menu
+
 public class GraphicalStartStateView extends GraphicalStateView {
     private JSlider DiffSlider;
     private JButton SetDiffButton;
@@ -54,15 +54,15 @@ public class GraphicalStartStateView extends GraphicalStateView {
         DifficultyLabel = new JLabel();
         DifficultyLabel.setText(GS.getGameDifficulty().toString());
         DifficultyLabel.setForeground(Color.WHITE);
-        Layout.putConstraint(SpringLayout.WEST, DifficultyLabel, 0, SpringLayout.WEST, ContentPanel);
-        Layout.putConstraint(SpringLayout.NORTH, DifficultyLabel, 25, SpringLayout.NORTH, ContentPanel);
+        Layout.putConstraint(SpringLayout.WEST, DifficultyLabel, 20, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.NORTH, DifficultyLabel, 50, SpringLayout.NORTH, ContentPanel);
         ContentPanel.add(DifficultyLabel);
 
         AreaLabel = new JLabel();
         AreaLabel.setText(GS.getZoneString(GS.getCurrentZone()));
         AreaLabel.setForeground(Color.WHITE);
         Layout.putConstraint(SpringLayout.NORTH, AreaLabel, gapSize, SpringLayout.SOUTH, DifficultyLabel);
-        Layout.putConstraint(SpringLayout.WEST, AreaLabel, 0, SpringLayout.WEST, ContentPanel);
+        Layout.putConstraint(SpringLayout.WEST, AreaLabel, 20, SpringLayout.WEST, ContentPanel);
         ContentPanel.add(AreaLabel);
 
         Dimension buttonSize = new Dimension(Width / 3, Height / 8);
@@ -133,7 +133,7 @@ public class GraphicalStartStateView extends GraphicalStateView {
     }
 
     private void HookListeners() {
-        //Lambdas Master Race
+
         SetDiffButton.addActionListener(actionEvent -> {
             if (DiffSliderShowing) {
                 DiffSliderShowing = false;

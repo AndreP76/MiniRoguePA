@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * Created by andre on 5/20/17.
  */
-//TODO: Corrigir posição do menu; adicionar log
+
 public class GraphicalTradeView extends GraphicalStateView {
     int startWidth = 0;
     int startHeight = 0;
@@ -133,7 +133,7 @@ public class GraphicalTradeView extends GraphicalStateView {
         L.putConstraint(SpringLayout.EAST, SellPanel, 0, SpringLayout.EAST, ContentPanel);
         L.putConstraint(SpringLayout.WEST, SellPanel, Width / 2, SpringLayout.WEST, ContentPanel);
 
-        L.putConstraint(SpringLayout.NORTH, BuyPanel, 0, SpringLayout.NORTH, ContentPanel);
+        L.putConstraint(SpringLayout.NORTH, BuyPanel, 30, SpringLayout.NORTH, ContentPanel);
         L.putConstraint(SpringLayout.SOUTH, BuyPanel, 0, SpringLayout.SOUTH, ContentPanel);
         L.putConstraint(SpringLayout.EAST, BuyPanel, 0, SpringLayout.WEST, SellPanel);
         L.putConstraint(SpringLayout.WEST, BuyPanel, 0, SpringLayout.WEST, ContentPanel);

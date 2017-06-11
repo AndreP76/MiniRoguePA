@@ -17,7 +17,7 @@ public class GameStateController extends Observable implements java.io.Serializa
     //Acho que esta a ser misturada aqui um controlador de MVC e um "controlador" da logica...
     //The IView speaks only to this class
     //private static GameStateController CurrentController; //Keeps the current controller. THERE CAN BE ONLY ONE!
-    //Idiots...
+
     public Stack<String> MessageStack = null;//the view reads messages from this
     private IState CurrentGameState; //The "Model"
     private DifficultyLevelEnum GameDifficulty;

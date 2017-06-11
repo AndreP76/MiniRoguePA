@@ -7,7 +7,6 @@ import com.TPPA.Main;
 
 /**
  * Created by andre on 5/1/17.
- * The law of equivalent exchange
  */
 public class TradingStateView extends StateView {
     TradingStateView(GameStateController GS) {

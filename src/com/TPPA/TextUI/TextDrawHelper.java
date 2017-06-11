@@ -20,7 +20,7 @@ enum AvailableOS{
 public class TextDrawHelper {//To console
     private static final int FillClearNum = 64;
     public static Scanner InputScanner = new Scanner(Main.InputStream);
-    //this uses system calls :(
+    //this uses system calls
     private static int ConsoleLines;
     private static int ConsoleRows;
     private static String OSName;

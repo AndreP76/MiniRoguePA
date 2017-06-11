@@ -108,7 +108,7 @@ public class GraphicalSpellView extends GraphicalStateView {
         ContentPanel.add(useSpell);
     }
 
-    private void addListeners() //impedir que os eventos sejam chamados múltiplas vezes!!!
+    private void addListeners()
     {
         if (P.getSpellsInventory().size() >= 1) {
             int index = chooseSpell.getSelectedIndex();

@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 /**
  * Created by Lídia on 29/05/2017.
  */
-//TODO: adicionar log
+
 public class GraphicalFeatView extends GraphicalStateView {
 
     private SpringLayout Layout;

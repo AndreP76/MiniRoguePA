@@ -17,7 +17,6 @@ import java.util.InputMismatchException;
 
 /**
  * Created by andre on 4/5/17.
- * Time to d-d-d-duel
  */
 
 public class AwaitCardSelectionState extends GameState {
