@@ -227,10 +227,15 @@ public class ResourceManager {
 
     public static Clip LoadAudioClip(String FilePath) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         Clip in;
-        AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(FilePath));
-        in = AudioSystem.getClip();
-        in.open(audioIn);
-        return in;
+        AudioFormat AF = AudioSystem.getAudioFileFormat(new File(FilePath)).getFormat();
+        if (AudioSystem.isLineSupported(new DataLine.Info(Clip.class, AF))) {
+            in = (Clip) AudioSystem.getLine(new DataLine.Info(Clip.class, AF));
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(FilePath));
+            in.open(audioIn);
+            return in;
+        } else {
+            throw new LineUnavailableException();
+        }
     }
 
     public static Clip getNextMonsterAttack() {
