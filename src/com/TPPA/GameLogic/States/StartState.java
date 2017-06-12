@@ -78,9 +78,9 @@ public class StartState extends GameState {
                 case Casual: {
                     armor = 1;
                     hp = 5;
-                    //gold = 5;
+                    gold = 5;
                     //DEBUG
-                    gold = 20;
+                    //gold = 20;
                     food = 6;
                     break;
                 }

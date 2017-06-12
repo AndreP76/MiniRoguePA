@@ -47,19 +47,15 @@ public class Player implements Serializable {
     private boolean hasUsedFeat;
 
     public Player(int StartAttack, int StartArmor, int StartGold, int StartFood, int StartXP, int StartHP) {
-        Food = StartFood;
-        XP = StartXP;
-        Attack = StartAttack;
-        Gold = StartGold;
-        Armor = StartArmor;
-        SpellsInventory = new ArrayList<>();
-        HP = StartHP;
-        this.Rank = 1;
         UnlockedDice = new ArrayList<>();
-        unlockNewDie(); // começa já com um dado desbloqueado
-
+        SpellsInventory = new ArrayList<>();
+        this.setFood(StartFood);
+        this.setXP(StartXP);
+        this.setAttack(StartAttack);
+        this.setGold(StartGold);
+        this.setArmor(StartArmor);
+        this.setHP(StartHP);
         hasDefeatedMonster = false;
-
         hasUsedFeat = false;
     }
 

@@ -34,7 +34,6 @@ public class GameStateController extends Observable implements java.io.Serializa
     private int CardsInEvenStage = 1;
     private Boolean BattledInThisRoom = false;
     private Monster CurrentMonster = null;
-
     public GameStateController() {//default
         //CurrentGameState = new StartState();
         GameDifficulty = DifficultyLevelEnum.Normal;//User can change it on StartState
@@ -46,15 +45,15 @@ public class GameStateController extends Observable implements java.io.Serializa
         MessageStack = new Stack<>();
     }
 
-    /*public static GameStateController getCurrentController() {
-        return CurrentController;
-    }*/
-
-    //getter
-
     public IState setCurrentController(GameStateController currentController) {
         //CurrentController = currentController;
-        this.setCurrentMonster(currentController.getCurrentMonster());
+        Monster C = currentController.getCurrentMonster();
+        if (C == null)
+            this.setCurrentMonster(null);
+        else {
+            Monster newMonster = new Monster(this, C.getHPMax(), C.getXPReward(), C.getGoldReward(), C.getStrength(), C.getBoss(), C.getName());
+            this.setCurrentMonster(newMonster);
+        }
         this.setBattledInThisRoom(currentController.getBattledInThisRoom());
         this.setCurrentRoom(currentController.getCurrentRoom());
         this.setCurrentStageInRoom(currentController.getCurrentStageInRoom());
@@ -62,7 +61,18 @@ public class GameStateController extends Observable implements java.io.Serializa
         this.setGameDifficulty(currentController.getGameDifficulty());
         this.setRoomStages(currentController.getRoomStages());
 
-        this.setCurrentPlayer(currentController.getCurrentPlayer());
+        //this.setCurrentPlayer(currentController.getCurrentPlayer()); // < maybe error here
+        Player P = currentController.getCurrentPlayer();
+        this.setCurrentPlayer(new Player(P.getAttack(), P.getArmor(), P.getGold(), P.getFood(), P.getXP(), P.getHP()));
+        while (!currentController.MessageStack.empty())
+            this.MessageStack.push(currentController.MessageStack.pop());
+
+        this.setMaxZones(currentController.getMaxZones());
+        this.setCurrentDeck(currentController.getCurrentDeck());
+        this.setMaxStagesInRoom(currentController.getMaxStagesInRoom());
+        this.setRoomsInZone(currentController.getRoomsInZone());
+        this.setMaxCardsInStage(currentController.getMaxCardsInStage());
+        this.setCardsInEvenStage(currentController.getCardsInEvenStage());
         this.setCurrentGameState(currentController.getCurrentGameState());
         return this.getCurrentGameState();
     }
@@ -89,8 +99,22 @@ public class GameStateController extends Observable implements java.io.Serializa
         return CardsInEvenStage;
     }
 
+    /*public static GameStateController getCurrentController() {
+        return CurrentController;
+    }*/
+
+    //getter
+
+    public void setCardsInEvenStage(int cardsInEvenStage) {
+        CardsInEvenStage = cardsInEvenStage;
+    }
+
     public int getMaxCardsInStage() {
         return MaxCardsInStage;
+    }
+
+    public void setMaxCardsInStage(int maxCardsInStage) {
+        MaxCardsInStage = maxCardsInStage;
     }
 
     public Player getCurrentPlayer() {
@@ -125,12 +149,24 @@ public class GameStateController extends Observable implements java.io.Serializa
         return CurrentDeck;
     }
 
+    public void setCurrentDeck(Deck currentDeck) {
+        CurrentDeck = currentDeck;
+    }
+
     public int getMaxStagesInRoom() {
         return MaxStagesInRoom;
     }
 
+    public void setMaxStagesInRoom(int maxStagesInRoom) {
+        MaxStagesInRoom = maxStagesInRoom;
+    }
+
     public int getMaxZones() {
         return MaxZones;
+    }
+
+    public void setMaxZones(int maxZones) {
+        MaxZones = maxZones;
     }
 
     public int getCurrentZone() {
@@ -191,6 +227,10 @@ public class GameStateController extends Observable implements java.io.Serializa
 
     public int getRoomsInZone() {
         return RoomsInZone;
+    }
+
+    public void setRoomsInZone(int roomsInZone) {
+        RoomsInZone = roomsInZone;
     }
 
     //C methods

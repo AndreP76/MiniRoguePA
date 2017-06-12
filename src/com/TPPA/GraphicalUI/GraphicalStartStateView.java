@@ -120,12 +120,12 @@ public class GraphicalStartStateView extends GraphicalStateView {
         StartAreaSpinner.setVisible(false);
         ContentPanel.add(StartAreaSpinner);
 
-        LoadButton = new JButton("Load game");
+        /*LoadButton = new JButton("Load game");
         LoadButton.setPreferredSize(buttonSize);
         buttonStartY += gapSize + (Height / 8);
         Layout.putConstraint(SpringLayout.WEST, LoadButton, buttonStartX, SpringLayout.WEST, ContentPanel);
         Layout.putConstraint(SpringLayout.NORTH, LoadButton, buttonStartY, SpringLayout.NORTH, ContentPanel);
-        ContentPanel.add(LoadButton);
+        ContentPanel.add(LoadButton);*/
 
         myMenu = new MyMenu(this, GS.getCurrentGameState());
         ContentPanel.add(myMenu);
@@ -175,11 +175,11 @@ public class GraphicalStartStateView extends GraphicalStateView {
                 AreaSpinnerShowing = true;
             }
         });
-        LoadButton.addActionListener(actionEvent -> {
+        /*LoadButton.addActionListener(actionEvent -> {
             JFileChooser JFC = new JFileChooser();
             JFC.showOpenDialog(ContentPanel);
             GS.RelayAction(InternalCommandsDictionary.LoadCommand + " " + (JFC.getSelectedFile().getName()));
-        });
+        });*/
     }
 
     public void DestroyView() {
